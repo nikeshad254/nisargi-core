@@ -14,7 +14,7 @@ class Controller extends Model
 		if (isset($_SERVER['PATH_INFO'])) {
 			switch ($_SERVER['PATH_INFO']) {
 				case '/':
-					include 'Views/index.php';
+					include 'Views/index.html';
 					break;
 			}
 		}

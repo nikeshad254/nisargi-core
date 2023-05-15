@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
+:root{
+    --irish-900: #002612;
+    --irish-800: #003D20;
+    --irish-700: #005330;
+    --irish-600: #006943;
+    --irish-500: #008059;
+    --irish-400: #30C9A4;
+    --irish-300: #72EFD8;
+    --irish-200: #B4FDF4;
+    --irish-100: #F2FFFE;
+
+    --pink-900: #250126;
+    --pink-800: #570255;
+    --pink-700: #87067C;
+    --pink-600: #B813A0;
+    --pink-500: #E833C4;
+    --pink-400: #F563CF;
+    --pink-300: #FC93DB;
+    --pink-200: #FFC3E8;
+    --pink-100: #FFF2F9;
+
+    --gray-900: #222624;
+    --gray-800: #434946;
+    --gray-700: #636C69;
+    --gray-600: #848F8B;
+    --gray-500: #A6B3AF;
+    --gray-400: #BAC5C2;
+    --gray-300: #CFD7D6;
+    --gray-200: #E4EAE9;
+    --gray-100: #FAFCFC;
+
+    --dark-opacity: #2226246c;
+    --pure-white: var(--gray-100);
+    --bg-gray: var(--gray-200);
+    --text-dark: var(--irish-900);
+
+    --max-screen-width: 1400px;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-dark);
+}
+/* https://goodpalette.io/008059-e833c4-a6b3af */
+body{
+    background: var(--bg-gray);
+    width: 100vw;
+    overflow-x: hidden;
+}
+/* utlility starts here */
+
+.p-2{
+    padding: 2rem;
+}
+.px-2{
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+.gap-2{
+    gap: 2rem;
+}
+.my-2{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.mt-2{
+    margin-top: 2rem;
+}
+.mt-1{
+    margin-top: 1rem;
+}
+.space-between{
+    justify-content: space-between;
+}
+.flex-row{
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+.flex-column{
+    display: flex;
+    flex-direction: column;
+}
+.border-bottom{
+    border-bottom: 2px solid var(--gray-400);
+    margin-bottom: 2px;
+}
+.link{
+    text-decoration: none;
+    color: inherit;
+}
+
+/* utlility starts ends */
+
+
+.top-nav{
+    background: var(--pure-white);
+    display: flex;
+    justify-content: center;
+}
+.main-nav{
+    display: flex;
+    flex: 1 1 100%;
+    justify-content: space-between;
+    align-items: center;
+    max-width: var(--max-screen-width);
+    padding: 0.2rem 1rem;
+}
+.left-nav{
+    flex: 1 1 10%;
+}
+.middle-nav{
+    flex: 1 1 50%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.right-nav{
+    flex: 1 1 40%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.main-nav h3{
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+.nav-btn{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+.nav-btn img{
+    height: 25px;
+    width: 25px;
+}
+.search-bar{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.search-bar input{
+    height: 1.7rem;
+    border-radius: 20px;
+    padding: 0px 25px 0px 10px;
+    background-color: var(--bg-gray);
+}
+.search-bar img{
+    position: absolute;
+    right: 5px;
+    height: 20px;
+    width: 20px;
+}
+.cat-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+.cat-btn img{
+    height: 15px;
+    width: 15px;
+}
+.bg-img{
+    width: 100vw;
+    height: 80vh;
+    position: absolute;
+    z-index: -1;
+}
+
+.btn{
+    text-decoration: none;
+    color: var(--pure-white);
+    background-color: var(--irish-500);
+    font-weight: 600;
+    width: fit-content;
+    padding: 0.3rem 1.3rem;
+    border-radius: 20px;
+}
+
+.item-box {
+    width: 10rem;
+    height: 12rem;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    background-color: var(--dark-opacity);
+}
+
+.item-box p {
+    margin-top: 0.5rem;
+    letter-spacing: 1px;
+    color: var(--gray-200);
+}
+
+.item-box img {
+    object-fit: cover;
+    z-index: -1;
+    position: absolute;
+    height: 12rem;
+    width: 10rem;
+}
+.service-box{
+    border: 2px solid var(--gray-500);
+    border-radius: 10px;
+    width: 23rem;
+    height: 19rem;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--gray-300);
+}
+.service-box h3{
+    font-size: 1.4rem;
+    width: 80%;
+    padding-left: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.service-box p{
+    font-size: 1.0rem;
+    padding-left: 10px;
+}
+.img-box{
+    position: relative;
+    height: 13rem;
+    overflow: hidden;
+}
+.img-box img{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+footer{
+    background-color: var(--irish-900);
+}
+footer p{
+    color: var(--gray-100);
+}

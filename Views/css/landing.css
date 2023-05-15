@@ -1,0 +1,23 @@
+.first-hero{
+    display: flex;
+    height: 80vh;
+    position: relative;
+    width: 100vw;
+    overflow: hidden;
+    max-width: var(--max-screen-width);
+}
+.left-hero{
+    width: 50vw;
+    margin-left: 1rem;
+    display: flex;
+    gap: 1.3rem;
+    flex-direction: column;
+    justify-content: center;
+}
+.left-hero .heading{
+    width: 60%;
+    font-size: 2rem;
+}
+.left-hero p{
+    text-align: justify;
+}

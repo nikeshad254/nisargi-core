@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nisargi</title>
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/consumerHome.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/consumerHome.css">
 </head>
+
 <body>
     <nav class="top-nav">
-        <div class="main-nav">
+        <div class="main-nav" id="main-nav">
             <div class="left-nav">
                 <h3>Nisargi</h3>
             </div>
 
-            <div class="middle-nav flex-row">
+            <div class="middle-nav">
 
-                <div class="cat-btn">
+                <div class="cat-btn" id="cat-btn">
                     <p>Category</p>
                     <img src="../images/icons/cat-down.svg" alt="">
                 </div>
@@ -33,9 +35,9 @@
                 <div class="nav-btn">
                     <p>About Us</p>
                 </div>
-                
+
             </div>
-            <div class="right-nav flex-row">
+            <div class="right-nav">
 
                 <div class="search-bar">
                     <input type="text" placeholder="search here ... ">
@@ -53,58 +55,93 @@
                 </div>
             </div>
         </div>
+
+        <div id="categories" class="categories-display">
+            <div class="container">
+                <div class="first-group cat-group">
+                    <p><a href="#" class="link">Fruits</a></p>
+                    <a href="#" class="link">Apple</a>
+                    <a href="#" class="link">Mango</a>
+                    <a href="#" class="link">Banana</a>
+                    <a href="#" class="link">Cucumber</a>
+                    <a href="#" class="link">more...</a>
+                </div>
+                <div class="second-group cat-group">
+                    <p><a href="#" class="link">Fruits</a></p>
+                    <a href="#" class="link">Apple</a>
+                    <a href="#" class="link">Mango</a>
+                    <a href="#" class="link">Banana</a>
+                    <a href="#" class="link">Cucumber</a>
+                    <a href="#" class="link">more...</a>
+                </div>
+                <div class="third-group cat-group">
+                    <p><a href="#" class="link">Fruits</a></p>
+                    <a href="#" class="link">Apple</a>
+                    <a href="#" class="link">Mango</a>
+                    <a href="#" class="link">Banana</a>
+                    <a href="#" class="link">Cucumber</a>
+                    <a href="#" class="link">more...</a>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <img class="three-bars" id="three-bars" src="../images/icons/3bars.svg" alt="">
     </nav>
 
     <section class="first-hero">
         <img class="bg-img" src="../images/firstHeroBg.svg" alt="">
         <div class="left-hero">
             <h3 class="heading">Fresh From Farm Straight to your door</h3>
-            <p>At Nisargi, we're dedicated to bringing you the freshest and most flavorful produce straight from the farm to your doorstep. Trust Nisargi to deliver nature's bounty to your door, and enjoy the authentic taste of farm-fresh goodness.</p>
+            <p>At Nisargi, we're dedicated to bringing you the freshest and most flavorful produce straight from the
+                farm to your doorstep. Trust Nisargi to deliver nature's bounty to your door, and enjoy the authentic
+                taste of farm-fresh goodness.</p>
             <a href="#" class="btn">
                 Discover Our Product
             </a>
         </div>
     </section>
 
-    <section class="second-hero p-2 border-bottom">
+    <section class="second-hero container">
         <h3>Shop Top Product Category</h3>
-        <div class="flex-row space-between mt-2">
-            <div class="item-box" >
+        <div class="items-lists">
+            <div class="item-box">
                 <p>Fruits</p>
                 <img src="../images/demo-fruits.jpg" alt="">
             </div>
 
-            <div class="item-box" >
+            <div class="item-box">
                 <p>Vegetable</p>
                 <img src="../images/demo-vegetable.jpg" alt="">
             </div>
 
-            <div class="item-box" >
+            <div class="item-box">
                 <p>Frozen</p>
                 <img src="../images/demo-frozen.jpg" alt="">
             </div>
 
-            <div class="item-box" >
+            <div class="item-box">
                 <p>Meat</p>
                 <img src="../images/demo-meat.jpg" alt="">
             </div>
 
-            <div class="item-box" >
+            <div class="item-box">
                 <p>Pickel</p>
                 <img src="../images/demo-pickel.jpg" alt="">
             </div>
 
-            <div class="item-box" >
+            <div class="item-box">
                 <p>Herbs</p>
                 <img src="../images/demo-herbs.jpg" alt="">
             </div>
         </div>
     </section>
 
-    <section class="third-hero p-2 border-bottom">
+    <section class="third-hero container">
         <h3>Services To Help You Shop</h3>
 
-        <div class="flex-row space-between mt-2">
+        <div class="services-lists">
 
             <div class="service-box">
                 <h3>Frequently Asked Questions</h3>
@@ -132,22 +169,24 @@
         </div>
     </section>
 
-    <section class="top-footer p-2 flex-row space-between">
-        <div class="first-block block flex-column">
+
+    <div class="container">
+    <section class="top-footer">
+        <div class="first-block block">
             <h3>Shop</h3>
             <a href="#" class="link">Sitemap</a>
             <a href="#" class="link">Nisargi Blog</a>
             <a href="#" class="link">Random Product</a>
         </div>
 
-        <div class="second-block block flex-column">
+        <div class="second-block block">
             <h3>Sell</h3>
             <a href="#" class="link">Sell on Nisargi</a>
             <a href="#" class="link">Farmer's Zone</a>
             <a href="#" class="link">Forum</a>
         </div>
 
-        <div class="third-block block flex-column">
+        <div class="third-block block">
             <h3>About</h3>
             <a href="#" class="link">Nisargi</a>
             <a href="#" class="link">Policies</a>
@@ -155,7 +194,7 @@
             <a href="#" class="link">Legal Imprints</a>
         </div>
 
-        <div class="fourth-block block flex-column">
+        <div class="fourth-block block">
             <h3>Help</h3>
             <a href="#" class="link">Help Center</a>
             <a href="#" class="link">Privacy Setting</a>
@@ -164,9 +203,16 @@
             <p>number not available</p>
         </div>
     </section>
-    <footer class="flex-row px-2 space-between">
-        <p>Nepal | English | Rs.(NPR)</p>
-        <p>&copy; 2023 Nisargi</p>
+</div>
+
+    <footer class="">
+        <div class="container">
+            <p>Nepal | English | Rs.(NPR)</p>
+            <p>&copy; 2023 Nisargi</p>
+        </div>
     </footer>
+
+<script src="./js/main.js"></script>
 </body>
+
 </html>

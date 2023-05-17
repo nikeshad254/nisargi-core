@@ -3,7 +3,7 @@
         const catBtn = document.getElementById("cat-btn");
         const categories = document.getElementById('categories');
         const hamMenu = document.getElementById('three-bars');
-        const mainNav = document.getElementById('main-nav')
+        const topNav = document.querySelector('.top-nav')
         const middleNav = document.querySelector('.middle-nav');
         const rightNav = document.querySelector('.right-nav');
 
@@ -20,16 +20,16 @@
             if(hamMenuActive){
                 middleNav.classList.remove('hidden');
                 rightNav.classList.remove('hidden');
-                mainNav.style.height = "100vh";
-                hamMenu.src = "../images/icons/cross.svg";
+                topNav.classList.remove('active');
+                hamMenu.src = "../images/icons/3bars.svg";
             }else{
                 middleNav.classList.add('hidden');
                 rightNav.classList.add('hidden');
-                mainNav.style.height = "3rem";
-                hamMenu.src = "../images/icons/3bars.svg";
+                topNav.classList.add('active')
+                hamMenu.src = "../images/icons/cross.svg";
             }
         }
-        handleMenu()
+        // handleMenu()
 
         catBtn.addEventListener('click', ()=>{
             catBtnActive = !catBtnActive? true : false;

@@ -80,6 +80,7 @@ body{
     left: 0;
     right: 0;
     top: 0;
+    border-bottom: 1px solid var(--gray-500);
 }
 .main-nav{
     display: flex;
@@ -211,6 +212,7 @@ body{
     font-size: 1.2rem;
     font-weight: 600;
     background-color: var(--dark-opacity);
+    text-decoration: none;
 }
 
 .item-box p {
@@ -282,6 +284,7 @@ img#three-bars {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    background-color: var(--irish-200);
 }
 .top-footer .block{
     display: flex;

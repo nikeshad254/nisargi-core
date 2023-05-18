@@ -18,6 +18,7 @@
 .all-cats{
     display: flex;
     flex-direction: row;
+    overflow: hidden;
     gap: 2rem;
     width: 80%;
 }
@@ -133,4 +134,117 @@
     width: 1.5rem;
     transform: rotateZ(-90deg);
     cursor: pointer;
+}
+
+@media (max-width: 1384px) {
+    .all-cats .one-cat img{
+        height: 4rem;
+        width: 4rem;
+    }
+    
+}
+@media (max-width: 1161px) {
+    .one-product{
+        padding: 0.5rem;
+    }
+    .products-list{
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .all-cats .one-cat:nth-child(8),
+    .all-cats .one-cat:nth-child(9)
+    {
+        display: none;
+    }
+}
+
+@media (max-width: 920px) {
+    .category-top-hero{
+        margin-top: var(--top-nav-tSize);
+    }
+    .products-list{
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .one-product .image img{
+        height: 9rem;
+        width: 9rem;
+    }
+    .all-cats .one-cat:nth-child(6),
+    .all-cats .one-cat:nth-child(7),
+    .all-cats .one-cat:nth-child(8),
+    .all-cats .one-cat:nth-child(9)
+    {
+        display: none;
+    }
+    .products-list{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .name-label h3{
+        font-size: 1.2rem;
+    }
+    .name-label .label{
+        font-size: 0.8rem;
+    }
+    .name-label small{
+        font-size: 0.8rem;
+    }
+    .category-top-hero{
+        margin-top: var(--top-nav-mSize);
+    }
+    .category-top-hero{
+        flex-direction: column;
+    }
+    .name-label{
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+    }
+    .all-cats{
+        width: 100%;
+        gap: 1rem;
+    }
+    .all-cats .one-cat:nth-child(5),
+    .all-cats .one-cat:nth-child(6),
+    .all-cats .one-cat:nth-child(7),
+    .all-cats .one-cat:nth-child(8),
+    .all-cats .one-cat:nth-child(9)
+    {
+        display: none;
+    }
+    .all-cats .one-cat img{
+        height: 2.1rem;
+        width: 2.1rem;
+    }
+    .all-cats .one-cat p{
+        font-size: 0.6rem;
+    }
+    .products-list{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 0.5rem;
+    }
+    .one-product .image img{
+        height: 8rem;
+        width: 8rem;
+    }
+    .one-product .content h4{
+        font-size: 0.9rem;
+    }
+    .one-product .content p{
+        font-size: 0.8rem;
+    }
+    .one-product .content .stars .star{
+        height: 1rem;
+        width: 1rem;
+    }
+    .one-product .content .stars small{
+        font-size: 0.9rem;
+    }
+    .one-product .content button{
+        font-size: 0.8rem;
+    }
 }

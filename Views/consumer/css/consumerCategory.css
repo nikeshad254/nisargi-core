@@ -53,14 +53,6 @@
     justify-content: space-between;
     margin-bottom: 1rem;
 }
-/* .products-list{
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    border: 1px solid rebeccapurple;
-    justify-content: space-between;
-} */
 .products-list{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -115,7 +107,7 @@
     transition: 0.5s ease;
 }
 .one-product .content button:hover{
-    background-color: var(--gray-500);
+    background-color: var(--gray-300);
     transition: 0.5s ease;
 }
 .paging-container{

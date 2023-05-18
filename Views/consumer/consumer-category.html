@@ -180,13 +180,39 @@
         <ul class="products-list">
             <li class="one-product">
                 <div class="image">
-                    <img src="../images/demo-vegetable.jpg" alt="">
+                    <img class="img" src="../images/apple-demo-product.jpg" alt="">
                 </div>
-                
+                <div class="content">
+                    <h4>Mustang Apples</h4>
+                    <h4>मुस्ताङ्ग स्याउ</h4>
+                    <p>Raju Kumar Pasal</p>
+                    <p class="price">Rs. 10293</p>
+                    <div class="stars" id="stars">
+                        <img src="../images/icons/star.svg" alt="" class="star">
+                        <img src="../images/icons/star.svg" alt="" class="star">
+                        <img src="../images/icons/star.svg" alt="" class="star">
+                        <img src="../images/icons/star.svg" alt="" class="star">
+                        <img src="../images/icons/star.svg" alt="" class="star">
+                        <small>(121)</small>
+                    </div>
+                    <button>Add to Cart</button>
+                </div>
             </li>
+
         </ul>
     </div>
 
+    <div class="paging-container">
+        <img src="../images/icons/arrow.svg" class="left-arrow" alt="">
+        <div class="pages">
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+        </div>
+        <img src="../images/icons/arrow.svg" class="right-arrow" alt="">
+    </div>
     <!-- content ends here -->
 
     <div class="container">
@@ -232,6 +258,43 @@
     </footer>
 
 <script src="./js/main.js"></script>
+<script>
+    // temporary for printing 8 blocks
+    const products_list = document.querySelector('.products-list');
+    function makeProducts(){
+        let inHtml = "";
+        for(let i=1; i<20; i++){
+            inHtml += `
+
+            <li class="one-product">
+                <div class="image">
+                    <img class="img" src="../images/apple-demo-product.jpg" alt="">
+                </div>
+                <div class="content">
+                    <h4>Mustang Apples</h4>
+                    <h4>मुस्ताङ्ग स्याउ</h4>
+                    <p>Raju Kumar Pasal</p>
+                    <p class="price">Rs. 10293</p>
+                    <div class="stars" id="stars">
+                        <img src="../images/icons/star.svg" alt="" class="star">
+                        <img src="../images/icons/star.svg" alt="" class="star">
+                        <img src="../images/icons/star.svg" alt="" class="star">
+                        <img src="../images/icons/star.svg" alt="" class="star">
+                        <img src="../images/icons/star.svg" alt="" class="star">
+                        <small>(121)</small>
+                    </div>
+                    <button>Add to Cart</button>
+                </div>
+            </li>
+
+            `;
+        }
+        products_list.innerHTML += inHtml;
+    }
+    makeProducts();
+
+
+</script>
 </body>
 
 </html>

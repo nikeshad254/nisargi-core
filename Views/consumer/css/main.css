@@ -119,6 +119,19 @@ body{
     height: 25px;
     width: 25px;
 }
+.cart-btn{
+    position: relative;
+}
+.cart-btn #cart-num{
+    position: absolute;
+    top: 0;
+    right: -1.1rem;
+    background-color: var(--pink-500);
+    color: var(--gray-100);
+    border-radius: 10px;
+    font-size: 0.7rem;
+    padding: 1px;
+}
 .search-bar{
     display: flex;
     align-items: center;
@@ -152,7 +165,6 @@ body{
     transform: rotateZ(180deg);
     transition: 0.1s ease-in;
 }
-
 .categories-display{
     display: none;
     position: absolute;

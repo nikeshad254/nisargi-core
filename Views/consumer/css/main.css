@@ -303,6 +303,31 @@ img#three-bars {
     flex-direction: column;
 }
 
+.paging-container{
+    display: flex;
+    padding: 1rem 2rem;
+    gap: 1rem;
+}
+.paging-container .pages{
+    display: flex;
+    gap: 1rem;
+}
+.paging-container .pages a{
+    text-decoration: none;
+}
+.paging-container .left-arrow{
+    height: 1.5rem;
+    width: 1.5rem;
+    transform: rotateZ(90deg);
+    cursor: pointer;
+}
+.paging-container .right-arrow{
+    height: 1.5rem;
+    width: 1.5rem;
+    transform: rotateZ(-90deg);
+    cursor: pointer;
+}
+
 @media (max-width: 920px) {
     .top-nav{
         height: var(--top-nav-tSize);

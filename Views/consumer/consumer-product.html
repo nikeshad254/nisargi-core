@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,16 +9,17 @@
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/consumerProduct.css">
 </head>
+
 <body>
     <nav class="top-nav">
-        <div class="main-nav">
+        <div class="main-nav" id="main-nav">
             <div class="left-nav">
                 <a href="./consumer-home.html" class="link"><h3>Nisargi</h3></a>
             </div>
 
-            <div class="middle-nav flex-row">
+            <div class="middle-nav">
 
-                <div class="cat-btn">
+                <div class="cat-btn" id="cat-btn">
                     <p>Category</p>
                     <img src="../images/icons/cat-down.svg" alt="">
                 </div>
@@ -33,9 +35,9 @@
                 <div class="nav-btn">
                     <p>About Us</p>
                 </div>
-                
+
             </div>
-            <div class="right-nav flex-row">
+            <div class="right-nav">
 
                 <div class="search-bar">
                     <input type="text" placeholder="search here ... ">
@@ -54,52 +56,402 @@
                 </div>
             </div>
         </div>
+
+        <div id="categories" class="categories-display">
+            <div class="container">
+                <div class="first-group cat-group">
+                    <p><a href="#" class="link">Fruits</a></p>
+                    <a href="#" class="link">Apple</a>
+                    <a href="#" class="link">Mango</a>
+                    <a href="#" class="link">Banana</a>
+                    <a href="#" class="link">Cucumber</a>
+                    <a href="#" class="link">more...</a>
+                </div>
+                <div class="second-group cat-group">
+                    <p><a href="#" class="link">Fruits</a></p>
+                    <a href="#" class="link">Apple</a>
+                    <a href="#" class="link">Mango</a>
+                    <a href="#" class="link">Banana</a>
+                    <a href="#" class="link">Cucumber</a>
+                    <a href="#" class="link">more...</a>
+                </div>
+                <div class="third-group cat-group">
+                    <p><a href="#" class="link">Fruits</a></p>
+                    <a href="#" class="link">Apple</a>
+                    <a href="#" class="link">Mango</a>
+                    <a href="#" class="link">Banana</a>
+                    <a href="#" class="link">Cucumber</a>
+                    <a href="#" class="link">more...</a>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <img class="three-bars" id="three-bars" src="../images/icons/3bars.svg" alt="">
     </nav>
 
     <!-- products conntent starts -->
 
-    <div class="labels">
-        <a href="#">All</a><span>></span><a href="#">Fruits</a>
+    <div class="labels container">
+        <a href="#">All</a><span>></span><a href="#">Fruits</a><span>></span><a href="#">Apple</a>
+    </div>
+
+    <div class="container product-view">
+        <div class="image-container">
+            <img src="../images/greenApple-demo-product.jpg" alt="">
+        </div>
+        <div class="details-container">
+            <h3 class="product">Green Apple - हरियो स्याउ </h3>
+            <p class="seller">Seller: <span>Raju kumar prasad Shop</span></p>
+            <p class="description">details goes here Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Perspiciatis natus sequi dolorum tempora provident impedit eveniet, commodi voluptates ullam tempore
+                esse optio temporibus.</p>
+            <div class="stars-and-award">
+                <div class="stars">
+                    <div class="stars-collection">
+                        <img src="../images/icons/star.svg" alt="" class="icons">
+                        <img src="../images/icons/star.svg" alt="" class="icons">
+                        <img src="../images/icons/star.svg" alt="" class="icons">
+                        <img src="../images/icons/star.svg" alt="" class="icons">
+                        <img src="../images/icons/star.svg" alt="" class="icons">
+                    </div>
+                    <small>(121)</small>
+                </div>
+
+                <div class="seller-award">
+                    <img src="../images/icons/cloudTick.svg" alt="" class="icons">
+                    <p>Best Seller</p>
+                </div>
+            </div>
+
+            <p class="price">Rs. 1000</p>
+            <div class="stockQty">
+                <div class="qtys">
+                    <div class="qty">
+                        <p onclick="decrement()">-</p>
+                        <div class="incrementer" id="incrPlace">1</div>
+                        <p onclick="increment()">+</p>
+                    </div>
+
+                    <p class="unit">kg</p>
+                </div>
+                <p class="stock">Stock: 14 kg</p>
+            </div>
+
+            <div class="buyCartBtn">
+                <button class="btn" id="buyOneProduct">
+                    Buy Now
+                </button>
+                <button class="btn" id="addOneCart">
+                    Add to Cart
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="reviews-section container">
+        <div class="avgReview">
+            <div class="stars">
+                <div class="stars-collection">
+                    <img src="../images/icons/star.svg" alt="" class="icons">
+                    <img src="../images/icons/star.svg" alt="" class="icons">
+                    <img src="../images/icons/star.svg" alt="" class="icons">
+                    <img src="../images/icons/star.svg" alt="" class="icons">
+                    <img src="../images/icons/star.svg" alt="" class="icons">
+                </div>
+                <small>4.5</small>
+            </div>
+        </div>
+        <h3>Reviews for this product <span>(1299)</span></h3>
+        <div class="reviewsContainer">
+            <div class="one-review">
+                <div class="stars-n-more">
+                    <div class="stars-collection">
+                        <img src="../images/icons/star.svg" alt="" class="icons">
+                        <img src="../images/icons/star.svg" alt="" class="icons">
+                        <img src="../images/icons/star.svg" alt="" class="icons">
+                        <img src="../images/icons/star.svg" alt="" class="icons">
+                        <img src="../images/icons/star.svg" alt="" class="icons">
+                    </div>
+                    <img src="../images/icons/3dots.svg" alt="" class="icons">
+                </div>
+                <div class="profile-name">
+                    <img class="profile-img" src="../images/demo-person.jpg" alt="">
+                    <h3 class="name">Ram Bahadur Pokhrel</h3>
+                    <p class="date">2020-20-20</p>
+                </div>
+                <p class="reviewPara">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique beatae autem laudantium eum qui aperiam alias, tempore consectetur labore fuga quae nemo? Doloremque repellat nemo cumque iusto dolorem impedit facere eaque unde error omnis.
+                </p>
+            </div>
+
+            <div class="one-review">
+                <div class="stars-n-more">
+                    <div class="stars-collection">
+                        <img src="../images/icons/star.svg" alt="" class="icons">
+                        <img src="../images/icons/star.svg" alt="" class="icons">
+                        <img src="../images/icons/star.svg" alt="" class="icons">
+                        <img src="../images/icons/star.svg" alt="" class="icons">
+                        <img src="../images/icons/star.svg" alt="" class="icons">
+                    </div>
+                    <img src="../images/icons/3dots.svg" alt="" class="icons">
+                </div>
+                <div class="profile-name">
+                    <img class="profile-img" src="../images/demo-person.jpg" alt="">
+                    <h3 class="name">Ram Bahadur Pokhrel</h3>
+                    <p class="date">2020-20-20</p>
+                </div>
+                <p class="reviewPara">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique beatae autem laudantium eum qui aperiam alias, tempore consectetur labore fuga quae nemo? Doloremque repellat nemo cumque iusto dolorem impedit facere eaque unde error omnis.
+                </p>
+            </div>
+
+            <div class="one-review">
+                <div class="stars-n-more">
+                    <div class="stars-collection">
+                        <img src="../images/icons/star.svg" alt="" class="icons">
+                        <img src="../images/icons/star.svg" alt="" class="icons">
+                        <img src="../images/icons/star.svg" alt="" class="icons">
+                        <img src="../images/icons/star.svg" alt="" class="icons">
+                        <img src="../images/icons/star.svg" alt="" class="icons">
+                    </div>
+                    <img src="../images/icons/3dots.svg" alt="" class="icons">
+                </div>
+                <div class="profile-name">
+                    <img class="profile-img" src="../images/demo-person.jpg" alt="">
+                    <h3 class="name">Ram Bahadur Pokhrel</h3>
+                    <p class="date">2020-20-20</p>
+                </div>
+                <p class="reviewPara">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique beatae autem laudantium eum qui aperiam alias, tempore consectetur labore fuga quae nemo? Doloremque repellat nemo cumque iusto dolorem impedit facere eaque unde error omnis.
+                </p>
+            </div>
+
+            <div class="one-review">
+                <div class="stars-n-more">
+                    <div class="stars-collection">
+                        <img src="../images/icons/star.svg" alt="" class="icons">
+                        <img src="../images/icons/star.svg" alt="" class="icons">
+                        <img src="../images/icons/star.svg" alt="" class="icons">
+                        <img src="../images/icons/star.svg" alt="" class="icons">
+                        <img src="../images/icons/star.svg" alt="" class="icons">
+                    </div>
+                    <img src="../images/icons/3dots.svg" alt="" class="icons">
+                </div>
+                <div class="profile-name">
+                    <img class="profile-img" src="../images/demo-person.jpg" alt="">
+                    <h3 class="name">Ram Bahadur Pokhrel</h3>
+                    <p class="date">2020-20-20</p>
+                </div>
+                <p class="reviewPara">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique beatae autem laudantium eum qui aperiam alias, tempore consectetur labore fuga quae nemo? Doloremque repellat nemo cumque iusto dolorem impedit facere eaque unde error omnis.
+                </p>
+
+            </div>
+        </div>
+
+        <div class="paging-container">
+            <img src="../images/icons/arrow.svg" class="left-arrow" alt="">
+            <div class="pages">
+                <a href="#">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+            </div>
+            <img src="../images/icons/arrow.svg" class="right-arrow" alt="">
+        </div>
+    </div>
+
+    <div class="more-shop container">
+        <h3>More from this shop:</h3>
+        <div class="one-product-collection">
+            <!-- max seven -->
+            <div class="one-more-product">
+                <img class="img" src="../images/mango-demo.png" alt="">
+                <p class="productEn">Mango</p>
+                <p class="productNp">आप</p>
+                <p class="price">Rs.120</p>
+            </div>
+    
+            <div class="one-more-product">
+                <img class="img" src="../images/mango-demo.png" alt="">
+                <p class="productEn">Mango</p>
+                <p class="productNp">आप</p>
+                <p class="price">Rs.120</p>
+            </div>
+    
+            <div class="one-more-product">
+                <img class="img" src="../images/mango-demo.png" alt="">
+                <p class="productEn">Mango</p>
+                <p class="productNp">आप</p>
+                <p class="price">Rs.120</p>
+            </div>
+    
+            <div class="one-more-product">
+                <img class="img" src="../images/mango-demo.png" alt="">
+                <p class="productEn">Mango</p>
+                <p class="productNp">आप</p>
+                <p class="price">Rs.120</p>
+            </div>
+    
+            <div class="one-more-product">
+                <img class="img" src="../images/mango-demo.png" alt="">
+                <p class="productEn">Mango</p>
+                <p class="productNp">आप</p>
+                <p class="price">Rs.120</p>
+            </div>
+    
+            <div class="one-more-product">
+                <img class="img" src="../images/mango-demo.png" alt="">
+                <p class="productEn">Mango</p>
+                <p class="productNp">आप</p>
+                <p class="price">Rs.120</p>
+            </div>
+    
+            <div class="one-more-product">
+                <img class="img" src="../images/mango-demo.png" alt="">
+                <p class="productEn">Mango</p>
+                <p class="productNp">आप</p>
+                <p class="price">Rs.120</p>
+            </div>
+            
+            <div class="view-more">
+                <img src="../images/icons/arrow.svg" alt="">
+                <p>More</p>
+            </div>
+    
+        </div>
+    </div>
+
+    <div class="more-shop container">
+        <h3>Products you may like:</h3>
+        <div class="one-product-collection">
+            <!-- max seven -->
+            <div class="one-more-product">
+                <img class="img" src="../images/mango-demo.png" alt="">
+                <p class="productEn">Mango</p>
+                <p class="productNp">आप</p>
+                <p class="price">Rs.120</p>
+            </div>
+    
+            <div class="one-more-product">
+                <img class="img" src="../images/mango-demo.png" alt="">
+                <p class="productEn">Mango</p>
+                <p class="productNp">आप</p>
+                <p class="price">Rs.120</p>
+            </div>
+    
+            <div class="one-more-product">
+                <img class="img" src="../images/mango-demo.png" alt="">
+                <p class="productEn">Mango</p>
+                <p class="productNp">आप</p>
+                <p class="price">Rs.120</p>
+            </div>
+    
+            <div class="one-more-product">
+                <img class="img" src="../images/mango-demo.png" alt="">
+                <p class="productEn">Mango</p>
+                <p class="productNp">आप</p>
+                <p class="price">Rs.120</p>
+            </div>
+    
+            <div class="one-more-product">
+                <img class="img" src="../images/mango-demo.png" alt="">
+                <p class="productEn">Mango</p>
+                <p class="productNp">आप</p>
+                <p class="price">Rs.120</p>
+            </div>
+    
+            <div class="one-more-product">
+                <img class="img" src="../images/mango-demo.png" alt="">
+                <p class="productEn">Mango</p>
+                <p class="productNp">आप</p>
+                <p class="price">Rs.120</p>
+            </div>
+    
+            <div class="one-more-product">
+                <img class="img" src="../images/mango-demo.png" alt="">
+                <p class="productEn">Mango</p>
+                <p class="productNp">आप</p>
+                <p class="price">Rs.120</p>
+            </div>
+            
+            <div class="view-more">
+                <img src="../images/icons/arrow.svg" alt="">
+                <p>More</p>
+            </div>
+    
+        </div>
     </div>
 
     <!-- products conntent ends -->
 
-    <section class="top-footer p-2 flex-row space-between">
-        <div class="first-block block flex-column">
-            <h3>Shop</h3>
-            <a href="#" class="link">Sitemap</a>
-            <a href="#" class="link">Nisargi Blog</a>
-            <a href="#" class="link">Random Product</a>
-        </div>
+    <div class="container">
+        <section class="top-footer">
+            <div class="first-block block">
+                <h3>Shop</h3>
+                <a href="#" class="link">Sitemap</a>
+                <a href="#" class="link">Nisargi Blog</a>
+                <a href="#" class="link">Random Product</a>
+            </div>
+    
+            <div class="second-block block">
+                <h3>Sell</h3>
+                <a href="#" class="link">Sell on Nisargi</a>
+                <a href="#" class="link">Farmer's Zone</a>
+                <a href="#" class="link">Forum</a>
+            </div>
+    
+            <div class="third-block block">
+                <h3>About</h3>
+                <a href="#" class="link">Nisargi</a>
+                <a href="#" class="link">Policies</a>
+                <a href="#" class="link">Terms & Use</a>
+                <a href="#" class="link">Legal Imprints</a>
+            </div>
+    
+            <div class="fourth-block block">
+                <h3>Help</h3>
+                <a href="#" class="link">Help Center</a>
+                <a href="#" class="link">Privacy Setting</a>
+                <p>Find Us</p>
+                <p>Kathmandhu, Nepal</p>
+                <p>number not available</p>
+            </div>
+        </section>
+    </div>
+    
+        <footer class="">
+            <div class="container">
+                <p>Nepal | English | Rs.(NPR)</p>
+                <p>&copy; 2023 Nisargi</p>
+            </div>
+        </footer>
 
-        <div class="second-block block flex-column">
-            <h3>Sell</h3>
-            <a href="#" class="link">Sell on Nisargi</a>
-            <a href="#" class="link">Farmer's Zone</a>
-            <a href="#" class="link">Forum</a>
-        </div>
 
-        <div class="third-block block flex-column">
-            <h3>About</h3>
-            <a href="#" class="link">Nisargi</a>
-            <a href="#" class="link">Policies</a>
-            <a href="#" class="link">Terms & Use</a>
-            <a href="#" class="link">Legal Imprints</a>
-        </div>
-
-        <div class="fourth-block block flex-column">
-            <h3>Help</h3>
-            <a href="#" class="link">Help Center</a>
-            <a href="#" class="link">Privacy Setting</a>
-            <p>Find Us</p>
-            <p>Kathmandhu, Nepal</p>
-            <p>number not available</p>
-        </div>
-    </section>
-    <footer class="flex-row px-2 space-between">
-        <p>Nepal | English | Rs.(NPR)</p>
-        <p>&copy; 2023 Nisargi</p>
-    </footer>
     <script src="./js/main.js"></script>
+    <script>
+        function decrement() {
+            var incrPlace = document.getElementById("incrPlace");
+            var currentValue = parseInt(incrPlace.innerHTML);
+
+            if (currentValue > 1) {
+                incrPlace.innerHTML = currentValue - 1;
+            }
+        }
+
+        function increment() {
+            var incrPlace = document.getElementById("incrPlace");
+            var currentValue = parseInt(incrPlace.innerHTML);
+
+            incrPlace.innerHTML = currentValue + 1;
+        }
+
+    </script>
 </body>
+
 </html>

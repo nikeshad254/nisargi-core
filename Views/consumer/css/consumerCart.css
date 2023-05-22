@@ -169,3 +169,107 @@ tfoot{
 .form-billing .btns .btn:hover{
     opacity: 0.8;
 }
+
+@media (max-width: 1200px) {
+    .form-billing{
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+    .form-billing .btns img{
+        display: none;
+    }
+    .one-item {
+        grid-template-columns: 1fr 2fr 1fr 1fr 0.2fr;
+    }
+    .form-billing .billing{
+        width: 50%;
+    }
+    .delivery-info {
+        width: 40%;
+    }
+}
+
+@media (max-width: 920px) {
+    .first-hero{
+        margin-top: var(--top-nav-tSize);
+    }
+    .cart-items h3 {
+        font-size: 1.2rem;
+    }
+    .one-item p {
+        font-size: 1rem;
+    }
+    .one-item .product-seller h3 {
+        font-size: 1.1rem;
+    }
+    .one-item {
+        grid-template-columns: 1fr 2fr 1fr 1fr 0.2fr;
+    }
+    .form-billing{
+        flex-direction: column;
+    }
+    .form-billing .delivery-info{
+        width: 100%;
+    }
+    .form-billing .billing{
+        width: 100%;
+        margin-left: 0;
+    }
+    .billing .totalBill{
+        justify-content: space-around;
+    }
+    .form-billing .btns .btn{
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .first-hero{
+        margin-top: var(--top-nav-mSize);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .one-item{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+        background-color: var(--irish-200);
+    }
+    .cart-items {
+        width: 93vw;
+    }
+    .one-item div{
+        width: 100%;
+    }
+    .one-item .mob-v{
+        display: flex;
+        justify-content: space-around;
+    }
+    .form-billing .delivery-info {
+        width: 90vw;
+    }
+    .delivery-info .heading h3{
+        font-size: 0.9rem;
+    }
+    .delivery-info .heading .btn{
+        width: fit-content;
+        padding: 0;
+    }
+    .form-billing .billing{
+        width: 90vw;
+    }
+    .billing table{
+        width: 100%;
+    }
+    .billing .one-shop {
+        width: 100%;
+    }
+    .address-billing{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}

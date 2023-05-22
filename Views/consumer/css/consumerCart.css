@@ -1,0 +1,171 @@
+.first-hero{
+    padding: 1rem 2rem;
+    margin-top: var(--nav-size);
+}
+.cart-items{
+    background-color: var(--gray-100);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-radius: 10px;
+}
+.cart-items h3{
+    font-size: 1.4rem;
+}
+.one-item{
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 1fr 1fr 0.2fr;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 10px;
+}
+.one-item:hover{
+    background-color: var(--gray-200);
+}
+.one-item .productImg{
+    height: 6rem;
+    width: 6rem;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid var(--gray-500);
+}
+.one-item .product-seller h3{
+    font-size: 1.3rem;
+}
+.one-item p{
+    font-size: 1.2rem;
+}
+#removeIcon{
+    height: 1.5rem;
+    width: 1.5rem;
+}
+/* address and billing starts here */
+.address-billing{
+    padding: 1rem 2rem;
+}
+.address-billing .default-header{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+.address-billing .default-header input{
+    height: 1rem;
+    width: 1rem;
+}
+.address-billing .default-header p{
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+.form-billing{
+    display: flex;
+    gap: 2rem;
+}
+
+.delivery-info{
+    background-color: var(--gray-100);
+    border-radius: 10px;
+    padding: 1rem;
+    width: 35%;
+}
+.delivery-info .headings{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+.delivery-info .delivery-form{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.delivery-form input{
+    height: 2rem;
+    padding-left: 0.3rem;
+    border-radius: 5px;
+}
+.delivery-form textarea{
+    padding: 0.3rem;
+    border-radius: 5px;
+}
+.label-txt{
+    display: flex;
+    flex-direction: column;
+}
+.form-billing .billing{
+    margin-left: 2rem;
+    padding: 0.5rem;
+    background-color: var(--gray-100);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    height: fit-content;
+    border-radius: 10px;
+}
+.billing .one-shop{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 25rem;
+    padding: 1rem;
+    background-color: var(--irish-100);
+    border-radius: 10px;
+    border: 1px solid var(--gray-500);
+}
+.billing .one-shop .heading{
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+.billing .one-shop table{
+    width: 100%;
+    text-align: center;
+    border-spacing: 0;
+}
+.billing .one-shop table thead th{
+    border-bottom: 1px solid var(--gray-500);
+    padding-bottom: 0.5rem;
+}
+.billing table td{
+    padding: 0.5rem 0rem;
+}
+
+.billing .one-shop table .spanner td{
+    border-bottom: 1px solid var(--gray-500);
+    border-top: 1px solid var(--gray-500);
+    padding-top: 0.5rem;
+}
+tfoot{
+    font-weight: 600;
+}
+.billing .totalBill{
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.form-billing .btns{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.form-billing .btns img{
+    height: 15rem;
+    width: 15rem;
+    align-self: flex-end;
+}
+.form-billing .btns .btn{
+    font-size: 1.3rem;
+    height: fit-content;
+    justify-self: flex-end;
+    width: 15rem;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+.form-billing .btns .btn:hover{
+    opacity: 0.8;
+}

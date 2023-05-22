@@ -211,6 +211,11 @@ body{
     width: fit-content;
     padding: 0.3rem 1.3rem;
     border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3 ease;
+}
+.btn:hover{
+    opacity: 0.9;
 }
 
 .item-box {

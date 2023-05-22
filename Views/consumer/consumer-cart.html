@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nisargi</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/consumerCart.css">
+</head>
+
+<body>
+    <nav class="top-nav">
+        <div class="main-nav" id="main-nav">
+            <div class="left-nav">
+                <a href="./consumer-home.html" class="link">
+                    <h3>Nisargi</h3>
+                </a>
+            </div>
+
+            <div class="middle-nav">
+
+                <div class="cat-btn" id="cat-btn">
+                    <p>Category</p>
+                    <img src="../images/icons/cat-down.svg" alt="">
+                </div>
+
+                <div class="nav-btn">
+                    <p>Today's Deal</p>
+                </div>
+
+                <div class="nav-btn">
+                    <p>Farmer's Zone</p>
+                </div>
+
+                <div class="nav-btn">
+                    <p>About Us</p>
+                </div>
+
+            </div>
+            <div class="right-nav">
+
+                <div class="search-bar">
+                    <input type="text" placeholder="search here ... ">
+                    <img src="../images/icons/search.svg" alt="">
+                </div>
+
+                <div class="nav-btn">
+                    <img src="../images/icons/user-circle.svg" alt="">
+                    <p>Account</p>
+                </div>
+
+                <div class="nav-btn cart-btn">
+                    <img src="../images/icons/cart.svg" alt="">
+                    <p>Cart</p>
+                    <small id="cart-num">99</small>
+                </div>
+            </div>
+        </div>
+
+        <div id="categories" class="categories-display">
+            <div class="container">
+                <div class="first-group cat-group">
+                    <p><a href="#" class="link">Fruits</a></p>
+                    <a href="#" class="link">Apple</a>
+                    <a href="#" class="link">Mango</a>
+                    <a href="#" class="link">Banana</a>
+                    <a href="#" class="link">Cucumber</a>
+                    <a href="#" class="link">more...</a>
+                </div>
+                <div class="second-group cat-group">
+                    <p><a href="#" class="link">Fruits</a></p>
+                    <a href="#" class="link">Apple</a>
+                    <a href="#" class="link">Mango</a>
+                    <a href="#" class="link">Banana</a>
+                    <a href="#" class="link">Cucumber</a>
+                    <a href="#" class="link">more...</a>
+                </div>
+                <div class="third-group cat-group">
+                    <p><a href="#" class="link">Fruits</a></p>
+                    <a href="#" class="link">Apple</a>
+                    <a href="#" class="link">Mango</a>
+                    <a href="#" class="link">Banana</a>
+                    <a href="#" class="link">Cucumber</a>
+                    <a href="#" class="link">more...</a>
+                </div>
+            </div>
+        </div>
+
+
+
+        <img class="three-bars" id="three-bars" src="../images/icons/3bars.svg" alt="">
+    </nav>
+
+    <!-- products conntent starts -->
+
+    <div class="container first-hero">
+        <div class="cart-items">
+            <h3>Items in your Cart (2)</h3>
+            <div class="one-item">
+                <img class="productImg" src="../images/apple-demo-product.jpg" alt="">
+                <div class="product-seller">
+                    <h3>Apple - स्याउ</h3>
+                    <p>Seller: Raju's Shop</p>
+                </div>
+                <div class="qty-rate">
+                    <p>Rs. 120</p>
+                    <p>Qty: 10</p>
+                </div>
+                <div class="extras">
+                    <p>Delivery</p>
+                    <p>Price</p>
+                </div>
+                <img id="removeIcon" src="../images/icons/minus-circle.svg" alt="">
+            </div>
+
+            <div class="one-item">
+                <img class="productImg" src="../images/apple-demo-product.jpg" alt="">
+                <div class="product-seller">
+                    <h3>apple - स्याउ</h3>
+                    <p>Seller: Raju's Shop</p>
+                </div>
+                <div class="qty-rate">
+                    <p>Rs. 120</p>
+                    <p>Qty: 10</p>
+                </div>
+                <div class="extras">
+                    <p>Delivery</p>
+                    <p>Price</p>
+                </div>
+                <img id="removeIcon" src="../images/icons/minus-circle.svg" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="address-billing container">
+        <div class="default-header">
+            <input type="checkbox" id="defaultAddressCheckbox">
+            <p>Default Address </p>
+        </div>
+
+        <div class="form-billing">
+            <div class="delivery-info">
+                <div class="headings">
+                    <h3>Delivery Information</h3>
+                    <button id="setDefault" class="btn">Set Default</button>
+                </div>
+
+                <form action="" class="delivery-form" method="post">
+                    <div class="label-txt">
+                        <label for="full-name">Full Name</label>
+                        <input type="text" name="full-name" placeholder="enter your name..">
+                    </div>
+
+                    <div class="label-txt">
+                        <label for="city">City</label>
+                        <input type="text" name="city" placeholder="enter your city..">
+                    </div>
+
+                    <div class="label-txt">
+                        <label for="street">Street Address</label>
+                        <input type="text" name="street" placeholder="enter your street..">
+                    </div>
+
+                    <div class="label-txt">
+                        <label for="mobile">Mobile</label>
+                        <input type="text" name="mobile" placeholder="enter your number..">
+                    </div>
+
+                    <div class="label-txt">
+                        <label for="message">Message:</label>
+                        <textarea name="message" id="message" cols="30" rows="10" style="resize:none"
+                            placeholder="enter your message.."></textarea>
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="billing">
+                <h3>Billing: </h3>
+                <div class="one-shop">
+                    <div class="heading">
+                        <p>Raju's Shop</p>
+                        <p>#1029</p>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <th>Name</th>
+                            <th>Qty</th>
+                            <th>Rate</th>
+                            <th>Price</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Apple</td>
+                                <td>10</td>
+                                <td>100</td>
+                                <td>1000</td>
+                            </tr>
+                            <tr class="spanner">
+                                <td colspan="3">Delivery</td>
+                                <td>10</td>
+                            </tr>
+                        </tbody>
+                        <tfoot class="spanner">
+                            <td colspan="3">Total:</td>
+                            <td>1020</td>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div class="one-shop">
+                    <div class="heading">
+                        <p>Raju's Shop</p>
+                        <p>#1029</p>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <th>Name</th>
+                            <th>Qty</th>
+                            <th>Rate</th>
+                            <th>Price</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Apple</td>
+                                <td>10</td>
+                                <td>100</td>
+                                <td>1000</td>
+                            </tr>
+                            <tr>
+                                <td>Apple</td>
+                                <td>10</td>
+                                <td>100</td>
+                                <td>1000</td>
+                            </tr>
+                            <tr class="spanner">
+                                <td colspan="3">Delivery</td>
+                                <td>10</td>
+                            </tr>
+                        </tbody>
+                        <tfoot class="spanner">
+                            <td colspan="3">Total:</td>
+                            <td>1020</td>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div class="totalBill">
+                    <p>Total Bill:</p>
+                    <p>Rs. 1928</p>
+                </div>
+            </div>
+
+            <div class="btns">
+                <img src="../images/order-gif.gif" alt="">
+                <img src="../images/down-gif.gif" alt="">
+                <button class="btn">Place Order</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- products conntent ends -->
+
+    <div class="container">
+        <section class="top-footer">
+            <div class="first-block block">
+                <h3>Shop</h3>
+                <a href="#" class="link">Sitemap</a>
+                <a href="#" class="link">Nisargi Blog</a>
+                <a href="#" class="link">Random Product</a>
+            </div>
+
+            <div class="second-block block">
+                <h3>Sell</h3>
+                <a href="#" class="link">Sell on Nisargi</a>
+                <a href="#" class="link">Farmer's Zone</a>
+                <a href="#" class="link">Forum</a>
+            </div>
+
+            <div class="third-block block">
+                <h3>About</h3>
+                <a href="#" class="link">Nisargi</a>
+                <a href="#" class="link">Policies</a>
+                <a href="#" class="link">Terms & Use</a>
+                <a href="#" class="link">Legal Imprints</a>
+            </div>
+
+            <div class="fourth-block block">
+                <h3>Help</h3>
+                <a href="#" class="link">Help Center</a>
+                <a href="#" class="link">Privacy Setting</a>
+                <p>Find Us</p>
+                <p>Kathmandhu, Nepal</p>
+                <p>number not available</p>
+            </div>
+        </section>
+    </div>
+
+    <footer class="">
+        <div class="container">
+            <p>Nepal | English | Rs.(NPR)</p>
+            <p>&copy; 2023 Nisargi</p>
+        </div>
+    </footer>
+
+
+    <script src="./js/main.js"></script>
+</body>
+
+</html>

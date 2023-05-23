@@ -1,0 +1,18 @@
+.first-hero{
+    padding: 1rem 2rem;
+    margin-top: var(--nav-size);
+}
+.first-hero h3{
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+.first-hero table{
+    text-align: center;
+    border-spacing: 0;
+    border: 1px solid var(--gray-700);
+}
+.first-hero table tr th,
+.first-hero table tr td{
+    border: 1px solid var(--gray-500);
+    padding: 0.2rem 0rem;
+}

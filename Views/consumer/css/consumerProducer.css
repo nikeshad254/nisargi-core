@@ -35,6 +35,7 @@
 .text-bio .sales-award{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 .text-bio .sales-award p{
     font-size: 1.1rem;
@@ -160,4 +161,101 @@
 .icons {
     height: 2rem;
     width: 2rem;
+}
+
+@media (max-width: 1024px) {
+    .icons, .icon{
+        height: 1.5rem;
+        width: 1.5rem;
+    }
+    .stars small {
+        font-size: 1.1rem;
+    }
+    .reviewsContainer {
+        gap: 1rem;
+    }
+    .one-review {
+        width: 48%;
+    }
+    .profile-name p, .profile-name h3{
+        font-size: 0.8rem;
+    }
+    .one-review .profile-name .profile-img {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    .one-review .reviewPara{
+        font-size: 0.9rem;
+    }
+    .one-review .reviewPara {
+        font-size: 0.7rem;
+    }
+    .one-product-collection {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+}
+
+@media (max-width: 920px) {
+    .first-hero {
+        margin-top: var(--top-nav-tSize);
+    }
+    .shop-info{
+        flex-direction: column;
+    }
+    .shop-info .img-address{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .one-product-collection {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .text-bio .block p{
+        font-size: 0.9rem;
+        text-align: justify;
+    }
+    .text-bio .sales-award p{
+        font-size: 1.0rem;
+    }
+    .product-shop h3, .reviews-collection .heading {
+        font-size: 1.1rem;
+    }
+    .one-more-product .img {
+        height: 8rem;
+        width: 8rem;
+    }
+    .one-more-product p {
+        font-size: 1.0rem;
+    }
+}
+@media (max-width: 576px) {
+    .first-hero{
+        margin-top: var(--top-nav-mSize);
+    }
+    .one-product-collection {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .one-more-product .img {
+        height: 5rem;
+        width: 5rem;
+    }
+    .reviewsContainer{
+        flex-direction: column;
+    }
+    .stars-and-award {
+        flex-direction: column;
+        align-items: center;
+    }
+    .reviewsContainer .one-review{
+        width: 100%;
+    }
+    .one-review .profile-name {
+        flex-direction: column;
+    }
+    .one-review .profile-name .profile-img {
+        width: 2rem;
+        height: 2rem;
+    }
+    
 }

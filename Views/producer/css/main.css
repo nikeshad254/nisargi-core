@@ -1,0 +1,235 @@
+:root{
+    --irish-900: #002612;
+    --irish-800: #003D20;
+    --irish-700: #005330;
+    --irish-600: #006943;
+    --irish-500: #008059;
+    --irish-400: #30C9A4;
+    --irish-300: #72EFD8;
+    --irish-200: #B4FDF4;
+    --irish-100: #F2FFFE;
+
+    --pink-900: #250126;
+    --pink-800: #570255;
+    --pink-700: #87067C;
+    --pink-600: #B813A0;
+    --pink-500: #E833C4;
+    --pink-400: #F563CF;
+    --pink-300: #FC93DB;
+    --pink-200: #FFC3E8;
+    --pink-100: #FFF2F9;
+
+    --gray-900: #222624;
+    --gray-800: #434946;
+    --gray-700: #636C69;
+    --gray-600: #848F8B;
+    --gray-500: #A6B3AF;
+    --gray-400: #BAC5C2;
+    --gray-300: #CFD7D6;
+    --gray-200: #E4EAE9;
+    --gray-100: #FAFCFC;
+
+    --dark-opacity: #2226246c;
+    --pure-white: var(--gray-100);
+    --bg-gray: var(--gray-200);
+    --text-dark: var(--irish-900);
+
+    --max-screen-width: 1400px;
+    --nav-size: 3rem;
+    --top-nav-mSize: 3rem;
+    --top-nav-tSize: 5rem;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--text-dark);
+    font-family: 'Montserrat', sans-serif;
+}
+body{
+    background: var(--bg-gray);
+    width: 100vw;
+}
+
+/* utility starts here */
+
+.Link{
+    text-decoration: none;
+    font-size: inherit;
+    color: inherit;
+}
+.container{
+    max-width: var(--max-screen-width);
+    padding: 1rem 1rem;
+}
+
+.container .heading{
+    font-size: 1.3rem;
+}
+/* utility ends here */
+
+/* navigation starts here */
+
+.top-nav{
+    background-color: var(--gray-100);
+    height: var(--nav-size);
+    display: flex;
+    align-items: center;
+}
+.navigation{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    padding: 0 1rem;
+}
+.navigation .middle-nav,
+.navigation .right-nav{
+    display: flex;
+    gap: 2rem;
+}
+.nisargi{
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+.nav-btn{
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+.nav-btn .icon{
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+/* navigation ends here */
+
+/* first-hero starts here */
+
+
+.first-hero .blocks{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+}
+
+.first-hero .blocks .block{
+    border-radius: 10px;
+    background-color: var(--gray-100);
+    padding: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.first-hero .blocks .block .desc .amt{
+    font-size: 1.3rem;
+}
+
+.first-hero .blocks .block .desc .name{
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+    text-transform: capitalize;
+}
+
+.first-hero .blocks .block .image{
+    height: 3rem;
+    width: 3rem;
+}
+/* first-hero ends here */
+
+/* second hero || general orders start here */
+
+.general-orders .order-table{
+    margin-top: 1rem;
+    border-spacing: 0;
+    border: 1px solid var(--gray-800);
+    text-align: center;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.general-orders .order-table td,
+.general-orders .order-table th{
+    border: 1px solid var(--gray-600);
+    padding: 0.3rem 0;
+}
+
+/* second hero || general orders ends here */
+
+
+@media (max-width: 930px) {
+
+    /* utility starts */
+    .container .heading{
+        font-size: 1.1rem;
+    }
+    /* utility ends */
+
+    .nav-btn{
+        font-size: 1rem;
+    }
+    .nav-btn .icon{
+        height: 1.2rem;
+        width: 1.2rem;
+    }
+    .navigation .middle-nav,
+    .navigation .right-nav{
+        gap: 1rem;
+    }
+    .nisargi{
+        font-size: 1.3rem;
+    }
+
+    /* first hero starts */
+    .first-hero .blocks .block{
+        padding: 0.7rem;
+    }
+    .first-hero .blocks .block .image{
+        height: 2rem;
+        width: 2rem;
+    }
+    /* first hero ends */
+
+}
+@media (max-width: 768px) {
+    .top-nav{
+        height: var(--top-nav-tSize);
+    }
+    .top-nav .navigation{
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.2rem;
+    }
+    .navigation .middle-nav{
+        justify-content: space-between;
+    }
+    .nisargi{
+        font-size: 1.2rem;
+    }
+    .container .heading{
+        font-size: 1.0rem;
+    }
+    .navigation .left-nav{
+        display: flex;
+        justify-content: center;
+        border-bottom: 1px solid var(--gray-400);
+    }
+    .navigation .right-nav{
+        justify-content: flex-end;
+        margin-top: 0.2rem;
+        padding-top: 0.2rem;
+        border-top: 1px solid var(--gray-500);
+        gap: 2rem;
+    }
+
+    .first-hero .blocks{
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+}

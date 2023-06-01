@@ -70,112 +70,27 @@
                 </div>
             </div>
 
-            <div class="one-product">
-                <img src="../images/apple-demo.png" alt="" class="product-img">
-                <div class="desc">
-                    <p class="name">Green Apples</p>
-                    <p class="stock">Stock: 100 kg</p>
-                    <p class="cost">Rs.100/kg</p>
-                </div>
-                <div class="buttons">
-                    <a href="#" class="edit btn Link">Edit</a>
-                    <a href="#" class="remove btn Link">Remove</a>
-                </div>
-            </div>
 
-            <div class="one-product">
-                <img src="../images/apple-demo.png" alt="" class="product-img">
-                <div class="desc">
-                    <p class="name">Green Apples</p>
-                    <p class="stock">Stock: 100 kg</p>
-                    <p class="cost">Rs.100/kg</p>
-                </div>
-                <div class="buttons">
-                    <a href="#" class="edit btn Link">Edit</a>
-                    <a href="#" class="remove btn Link">Remove</a>
-                </div>
-            </div>
-
-            <div class="one-product">
-                <img src="../images/apple-demo.png" alt="" class="product-img">
-                <div class="desc">
-                    <p class="name">Green Apples</p>
-                    <p class="stock">Stock: 100 kg</p>
-                    <p class="cost">Rs.100/kg</p>
-                </div>
-                <div class="buttons">
-                    <a href="#" class="edit btn Link">Edit</a>
-                    <a href="#" class="remove btn Link">Remove</a>
-                </div>
-            </div>
-
-            <div class="one-product">
-                <img src="../images/apple-demo.png" alt="" class="product-img">
-                <div class="desc">
-                    <p class="name">Green Apples</p>
-                    <p class="stock">Stock: 100 kg</p>
-                    <p class="cost">Rs.100/kg</p>
-                </div>
-                <div class="buttons">
-                    <a href="#" class="edit btn Link">Edit</a>
-                    <a href="#" class="remove btn Link">Remove</a>
-                </div>
-            </div>
-
-            <div class="one-product">
-                <img src="../images/apple-demo.png" alt="" class="product-img">
-                <div class="desc">
-                    <p class="name">Green Apples</p>
-                    <p class="stock">Stock: 100 kg</p>
-                    <p class="cost">Rs.100/kg</p>
-                </div>
-                <div class="buttons">
-                    <a href="#" class="edit btn Link">Edit</a>
-                    <a href="#" class="remove btn Link">Remove</a>
-                </div>
-            </div>
-
-            <div class="one-product">
-                <img src="../images/apple-demo.png" alt="" class="product-img">
-                <div class="desc">
-                    <p class="name">Green Apples</p>
-                    <p class="stock">Stock: 100 kg</p>
-                    <p class="cost">Rs.100/kg</p>
-                </div>
-                <div class="buttons">
-                    <a href="#" class="edit btn Link">Edit</a>
-                    <a href="#" class="remove btn Link">Remove</a>
-                </div>
-            </div>
-
-            <div class="one-product">
-                <img src="../images/apple-demo.png" alt="" class="product-img">
-                <div class="desc">
-                    <p class="name">Green Apples</p>
-                    <p class="stock">Stock: 100 kg</p>
-                    <p class="cost">Rs.100/kg</p>
-                </div>
-                <div class="buttons">
-                    <a href="#" class="edit btn Link">Edit</a>
-                    <a href="#" class="remove btn Link">Remove</a>
-                </div>
-            </div>
-
-            <div class="one-product">
-                <img src="../images/apple-demo.png" alt="" class="product-img">
-                <div class="desc">
-                    <p class="name">Green Apples</p>
-                    <p class="stock">Stock: 100 kg</p>
-                    <p class="cost">Rs.100/kg</p>
-                </div>
-                <div class="buttons">
-                    <a href="#" class="edit btn Link">Edit</a>
-                    <a href="#" class="remove btn Link">Remove</a>
-                </div>
-            </div>
-            
         </div>
     </div>
+
+    <script>
+        const temp = document.querySelector('.products-container');
+        for(let i=0; i<25; i++){
+            temp.innerHTML += `            <div class="one-product">
+                <img src="../images/apple-demo.png" alt="" class="product-img">
+                <div class="desc">
+                    <p class="name">Green Apples</p>
+                    <p class="stock">Stock: 100 kg</p>
+                    <p class="cost">Rs.100/kg</p>
+                </div>
+                <div class="buttons">
+                    <a href="#" class="edit btn Link">Edit</a>
+                    <a href="#" class="remove btn Link">Remove</a>
+                </div>
+            </div>`;
+        }
+    </script>
 
 </body>
 

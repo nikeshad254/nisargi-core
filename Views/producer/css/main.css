@@ -49,7 +49,7 @@
 }
 body{
     background: var(--bg-gray);
-    width: 100vw;
+    /* overflow-x: hidden; */
 }
 
 /* utility starts here */
@@ -74,6 +74,10 @@ body{
 .top-nav{
     background-color: var(--gray-100);
     height: var(--nav-size);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     display: flex;
     align-items: center;
 }

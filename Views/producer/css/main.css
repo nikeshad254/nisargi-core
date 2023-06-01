@@ -108,59 +108,7 @@ body{
 
 /* navigation ends here */
 
-/* first-hero starts here */
 
-
-.first-hero .blocks{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 0.5rem;
-}
-
-.first-hero .blocks .block{
-    border-radius: 10px;
-    background-color: var(--gray-100);
-    padding: 1.3rem;
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.first-hero .blocks .block .desc .amt{
-    font-size: 1.3rem;
-}
-
-.first-hero .blocks .block .desc .name{
-    font-size: 1.1rem;
-    margin-top: 0.5rem;
-    text-transform: capitalize;
-}
-
-.first-hero .blocks .block .image{
-    height: 3rem;
-    width: 3rem;
-}
-/* first-hero ends here */
-
-/* second hero || general orders start here */
-
-.general-orders .order-table{
-    margin-top: 1rem;
-    border-spacing: 0;
-    border: 1px solid var(--gray-800);
-    text-align: center;
-    width: 100%;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.general-orders .order-table td,
-.general-orders .order-table th{
-    border: 1px solid var(--gray-600);
-    padding: 0.3rem 0;
-}
-
-/* second hero || general orders ends here */
 
 
 @media (max-width: 930px) {
@@ -186,15 +134,6 @@ body{
         font-size: 1.3rem;
     }
 
-    /* first hero starts */
-    .first-hero .blocks .block{
-        padding: 0.7rem;
-    }
-    .first-hero .blocks .block .image{
-        height: 2rem;
-        width: 2rem;
-    }
-    /* first hero ends */
 
 }
 @media (max-width: 768px) {
@@ -228,8 +167,4 @@ body{
         gap: 2rem;
     }
 
-    .first-hero .blocks{
-        flex-wrap: wrap;
-        gap: 1rem;
-    }
 }

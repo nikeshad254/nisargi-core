@@ -1,0 +1,58 @@
+.first-hero .headers{
+    display: flex;
+    justify-content: space-between;
+}
+.addNewProduct{
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 10px;
+    background-color: var(--gray-100);
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.addNewProduct:hover{
+    background-color: var(--gray-200);
+    outline: 1px solid var(--gray-900);
+}
+.one-product{
+    width: fit-content;
+    padding: 0.5rem;
+    background-color: var(--gray-100);
+    border-radius: 10px;
+}
+.one-product .product-img{
+    height: 10rem;
+    width: 10rem;
+    object-fit: cover;
+}
+.one-product .desc{
+    text-align: center;
+    font-size: 1.1rem;
+}
+.one-product .desc .name{
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+.one-product .desc .cost{
+    font-weight: 600;
+}
+.one-product .buttons{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.3rem;
+}
+.one-product .buttons .btn{
+    background-color: var(--irish-200);
+    padding: 0.5rem;
+    border-radius: 10px;
+    transition: 0.3s ease;
+}
+.one-product .buttons .edit:hover{
+    background-color: var(--irish-600);
+    color: var(--gray-100);
+}
+.one-product .buttons .remove:hover{
+    background-color: var(--pink-700);
+    color: var(--gray-100);
+}

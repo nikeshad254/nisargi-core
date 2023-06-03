@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producer Home</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/producer-create.css">
+</head>
+
+<body>
+    <nav class="top-nav">
+        <div class="container navigation">
+            <div class="left-nav">
+                <a href="#" class="Link nisargi">Nisargi</a>
+            </div>
+
+            <div class="middle-nav">
+                <a href="#" class="Link nav-btn">
+                    <p>Products</p>
+                    <img src="../images/icons/shopping-bag.svg" alt="" class="icon">
+                </a>
+                <a href="#" class="Link nav-btn">
+                    <p>Orders</p>
+                    <img src="../images/icons/queue-list.svg" alt="" class="icon">
+                </a>
+                <a href="#" class="Link nav-btn">
+                    <p>Reviews</p>
+                    <img src="../images/icons/star.svg" alt="" class="icon">
+                </a>
+                <a href="#" class="Link nav-btn">
+                    <p>Requests</p>
+                    <img src="../images/icons/clipboard.svg" alt="" class="icon">
+                </a>
+
+            </div>
+
+            <div class="right-nav">
+                <a href="#" class="Link nav-btn">
+                    <p>Buyer's Zone</p>
+                    <img src="../images/icons/cart.svg" alt="" class="icon">
+                </a>
+                <a href="#" class="Link nav-btn">
+                    <p>Sign In</p>
+                    <img src="../images/icons/user-circle.svg" alt="" class="icon">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="first-hero container">
+        <h3 class="heading">Create Product</h3>
+        <form action="" method="post" class="create-product">
+            <div class="lbl-inp">
+                <label for="name">Product Name</label>
+                <input type="text" name="name">
+            </div>
+
+            <div class="lbl-inp">
+                <label for="description">Description</label>
+                <textarea name="description" cols="30" rows="10" style="resize: none;"></textarea>
+            </div>
+
+            <div class="lbl-inp">
+                <label for="product_image">Image</label>
+                <input type="file" name="product_image">
+            </div>
+
+            <div class="lbl-inp">
+                <label for="category">Category</label>
+                <input type="text" name="category">
+            </div>
+
+            <div class="lbl-inp">
+                <label for="Price">Price</label>
+                <input type="text" name="Price">
+            </div>
+
+            <div class="lbl-inp">
+                <label for="Stock">Stock</label>
+                <div class="inps">
+                    <input type="text" class="stock" name="Stock">
+                    <select name="unit">
+                        <option value="kg">kg</option>
+                        <option value="g">g</option>
+                        <option value="ltr">ltr</option>
+                        <option value="ml">ml</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <a href="#" class="btn Link cancel">Cancel</a>
+                <button class="btn post">Post Item</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>

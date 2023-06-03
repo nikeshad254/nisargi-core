@@ -1,0 +1,60 @@
+.first-hero{
+    margin-top: var(--nav-size);
+}
+.first-hero .heading{
+    text-align: center;
+    font-size: 1.4rem;
+}
+.create-product{
+    margin: 0 auto;
+    width: 22rem;
+    padding: 1rem;
+    background-color: var(--gray-100);
+    border-radius: 10px;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 1.0rem;
+}
+.create-product .lbl-inp, 
+.create-product .lbl-inp .inps{
+    display: flex;
+    justify-content: space-between;
+}
+.create-product .lbl-inp .inps{
+    width: 12rem;
+}
+
+.create-product .lbl-inp input, 
+.create-product .lbl-inp textarea{
+    width: 12rem;
+    padding: 0.2rem;
+}
+.create-product .lbl-inp .stock{
+    width: 7.5rem;
+}
+.create-product .buttons{
+    display: flex;
+    justify-content: space-between;
+}
+.create-product .buttons .btn{
+    background-color: var(--irish-300);
+    min-width: 7rem;
+    font-size: 1.0rem;
+    text-align: center;
+    padding: 0.2rem;
+    border-radius: 10px;
+    border: 1px solid var(--gray-800);
+    transition: 0.3s ease;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+.create-product .buttons .cancel:hover{
+    background-color: var(--pink-700);
+    color: var(--gray-100);
+}
+.create-product .buttons .post:hover{
+    background-color: var(--irish-700);
+    color: var(--gray-100);
+}

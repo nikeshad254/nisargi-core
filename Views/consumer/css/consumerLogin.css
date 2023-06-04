@@ -1,0 +1,87 @@
+.bgImg {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    object-fit: center;
+    z-index: -1;
+}
+
+.first-hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid red;
+    width: 90vw;
+    height: 90vh;
+    /* From https://css.glass */
+    background: rgba(73, 73, 73, 0.258);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1.8px);
+    -webkit-backdrop-filter: blur(1.8px);
+    border: 1px solid rgba(255, 255, 255, 0.31);
+    overflow: hidden;
+}
+.formContainer .descs{
+    flex: 1 1 40%;
+    background: var(--irish-400);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    color: var(--gray-100);
+}
+.formContainer .descs .desc{
+    text-align: center;
+    padding: 0rem 2rem;
+}
+.formContainer h3{
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.formContainer p{
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+.formContainer .btn{
+    width: 15rem;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    background: rgba(99, 15, 15, 0.327);
+}
+.formContainer .loginForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    flex: 1 1 60%;
+}
+.formContainer .loginForm .inputs{
+    display: flex;
+    flex-direction: column;
+    width: 30rem;
+    gap: 1.5rem;
+}
+.formContainer .loginForm .inputs .lbl-inp{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+}
+.loginForm .inputs .lbl-inp input{
+    width: 20rem;
+    padding: 0.3rem 0.4rem;
+    border-radius: 10px;
+    border: 1px solid var(--gray-500);
+    font-weight: 600;
+    font-size: 1.0rem;
+}

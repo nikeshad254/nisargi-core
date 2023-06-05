@@ -21,7 +21,11 @@ class Controller extends Model
 
 
 				case '/login':
-					include 'Views/login.php'; 
+					if(isset($_SESSION['user_data'])){
+						header('Location:./');
+					}
+
+					include 'Views/login.php';
 
 					if($_SERVER['REQUEST_METHOD'] == "POST"){
 						$email = mysqli_real_escape_string($this->connection ,$_POST['email']);
@@ -29,6 +33,7 @@ class Controller extends Model
 	
 						$loginEx = $this->LoginData($email, $pass);
 						if($loginEx['Code']){
+							$_SESSION['user_data'] = $loginEx['Data'];
 							?>
 							<script type="text/javascript">
 								console.log("success");

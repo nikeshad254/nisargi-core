@@ -44,23 +44,4 @@ hamMenu.addEventListener("click", () => {
 });
 
 // Function to close the modal
-function closeModal() {
-    document.getElementById("myModal").style.display = "none";
-}
 
-function openModal(title, msg, status, time) {
-    let myModal = document.getElementById("myModal");
-    myModal.style.display = "block";
-    myModal.querySelector('.title').innerHTML = title;
-    myModal.querySelector('.msg').innerHTML = msg;
-    if(status == 0){    // 0 for tick
-        myModal.querySelector('.icon').src ='../images/icons/tick.svg';
-    }else if(status == 1){  // 1 for cross
-        myModal.querySelector('.icon').src = '../images/icons/cross.svg';
-    }
-    if(time>0){
-        setTimeout(()=>{
-            closeModal();
-        }, time*1000);
-    }
-}

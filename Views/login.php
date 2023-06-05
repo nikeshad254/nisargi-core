@@ -17,11 +17,11 @@
             <div class="descs">
                 <h3>Welcome To Nisargi</h3>
                 <p class="desc">A common platform for you to buy and sell organic products fresh from farm to your door steps</p>
-                <button class="btn">Register</button>
-                <button class="btn">Home</button>
+                <a href="./register" class="btn">Register</a>
+                <a href="./" class="btn">Home</a>
             </div>
 
-            <form action="" class="loginForm" method="post">
+            <form class="loginForm" method="post">
                 <h3>Log In to Nisargi</h3>
 
                 <div class="inputs">
@@ -42,7 +42,7 @@
         </div>
 
     </section>
-
+    <?php require "Views/modal.php"; ?>
 </body>
 
 </html>

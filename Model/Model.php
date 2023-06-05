@@ -19,6 +19,22 @@ class Model {
 		}
 	}
 
+	function LoginData($email, $pass) {
+		$loginSql = "SELECT * FROM user WHERE email = '$email'";
+		$loginEx = $this->connection->query($loginSql);
+		$loginData = $loginEx->fetch_object();
+		if($loginEx->num_rows > 0 && password_verify($pass, $loginData->password)){
+			$response['Data'] = $loginData;
+			$response['Code'] = true;
+			$response['Message'] = 'Login Successful.';
+		} else {
+			$response['Data'] = null;
+			$response['Code'] = false;
+			$response['Message'] = 'Email or password is incorrect.';
+		}
+		return $response;
+	}
+
 }
 
 ?>

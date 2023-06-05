@@ -35,6 +35,25 @@ class Model {
 		return $response;
 	}
 
+	function InsertData ($tbl, $data){
+		$clms = implode(',', array_keys($data));
+		$vals = implode("','", $data);
+		$sql = "insert into $tbl ($clms) values ('$vals')";
+		// echo $sql;
+		// exit;
+		$insertEx = $this->connection->query($sql);
+		if($insertEx){
+			$response['Data'] = null;
+			$response['Code'] = true;
+			$response['Message'] = 'Data created successfully.';
+		} else {
+			$response['Data'] = null;
+			$response['Code'] = false;
+			$response['Message'] = 'Data creation failed.';
+		}
+		return $response;
+	}
+
 }
 
 ?>

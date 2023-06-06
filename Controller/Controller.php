@@ -2,11 +2,19 @@
 
 date_default_timezone_set('Asia/Kolkata');
 require_once('Model/Model.php');
-require_once('Views/url.php');
 session_start();
 
 class Controller extends Model
-{
+{	
+	function redirect($path){
+		if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off'){
+			$protocol = 'https';
+		}else{
+			$protocol = 'http';
+		}
+		header("Location: $protocol://".$_SERVER['HTTP_HOST']."/nisargi".$path);
+		exit;
+	}
 
 	function __construct()
 	{
@@ -24,8 +32,9 @@ class Controller extends Model
 				case '/login':
 					if (isset($_SESSION['user_data'])) {
 						// print_r($_SESSION['user_data']);
+						// echo $_SESSION['user_data']->photo;
 						// exit;
-						redirect("/");
+						$this->redirect('/');
 					}
 
 					include 'Views/login.php';
@@ -56,7 +65,7 @@ class Controller extends Model
 
 				case '/register':
 					if (isset($_SESSION['user_data'])) {
-						redirect("/");
+						$this->redirect("/");
 					}
 
 					include 'Views/consumer/register.php';
@@ -84,7 +93,7 @@ class Controller extends Model
 							<script type="text/javascript">
 								openModal("Success", "<?= $insertEx['Message'] ?>", 0, 1.5);
 								setTimeout(() => {
-									<?php redirect('/login'); ?>
+									<?php $this->redirect('/login'); ?>
 								}, 1500);
 							</script>
 						<?php
@@ -105,6 +114,24 @@ class Controller extends Model
 
 				case '/adminHome':
 					echo "hey cons";
+					break;
+				
+				case '/logout':
+					if (!isset($_SESSION['user_data'])) {
+						$this->redirect("/");
+					}
+
+					if ($_SERVER['REQUEST_METHOD'] == "POST") {
+						if($_POST['logout']=='yes'){
+							unset($_SESSION['user_data']);
+							session_destroy();
+							$this->redirect('/');
+						}
+					}
+					include 'Views/logout.php';
+					break;
+
+					default:
 					break;
 			}
 		}

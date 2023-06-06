@@ -46,9 +46,17 @@
                     <img src="Views/images/icons/search.svg" alt="">
                 </div>
 
-                <div class="nav-btn">
-                    <img src="Views/images/icons/user-circle.svg" alt="">
-                    <p>Account</p>
+                <div href="login" class="link nav-btn">
+                    
+                    <?php
+                    if(isset($_SESSION['user_data'])){
+                        echo '<img src="uploads/'.$_SESSION["user_data"]->photo.'" alt="">';
+                        echo '<a  class="btn btn-success" href="logout">Logout</a>';
+                    }else{
+                        echo '<img src="Views/images/icons/user-circle.svg" alt="">';
+                        echo '<a  class="btn btn-success" href="login">Login</a>';
+                    }
+                    ?>
                 </div>
 
                 <a href="./consumer-cart.html" class="nav-btn cart-btn link">

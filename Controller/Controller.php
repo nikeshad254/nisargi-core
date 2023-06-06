@@ -5,15 +5,39 @@ require_once('Model/Model.php');
 session_start();
 
 class Controller extends Model
-{	
-	function redirect($path){
-		if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off'){
+{
+	function redirect($path, $seconds)
+	{
+		if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
 			$protocol = 'https';
-		}else{
+		} else {
 			$protocol = 'http';
 		}
-		header("Location: $protocol://".$_SERVER['HTTP_HOST']."/nisargi".$path);
+		$protocol = $_SERVER['REQUEST_SCHEME'];
+		$host = $_SERVER['HTTP_HOST'];
+		$path = '/nisargi' . $path;
+
+		header("Refresh: $seconds; url=$protocol://$host$path");
+		// header("Location: $protocol://" . $_SERVER['HTTP_HOST'] . "/nisargi" . $path);
 		exit;
+	}
+
+	function validateForm($data)
+	{
+		$errors = [];
+
+		foreach ($data as $field => $value) {
+
+			if (empty($value)) {
+				$errors[] = ucfirst($field) . ' should not be empty.';
+			}
+
+			if ($field === 'email' && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
+				$errors[] = 'Invalid email format.';
+			}
+		}
+
+		return $errors;
 	}
 
 	function __construct()
@@ -34,7 +58,7 @@ class Controller extends Model
 						// print_r($_SESSION['user_data']);
 						// echo $_SESSION['user_data']->photo;
 						// exit;
-						$this->redirect('/');
+						$this->redirect('/', 0);
 					}
 
 					include 'Views/login.php';
@@ -65,7 +89,7 @@ class Controller extends Model
 
 				case '/register':
 					if (isset($_SESSION['user_data'])) {
-						$this->redirect("/");
+						$this->redirect("/", 0);
 					}
 
 					include 'Views/consumer/register.php';
@@ -84,22 +108,31 @@ class Controller extends Model
 							'photo' => $photo,
 						];
 
+						$error = [];
+						$error = $this->validateForm($insert_data);
+						if ($error) {
+						?>
+							<script>
+								openModal("Failed Insertion", "<?= $error[0] ?>", 1, 1.5);
+							</script>
+						<?php
+							exit;
+						}
 						$insertEx = $this->InsertData('user', $insert_data);
 						if ($insertEx['Code']) {
 							if (!is_null($photo)) {
 								move_uploaded_file($_FILES['photo']['tmp_name'], $path . $file_name);
 							}
 						?>
-							<script type="text/javascript">
-								openModal("Success", "<?= $insertEx['Message'] ?>", 0, 1.5);
-								setTimeout(() => {
-									<?php $this->redirect('/login'); ?>
-								}, 1500);
+							<script>
+								console.log("hey success");
+								openModal("Register Success", "Please login Now!", 0, 1.5);
 							</script>
 						<?php
+							$this->redirect('/login', 1.5);
 						} else {
 						?>
-							<script type="text/javascript">
+							<script>
 								openModal("Failed", "<?= $insertEx['Message'] ?>", 0, 1.5);
 							</script>
 <?php
@@ -115,23 +148,23 @@ class Controller extends Model
 				case '/adminHome':
 					echo "hey cons";
 					break;
-				
+
 				case '/logout':
 					if (!isset($_SESSION['user_data'])) {
-						$this->redirect("/");
+						$this->redirect("/", 0);
 					}
 
 					if ($_SERVER['REQUEST_METHOD'] == "POST") {
-						if($_POST['logout']=='yes'){
+						if ($_POST['logout'] == 'yes') {
 							unset($_SESSION['user_data']);
 							session_destroy();
-							$this->redirect('/');
+							$this->redirect('/', 0);
 						}
 					}
 					include 'Views/logout.php';
 					break;
 
-					default:
+				default:
 					break;
 			}
 		}

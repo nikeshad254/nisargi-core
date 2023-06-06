@@ -50,7 +50,7 @@
                     
                     <?php
                     if(isset($_SESSION['user_data'])){
-                        echo '<img src="uploads/'.$_SESSION["user_data"]->photo.'" alt="">';
+                        echo '<img src="uploads/'.$_SESSION["user_data"]->photo.'" alt="" class="profileImg">';
                         echo '<a  class="btn btn-success" href="logout">Logout</a>';
                     }else{
                         echo '<img src="Views/images/icons/user-circle.svg" alt="">';

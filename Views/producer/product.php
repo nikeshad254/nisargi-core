@@ -1,7 +1,7 @@
 <div class="first-hero container">
         <div class="headers">
             <h3 class="heading">Products In Your Shop</h3>
-            <div class="addNewProduct" id="addNewProduct"><span>+</span><span>Create New</span></div>
+            <a href="./productCreate" class="Link addNewProduct" id="addNewProduct"><span>+</span><span>Create New</span></a>
         </div>
 
         <div class="products-container">

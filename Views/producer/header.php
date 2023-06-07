@@ -10,10 +10,12 @@
 
     <?php 
         $path = $_SERVER['PATH_INFO'];
-        if( $path == '/farmerProducer'){
+        if( $path == '/farmerProduct'){
             echo '<link rel="stylesheet" href="Views/producer/css/producer-product.css">';
         }else if($path == '/farmerZone'){
             echo '<link rel="stylesheet" href="Views/producer/css/producer-home.css">';
+        }else if($path == '/productCreate'){
+            echo '<link rel="stylesheet" href="Views/producer/css/producer-create.css">';
         }
     ?>
 </head>
@@ -26,7 +28,7 @@
             </div>
 
             <div class="middle-nav">
-                <a href="./farmerProducer" class="Link nav-btn">
+                <a href="./farmerProduct" class="Link nav-btn">
                     <p>Products</p>
                     <img src="Views/images/icons/shopping-bag.svg" alt="" class="icon">
                 </a>

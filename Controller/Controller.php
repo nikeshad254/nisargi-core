@@ -147,11 +147,23 @@ class Controller extends Model
 					include 'Views/producer/footer.php';
 					break;
 
-				case '/farmerProducer':
+				case '/farmerProduct':
 					include 'Views/producer/header.php';
 					include 'Views/producer/product.php';
 					include 'Views/producer/footer.php';
 					break;
+				
+				case '/productCreate':
+					include 'Views/producer/header.php';
+					include 'Views/producer/productForm.php';
+					include 'Views/producer/footer.php';
+					break;
+
+				// case '/farmerProduct/create':
+				// 	include 'Views/producer/header.php';
+				// 	include 'Views/producer/productForm.php';
+				// 	include 'Views/producer/footer.php';
+				// 	break;
 
 				case '/logout':
 					if (!isset($_SESSION['user_data'])) {

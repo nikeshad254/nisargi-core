@@ -141,7 +141,7 @@ class Controller extends Model
 
 					break;
 
-				case '/userHome':
+				case '/farmerZone':
 					echo "hey";
 					break;
 

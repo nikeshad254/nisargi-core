@@ -17,8 +17,8 @@
             <div class="descs">
                 <h3>Welcome To Nisargi</h3>
                 <p class="desc">A common platform for you to buy and sell organic products fresh from farm to your door steps</p>
-                <button class="btn">Log In</button>
-                <button class="btn">Home</button>
+                <a href="./login" class="btn link">Log In</a>
+                <a href="./index.php" class="btn link">Home</a>
             </div>
 
             <form class="loginForm" method="post" enctype="multipart/form-data">

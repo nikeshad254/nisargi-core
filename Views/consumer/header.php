@@ -30,9 +30,9 @@
                     <p>Today's Deal</p>
                 </div>
 
-                <div class="nav-btn">
+                <a href="./farmerZone" class="link nav-btn">
                     <p>Farmer's Zone</p>
-                </div>
+                </a>
 
                 <div class="nav-btn">
                     <p>About Us</p>

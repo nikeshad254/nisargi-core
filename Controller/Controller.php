@@ -142,11 +142,15 @@ class Controller extends Model
 					break;
 
 				case '/farmerZone':
-					echo "hey";
+					include 'Views/producer/header.php';
+					include 'Views/producer/dashboard.php';
+					include 'Views/producer/footer.php';
 					break;
 
-				case '/adminHome':
-					echo "hey cons";
+				case '/farmerProducer':
+					include 'Views/producer/header.php';
+					include 'Views/producer/product.php';
+					include 'Views/producer/footer.php';
 					break;
 
 				case '/logout':

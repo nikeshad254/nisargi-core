@@ -1,5 +1,7 @@
 /* first-hero starts here */
-
+.first-hero{
+    margin-top: var(--nav-size);
+}
 
 .first-hero .blocks{
     display: flex;

@@ -154,9 +154,58 @@ class Controller extends Model
 					break;
 				
 				case '/productCreate':
+					
+					if ($_SERVER['REQUEST_METHOD'] == "POST") {
+						$path = 'uploads/products/';
+						$extention = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+						$file_name = $_POST['name'] . '_' . date('YmdHis') . '.' . $extention;
+						$photo = (file_exists($_FILES['image']['tmp_name'])) ? $file_name : null;
+
+						$insert_data = [
+							'name' => $_POST['name'],
+							'image' => $photo,
+							'description' => $_POST['description'],
+							'category' => $_POST['category'],
+							'price' => $_POST['price'],
+							'stock' => $_POST['stock'],
+							'unit' => $_POST['unit'],
+							'shop_id' => 1,
+						];
+						$error = [];
+						$error = $this->validateForm($insert_data);
+						if ($error) {
+						?>
+							<script>
+								openModal("Failed Insertion", "<?= $error[0] ?>", 1, 1.5);
+							</script>
+						<?php
+							exit;
+						}
+						$insertEx = $this->InsertData('product', $insert_data);
+						if ($insertEx['Code']) {
+							if (!is_null($photo)) {
+								move_uploaded_file($_FILES['image']['tmp_name'], $path . $file_name);
+							}
+
+						?>
+							<script>
+								openModal("Product Added", "product has been added successfully!", 0, 1.5);
+							</script>
+						<?php
+							$this->redirect('/farmerProduct', 1.5);
+						} else {
+						?>
+							<script>
+								openModal("Failed", "<?= $insertEx['Message'] ?>", 0, 1.5);
+							</script>
+<?php
+						}
+					}
 					include 'Views/producer/header.php';
 					include 'Views/producer/productForm.php';
+					include 'Views/modal.php';
 					include 'Views/producer/footer.php';
+
 					break;
 
 				// case '/farmerProduct/create':

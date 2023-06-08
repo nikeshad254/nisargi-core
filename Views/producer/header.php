@@ -48,7 +48,7 @@
             </div>
 
             <div class="right-nav">
-                <a href="#" class="Link nav-btn">
+                <a href="./" class="Link nav-btn">
                     <p>Buyer's Zone</p>
                     <img src="Views/images/icons/cart.svg" alt="" class="icon">
                 </a>

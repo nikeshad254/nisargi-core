@@ -56,8 +56,10 @@
     margin-top: 0.3rem;
 }
 .one-product .buttons .btn{
-    background-color: var(--irish-200);
+    background-color: var(--irish-400);
     padding: 0.5rem;
+    color: var(--gray-900);
+    border: 1px solid var(--gray-900);
     border-radius: 10px;
     transition: 0.3s ease;
     text-align: center;

@@ -53,8 +53,15 @@
                     <img src="Views/images/icons/cart.svg" alt="" class="icon">
                 </a>
                 <a href="#" class="Link nav-btn">
-                    <p>Sign In</p>
-                    <img src="Views/images/icons/user-circle.svg" alt="" class="icon">
+                <?php
+                    if(isset($_SESSION['user_data'])){
+                        echo '<img src="uploads/'.$_SESSION["user_data"]->photo.'" alt="" class="profileImg">';
+                        echo '<a  class="btn btn-success" href="logout">Logout</a>';
+                    }else{
+                        echo '<img src="Views/images/icons/user-circle.svg" alt="">';
+                        echo '<a  class="btn btn-success" href="login">Login</a>';
+                    }
+                    ?>
                 </a>
             </div>
         </div>

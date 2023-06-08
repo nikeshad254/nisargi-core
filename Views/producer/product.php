@@ -5,18 +5,24 @@
         </div>
 
         <div class="products-container">
+            <?php
+                $i = 1;
+
+                foreach ($products['Data'] as $product): 
+            ?>
             <div class="one-product">
-                <img src="Views/images/apple-demo.png" alt="" class="product-img">
+                <img src="uploads/products/<?= $product->image?>" alt="" class="product-img">
                 <div class="desc">
-                    <p class="name">Green Apples</p>
-                    <p class="stock">Stock: 100 kg</p>
-                    <p class="cost">Rs.100/kg</p>
+                    <p class="name"><?= $product->name?></p>
+                    <p class="stock">Stock: <?= $product->stock?> <?= $product->unit?></p>
+                    <p class="cost">Rs.<?= $product->price?>/<?= $product->unit?></p>
                 </div>
                 <div class="buttons">
                     <a href="#" class="edit btn Link">Edit</a>
                     <a href="#" class="remove btn Link">Remove</a>
                 </div>
             </div>
+            <?php endforeach; ?>
 
 
         </div>

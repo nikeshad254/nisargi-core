@@ -35,6 +35,11 @@ class Controller extends Model
 			if ($field === 'email' && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
 				$errors[] = 'Invalid email format.';
 			}
+
+			if ($field === 'number' || $field === 'stock' || $field === 'price') {
+				if(!is_numeric($value))
+				$errors[] = ucfirst($field).' must be number';
+			}
 		}
 
 		return $errors;
@@ -148,12 +153,19 @@ class Controller extends Model
 					break;
 
 				case '/farmerProduct':
+					$where = ['id' => $_SESSION['user_data']->id];
+					$products = $this->SelectData('product');
+
 					include 'Views/producer/header.php';
 					include 'Views/producer/product.php';
 					include 'Views/producer/footer.php';
 					break;
 				
 				case '/productCreate':
+
+					include 'Views/producer/header.php';
+					include 'Views/producer/productForm.php';
+					include 'Views/modal.php';
 					
 					if ($_SERVER['REQUEST_METHOD'] == "POST") {
 						$path = 'uploads/products/';
@@ -201,14 +213,13 @@ class Controller extends Model
 <?php
 						}
 					}
-					include 'Views/producer/header.php';
-					include 'Views/producer/productForm.php';
-					include 'Views/modal.php';
+
+
 					include 'Views/producer/footer.php';
 
 					break;
 
-				// case '/farmerProduct/create':
+				// case '/farmerProduct':
 				// 	include 'Views/producer/header.php';
 				// 	include 'Views/producer/productForm.php';
 				// 	include 'Views/producer/footer.php';

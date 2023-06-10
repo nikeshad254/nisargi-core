@@ -32,9 +32,9 @@
                     <input type="text" class="stock" name="stock">
                     <select name="unit">
                         <option value="kg">kg</option>
-                        <option value="g">g</option>
-                        <option value="ltr">ltr</option>
-                        <option value="ml">ml</option>
+                        <option value="g" >g</option>
+                        <option value="ltr" >ltr</option>
+                        <option value="ml" >ml</option>
                     </select>
                 </div>
             </div>

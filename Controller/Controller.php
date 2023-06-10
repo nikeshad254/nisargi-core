@@ -37,8 +37,8 @@ class Controller extends Model
 			}
 
 			if ($field === 'number' || $field === 'stock' || $field === 'price') {
-				if(!is_numeric($value))
-				$errors[] = ucfirst($field).' must be number';
+				if (!is_numeric($value))
+					$errors[] = ucfirst($field) . ' must be number';
 			}
 		}
 
@@ -140,7 +140,7 @@ class Controller extends Model
 							<script>
 								openModal("Failed", "<?= $insertEx['Message'] ?>", 0, 1.5);
 							</script>
-<?php
+						<?php
 						}
 					}
 
@@ -160,13 +160,14 @@ class Controller extends Model
 					include 'Views/producer/product.php';
 					include 'Views/producer/footer.php';
 					break;
-				
+
 				case '/productCreate':
 
 					include 'Views/producer/header.php';
 					include 'Views/producer/productForm.php';
-					include 'Views/modal.php';
-					
+					include "Views/modal.php";
+
+
 					if ($_SERVER['REQUEST_METHOD'] == "POST") {
 						$path = 'uploads/products/';
 						$extention = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
@@ -198,32 +199,102 @@ class Controller extends Model
 							if (!is_null($photo)) {
 								move_uploaded_file($_FILES['image']['tmp_name'], $path . $file_name);
 							}
-
 						?>
 							<script>
-								openModal("Product Added", "product has been added successfully!", 0, 1.5);
+								openModal("Sucess", "data has been sucessfully inserted", 0, 1.5, './farmerProduct');
 							</script>
 						<?php
-							$this->redirect('/farmerProduct', 1.5);
+
 						} else {
 						?>
 							<script>
-								openModal("Failed", "<?= $insertEx['Message'] ?>", 0, 1.5);
+								openModal("Failed", "data has been sucessfully failed", 1, 1.5);
+							</script>
+						<?php
+						}
+					}
+
+					include 'Views/producer/footer.php';
+					break;
+
+				case '/productEdit':
+					include 'Views/producer/header.php';
+
+					$product = [
+						'name' => '',
+						'image' => '',
+						'description' => '',
+						'category' => '',
+						'price' => '',
+						'stock' => '',
+						'unit' => '',
+						'shop_id' => 1,
+					];
+
+					if ($_SERVER['REQUEST_METHOD'] == "GET") {
+						$where = ['id' => $_GET['id']];
+						$products = $this->SelectData('product', $where);
+						if (!$products['Code']) {
+							echo "no product found";
+							exit;
+						}
+						$product = $products['Data'][0];
+						include 'Views/producer/productFormEdit.php';
+					}
+
+					include 'Views/modal.php';
+
+					if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+						$where = ['id' => $_GET['id']];
+						$products = $this->SelectData('product', $where);
+						$product = $products['Data'][0];
+
+						$path = 'uploads/products/';
+						$extention = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+						$file_name = $_POST['name'] . '_' . date('YmdHis') . '.' . $extention;
+						$photo = (file_exists($_FILES['image']['tmp_name'])) ? $file_name : $product->image;
+
+
+						$update_data = [
+							'name' => $_POST['name'],
+							'image' => $photo,
+							'description' => $_POST['description'],
+							'category' => $_POST['category'],
+							'price' => $_POST['price'],
+							'stock' => $_POST['stock'],
+							'unit' => $_POST['unit'],
+							'shop_id' => 1,
+						];
+
+						$where = ['id' => $_GET['id']];
+
+						$upd_data = $this->UpdateData('product', $update_data, $where);
+
+						if ($upd_data) {
+
+							if (!is_null($photo)) {
+								move_uploaded_file($_FILES['image']['tmp_name'], $path . $file_name);
+								echo "hello";
+							}
+
+						?>
+							<script type="text/javascript">
+								openModal("Sucess", "data has been sucessfully updated", 0, 1.5, './farmerProduct');
+							</script>
+						<?php
+						} else {
+						?>
+							<script type="text/javascript">
+								openModal("Failed", "data update failed", 1, 1.5, '');
 							</script>
 <?php
 						}
 					}
 
-
 					include 'Views/producer/footer.php';
 
 					break;
-
-				// case '/farmerProduct':
-				// 	include 'Views/producer/header.php';
-				// 	include 'Views/producer/productForm.php';
-				// 	include 'Views/producer/footer.php';
-				// 	break;
 
 				case '/logout':
 					if (!isset($_SESSION['user_data'])) {

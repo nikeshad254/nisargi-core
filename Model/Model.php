@@ -81,6 +81,21 @@ class Model {
 		
 	}
 
+	function UpdateData ($tbl, $data, $where) {
+		$sql = "UPDATE $tbl SET ";
+		foreach ($data as $key => $value) {
+			$sql .= "$key = '$value',"; 
+		}
+		$sql = rtrim($sql, ',');
+		$sql .= " WHERE ";
+		foreach ($where as $key => $value) {
+			$sql .= "$key = '$value' AND";
+		}
+		$sql = rtrim($sql, 'AND');
+
+		return $updEx = $this->connection->query($sql);
+	}
+
 }
 
 ?>

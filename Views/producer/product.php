@@ -18,8 +18,8 @@
                     <p class="cost">Rs.<?= $product->price?>/<?= $product->unit?></p>
                 </div>
                 <div class="buttons">
-                    <a href="#" class="edit btn Link">Edit</a>
-                    <a href="#" class="remove btn Link">Remove</a>
+                    <a href="./productEdit?id=<?= $product->id?>" class="edit btn Link">Edit</a>
+                    <a href="./productDelete?id=<?= $product->id?>" class="remove btn Link">Remove</a>
                 </div>
             </div>
             <?php endforeach; ?>

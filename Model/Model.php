@@ -103,6 +103,15 @@ class Model {
 		}
 		return $this->connection->query($sql);
 	}
+
+	function FlagDelete($tbl, $where){
+		$sql = "UPDATE $tbl SET deleteFlag = 'd' WHERE ";
+		foreach ($where as $key => $value) {
+			$sql .= " $key = '$value'";
+		}
+		return $this->connection->query($sql);
+	}
+
 }
 
 ?>

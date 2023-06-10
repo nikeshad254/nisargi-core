@@ -153,8 +153,8 @@ class Controller extends Model
 					break;
 
 				case '/farmerProduct':
-					$where = ['id' => $_SESSION['user_data']->id];
-					$products = $this->SelectData('product');
+					$where = ['shop_id' => 1, 'deleteFlag' => 'o'];
+					$products = $this->SelectData('product', $where);
 
 					include 'Views/producer/header.php';
 					include 'Views/producer/product.php';
@@ -305,7 +305,7 @@ class Controller extends Model
 					if ($_SERVER['REQUEST_METHOD'] == "POST") {
 						if ($_POST['delete'] == 'yes') {
 							$where = ['id' => $_GET['id']];
-							$del_data = $this->DeleteData('product', $where);
+							$del_data = $this->FlagDelete('product', $where);
 							if($del_data){
 								$this->redirect('./farmerProduct', 0);
 							}

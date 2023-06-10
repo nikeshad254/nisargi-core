@@ -96,6 +96,13 @@ class Model {
 		return $updEx = $this->connection->query($sql);
 	}
 
+	function DeleteData($tbl, $where){
+		$sql = "DELETE FROM $tbl WHERE ";
+		foreach ($where as $key => $value) {
+			$sql .= " $key = '$value'";
+		}
+		return $this->connection->query($sql);
+	}
 }
 
 ?>

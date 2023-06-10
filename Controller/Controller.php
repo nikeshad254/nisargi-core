@@ -295,6 +295,23 @@ class Controller extends Model
 					include 'Views/producer/footer.php';
 
 					break;
+				
+				case '/productDelete':
+					if($_SERVER['REQUEST_METHOD'] == "GET"){
+						include 'Views/producer/header.php';
+						include 'Views/producer/productDelete.php';
+						include 'Views/producer/footer.php';
+					}
+					if ($_SERVER['REQUEST_METHOD'] == "POST") {
+						if ($_POST['delete'] == 'yes') {
+							$where = ['id' => $_GET['id']];
+							$del_data = $this->DeleteData('product', $where);
+							if($del_data){
+								$this->redirect('./farmerProduct', 0);
+							}
+						}
+					}
+					break;
 
 				case '/logout':
 					if (!isset($_SESSION['user_data'])) {

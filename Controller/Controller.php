@@ -75,16 +75,21 @@ class Controller extends Model
 						$loginEx = $this->LoginData($email, $pass);
 						if ($loginEx['Code']) {
 							$_SESSION['user_data'] = $loginEx['Data'];
+							$where = ['user_id' => $_SESSION['user_data']->id];
+							$selectEx = $this->SelectData('shop', $where);
+							if($selectEx['Code']){
+								$_SESSION['shop_data'] = $selectEx['Data'][0];
+							}
+							
 ?>
 							<script type="text/javascript">
-								openModal("Login Successful", "<?= $loginEx['Message'] ?>", 0, 1.5);
+								openModal("Login Successful", "<?= $loginEx['Message'] ?>", 0, 1.5, '/nisargi');
 							</script>
 						<?php
-							header("Refresh:1.5; url=./");
 						} else {
 						?>
 							<script type="text/javascript">
-								openModal("Login Failed", "<?= $loginEx['Message'] ?>", 1, 1.5);
+								openModal("Login Failed", "<?= $loginEx['Message'] ?>", 1, 1.5, '');
 							</script>
 						<?php
 						}
@@ -131,29 +136,93 @@ class Controller extends Model
 						?>
 							<script>
 								console.log("hey success");
-								openModal("Register Success", "Please login Now!", 0, 1.5);
+								openModal("Register Success", "Please login Now!", 0, 1.5, '');
 							</script>
 						<?php
 							$this->redirect('/login', 1.5);
 						} else {
 						?>
 							<script>
-								openModal("Failed", "<?= $insertEx['Message'] ?>", 0, 1.5);
+								openModal("Failed", "<?= $insertEx['Message'] ?>", 0, 1.5, '');
 							</script>
 						<?php
 						}
 					}
 
 					break;
+				case '/registerShop':
+					if (!isset($_SESSION['user_data'])) {
+						$this->redirect("/login", 0);
+					}else{
+						if(isset($_SESSION['shop_data'])){
+							$this->redirect('/farmerZone', 0);
+						}
+					}
+
+					include 'Views/consumer/header.php';
+					include 'Views/producer/registerShop.php';
+					include 'Views/modal.php';
+					include 'Views/producer/footer.php';
+
+					if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+						$insert_data = [
+							'name' => $_POST['name'],
+							'phone' => $_POST['phone'],
+							'bio' => $_POST['bio'],
+							'address' => $_POST['address'],
+							'user_id' => $_SESSION['user_data']->id,
+						];
+
+						$error = [];
+						$error = $this->validateForm($insert_data);
+						if ($error) {
+						?>
+							<script>
+								openModal("Failed Insertion", "<?= $error[0] ?>", 1, 1.5, '');
+							</script>
+						<?php
+							exit;
+						}
+						$insertEx = $this->InsertData('shop', $insert_data);
+						if ($insertEx['Code']) {
+							$where = ['user_id' => $_SESSION['user_data']->id];
+							$dataEx = $this->SelectData('shop', $where);
+							if($dataEx['Code']){
+								$_SESSION['shop_data'] = $dataEx['Data'][0];
+							}
+						?>
+							<script>
+								openModal("Register Success", "You have a shop now!", 0, 1.5, '/nisargi/farmerZone');
+							</script>
+						<?php
+						} else {
+						?>
+							<script>
+								openModal("Failed", "<?= $insertEx['Message'] ?>", 0, 1.5, '');
+							</script>
+						<?php
+						}
+					}
+					break;
 
 				case '/farmerZone':
+					if (!isset($_SESSION['user_data'])) {
+						$this->redirect("/login", 0);
+					}else{
+						if(!isset($_SESSION['shop_data'])){
+							$this->redirect('/registerShop', 0);
+						}
+					}
+
 					include 'Views/producer/header.php';
 					include 'Views/producer/dashboard.php';
 					include 'Views/producer/footer.php';
 					break;
 
 				case '/farmerProduct':
-					$where = ['shop_id' => 1, 'deleteFlag' => 'o'];
+
+					$where = ['shop_id' => $_SESSION['shop_data']->id, 'deleteFlag' => 'o'];
 					$products = $this->SelectData('product', $where);
 
 					include 'Views/producer/header.php';
@@ -182,20 +251,21 @@ class Controller extends Model
 							'price' => $_POST['price'],
 							'stock' => $_POST['stock'],
 							'unit' => $_POST['unit'],
-							'shop_id' => 1,
+							'shop_id' => $_SESSION['shop_data']->id,
 						];
 						$error = [];
 						$error = $this->validateForm($insert_data);
 						if ($error) {
 						?>
 							<script>
-								openModal("Failed Insertion", "<?= $error[0] ?>", 1, 1.5);
+								openModal("Failed Insertion", "<?= $error[0] ?>", 1, 1.5, '');
 							</script>
 						<?php
 							exit;
 						}
 						$insertEx = $this->InsertData('product', $insert_data);
 						if ($insertEx['Code']) {
+
 							if (!is_null($photo)) {
 								move_uploaded_file($_FILES['image']['tmp_name'], $path . $file_name);
 							}
@@ -208,7 +278,7 @@ class Controller extends Model
 						} else {
 						?>
 							<script>
-								openModal("Failed", "data has been sucessfully failed", 1, 1.5);
+								openModal("Failed", "data has been sucessfully failed", 1, 1.5, '');
 							</script>
 						<?php
 						}
@@ -228,7 +298,7 @@ class Controller extends Model
 						'price' => '',
 						'stock' => '',
 						'unit' => '',
-						'shop_id' => 1,
+						'shop_id' => $_SESSION['shop_data']->id,
 					];
 
 					if ($_SERVER['REQUEST_METHOD'] == "GET") {
@@ -264,7 +334,7 @@ class Controller extends Model
 							'price' => $_POST['price'],
 							'stock' => $_POST['stock'],
 							'unit' => $_POST['unit'],
-							'shop_id' => 1,
+							'shop_id' => $_SESSION['shop_data']->id,
 						];
 
 						$where = ['id' => $_GET['id']];

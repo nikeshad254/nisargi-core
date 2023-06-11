@@ -14,7 +14,7 @@
             echo '<link rel="stylesheet" href="Views/producer/css/producer-product.css">';
         }else if($path == '/farmerZone'){
             echo '<link rel="stylesheet" href="Views/producer/css/producer-home.css">';
-        }else if($path == '/productCreate' || $path == '/productEdit'){
+        }else if($path == '/productCreate' || $path == '/productEdit' || $path == '/registerShop'){
             echo '<link rel="stylesheet" href="Views/producer/css/producer-create.css">';
         }
     ?>

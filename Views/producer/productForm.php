@@ -18,7 +18,14 @@
 
             <div class="lbl-inp">
                 <label for="category">Category</label>
-                <input type="text" name="category" required>
+                <!-- <input type="text" name="category" required> -->
+                <select name="category" class="category">
+                    <option value="fruits">fruits</option>
+                    <option value="vegetables" >vegetables</option>
+                    <option value="frozen" >frozen</option>
+                    <option value="pickels" >pickels</option>
+                    <option value="herbs" >herbs</option>
+                </select>
             </div>
 
             <div class="lbl-inp">
@@ -33,6 +40,7 @@
                     <select name="unit">
                         <option value="kg">kg</option>
                         <option value="g" >g</option>
+                        <option value="pcs" >pcs</option>
                         <option value="ltr" >ltr</option>
                         <option value="ml" >ml</option>
                     </select>

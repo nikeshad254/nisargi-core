@@ -21,10 +21,13 @@
     outline: 1px solid var(--gray-900);
 }
 .one-product{
-    width: fit-content;
+    width: 12rem;
     padding: 0.5rem;
     background-color: var(--gray-100);
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     
 }
 .products-container{
@@ -36,7 +39,7 @@
 }
 .one-product .product-img{
     height: 10rem;
-    width: 10rem;
+    width: 100%;
     object-fit: cover;
 }
 .one-product .desc{
@@ -46,6 +49,8 @@
 .one-product .desc .name{
     font-size: 1.2rem;
     font-weight: 700;
+    /* width: 10rem; */
+    text-align: center;
 }
 .one-product .desc .cost{
     font-weight: 600;

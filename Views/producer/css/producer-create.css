@@ -27,7 +27,8 @@
 }
 
 .create-product .lbl-inp input, 
-.create-product .lbl-inp textarea{
+.create-product .lbl-inp textarea,
+.create-product .lbl-inp .category{
     width: 12rem;
     padding: 0.2rem;
 }
@@ -39,13 +40,14 @@
     justify-content: space-between;
 }
 .create-product .buttons .btn{
-    background-color: var(--irish-300);
+    background-color: var(--irish-400);
     min-width: 7rem;
     font-size: 1.0rem;
     text-align: center;
     padding: 0.2rem;
     border-radius: 10px;
     border: 1px solid var(--gray-800);
+    color: #000;
     transition: 0.3s ease;
     cursor: pointer;
     margin-top: 0.5rem;

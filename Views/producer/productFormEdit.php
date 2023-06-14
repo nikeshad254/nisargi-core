@@ -19,7 +19,15 @@
 
         <div class="lbl-inp">
             <label for="category">Category</label>
-            <input type="text" name="category" value="<?= htmlentities($product->category) ?>" required>
+
+            <select name="category" class="category">
+                <option value="fruits" <?php echo (htmlentities($product->category) == 'fruits') ? 'selected' : ''; ?>>fruits</option>
+                <option value="vegetables" <?php echo (htmlentities($product->category) == 'vegetables') ? 'selected' : ''; ?>>vegetables</option>
+                <option value="frozen" <?php echo (htmlentities($product->category) == 'frozen') ? 'selected' : ''; ?>>frozen</option>
+                <option value="pickles" <?php echo (htmlentities($product->category) == 'pickles') ? 'selected' : ''; ?>>pickles</option>
+                <option value="dairy" <?php echo (htmlentities($product->category) == 'dairy') ? 'selected' : ''; ?>>dairy</option>
+            </select>
+
         </div>
 
         <div class="lbl-inp">
@@ -34,6 +42,7 @@
                 <select name="unit">
                     <option value="kg" value="<?= htmlentities($product->name) == 'kg' ? 'selected' : '' ?>">kg</option>
                     <option value="g" value="<?= htmlentities($product->name) == 'g' ? 'selected' : '' ?>">g</option>
+                    <option value="pcs" value="<?= htmlentities($product->name) == 'pcs' ? 'selected' : '' ?>">pcs</option>
                     <option value="ltr" value="<?= htmlentities($product->name) == 'ltr' ? 'selected' : '' ?>">ltr</option>
                     <option value="ml" value="<?= htmlentities($product->name) == 'ml' ? 'selected' : '' ?>">ml</option>
                 </select>
@@ -42,7 +51,7 @@
 
         <div class="buttons">
             <a href="./farmerProduct" class="btn Link cancel">Cancel</a>
-            <button class="btn post">Post Item</button>
+            <button class="btn post">Update Item</button>
         </div>
     </form>
 

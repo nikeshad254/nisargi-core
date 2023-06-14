@@ -25,6 +25,7 @@
                     <option value="frozen" >frozen</option>
                     <option value="pickels" >pickels</option>
                     <option value="herbs" >herbs</option>
+                    <option value="fertilizer" >fertilizer</option>
                 </select>
             </div>
 

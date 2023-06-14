@@ -26,6 +26,7 @@
                 <option value="frozen" <?php echo (htmlentities($product->category) == 'frozen') ? 'selected' : ''; ?>>frozen</option>
                 <option value="pickles" <?php echo (htmlentities($product->category) == 'pickles') ? 'selected' : ''; ?>>pickles</option>
                 <option value="dairy" <?php echo (htmlentities($product->category) == 'dairy') ? 'selected' : ''; ?>>dairy</option>
+                <option value="fertilizer" <?php echo (htmlentities($product->category) == 'fertilizer') ? 'selected' : ''; ?>>fertilizer</option>
             </select>
 
         </div>

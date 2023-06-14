@@ -25,11 +25,6 @@
         </a>
 
         <a href="#" class="item-box">
-            <p>Frozen</p>
-            <img src="Views/images/demo-frozen.jpg" alt="">
-        </a>
-
-        <a href="#" class="item-box">
             <p>Meat</p>
             <img src="Views/images/demo-meat.jpg" alt="">
         </a>
@@ -40,8 +35,13 @@
         </a>
 
         <a href="#" class="item-box">
-            <p>Herbs</p>
-            <img src="Views/images/demo-herbs.jpg" alt="">
+            <p>Dairy</p>
+            <img src="Views/images/demo-frozen.jpg" alt="">
+        </a>
+
+        <a href="#" class="item-box">
+            <p>Fertilizer</p>
+            <img src="Views/images/demo-fertilizer.jpg" alt="">
         </a>
     </div>
 </section>

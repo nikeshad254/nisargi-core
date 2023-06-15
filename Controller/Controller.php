@@ -153,16 +153,20 @@ class Controller extends Model
 
 				case '/products':
 					$category = '';
+					$where = ['deleteFlag'=>'o'];
 					if($_SERVER['REQUEST_METHOD'] == "GET"){
 						if(isset($_GET['category'])){
 							$category = $_GET['category'];
+							$where = ['deleteFlag'=>'o', 'category'=> $category];
+							if($category == '' || $category == 'all'){
+								$where = ['deleteFlag'=>'o'];
+							}
 						}
 					}
-					$where = ['deleteFlag'=>'o'];
 					$selectEx = $this->SelectData('product_view', $where);
 					if($selectEx['Code']==false){
-						echo "Error Occured";
-						exit;
+						echo "Error Occured Catgegory and Produccts not found";
+						// exit;
 					}
 					$products = $selectEx['Data'];
 					

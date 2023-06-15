@@ -14,32 +14,32 @@
 <section class="second-hero container">
     <h3>Shop Top Product Category</h3>
     <div class="items-lists">
-        <a href="#" class="item-box">
+        <a href="./products?category=fruits" class="item-box">
             <p>Fruits</p>
             <img src="Views/images/demo-fruits.jpg" alt="">
         </a>
 
-        <a href="#" class="item-box">
+        <a href="./products?category=vegetables" class="item-box">
             <p>Vegetable</p>
             <img src="Views/images/demo-vegetable.jpg" alt="">
         </a>
 
-        <a href="#" class="item-box">
+        <a href="./products?category=meat" class="item-box">
             <p>Meat</p>
             <img src="Views/images/demo-meat.jpg" alt="">
         </a>
 
-        <a href="#" class="item-box">
+        <a href="./products?category=pickels" class="item-box">
             <p>Pickel</p>
             <img src="Views/images/demo-pickel.jpg" alt="">
         </a>
 
-        <a href="#" class="item-box">
+        <a href="./products?category=dairy" class="item-box">
             <p>Dairy</p>
             <img src="Views/images/demo-frozen.jpg" alt="">
         </a>
 
-        <a href="#" class="item-box">
+        <a href="./products?category=fertilizer" class="item-box">
             <p>Fertilizer</p>
             <img src="Views/images/demo-fertilizer.jpg" alt="">
         </a>

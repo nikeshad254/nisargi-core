@@ -22,9 +22,9 @@
                 <select name="category" class="category">
                     <option value="fruits">fruits</option>
                     <option value="vegetables" >vegetables</option>
-                    <option value="frozen" >frozen</option>
+                    <option value="meat" >meat</option>
                     <option value="pickels" >pickels</option>
-                    <option value="herbs" >herbs</option>
+                    <option value="dairy" >dairy</option>
                     <option value="fertilizer" >fertilizer</option>
                 </select>
             </div>

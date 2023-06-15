@@ -45,7 +45,7 @@ hamMenu.addEventListener("click", () => {
 });
 
 function updateCartNum() {
-  const cartIds = localStorage.getItem('nisargiCart101');
+  const cartIds = sessionStorage.getItem('nisargiCart101');;
   const parsedIds = cartIds ? JSON.parse(cartIds) : [];
   navNum.innerHTML = parsedIds.length;
 }

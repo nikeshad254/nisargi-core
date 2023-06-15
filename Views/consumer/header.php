@@ -7,15 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nisargi</title>
     <link rel="stylesheet" href="Views/consumer/css/main.css">
-    <?php 
-        $path = $_SERVER['PATH_INFO'];
-        if( $path == '/'){
-            echo '<link rel="stylesheet" href="Views/consumer/css/consumerHome.css">';
-        }else if($path == '/registerShop'){
-            echo '<link rel="stylesheet" href="Views/producer/css/producer-create.css">';
-        }else if($path == '/products'){
-            echo '<link rel="stylesheet" href="Views/consumer/css/consumerCategory.css">';
-        }
+    <?php
+    $path = $_SERVER['PATH_INFO'];
+    if ($path == '/') {
+        echo '<link rel="stylesheet" href="Views/consumer/css/consumerHome.css">';
+    } else if ($path == '/registerShop') {
+        echo '<link rel="stylesheet" href="Views/producer/css/producer-create.css">';
+    } else if ($path == '/products') {
+        echo '<link rel="stylesheet" href="Views/consumer/css/consumerCategory.css">';
+    } else if ($path == '/yourcart') {
+        echo '<link rel="stylesheet" href="Views/consumer/css/consumerCart.css">';
+    }
     ?>
 </head>
 
@@ -56,12 +58,12 @@
                 </div>
 
                 <div href="login" class="link nav-btn">
-                    
+
                     <?php
-                    if(isset($_SESSION['user_data'])){
-                        echo '<img src="uploads/'.$_SESSION["user_data"]->photo.'" alt="" class="profileImg">';
+                    if (isset($_SESSION['user_data'])) {
+                        echo '<img src="uploads/' . $_SESSION["user_data"]->photo . '" alt="" class="profileImg">';
                         echo '<a  class="btn btn-success" href="logout">Logout</a>';
-                    }else{
+                    } else {
                         echo '<img src="Views/images/icons/user-circle.svg" alt="">';
                         echo '<a  class="btn btn-success" href="login">Login</a>';
                     }

@@ -179,6 +179,15 @@ class Controller extends Model
 					include 'Views/consumer/footer.php';
 
 					break;
+				
+				case '/yourcart':
+
+					include 'Views/consumer/header.php';
+					include 'Views/consumer/cart.php';
+					$cart = "<script>document.write(localStorage.getItem('nisargiCart101'));</script>";
+					print_r($cart);
+					include 'Views/consumer/footer.php';
+					break;
 
 
 				case '/registerShop':

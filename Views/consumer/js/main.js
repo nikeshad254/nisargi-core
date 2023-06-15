@@ -6,6 +6,7 @@ const hamMenu = document.getElementById("three-bars");
 const topNav = document.querySelector(".top-nav");
 const middleNav = document.querySelector(".middle-nav");
 const rightNav = document.querySelector(".right-nav");
+const navNum = document.querySelector("#cart-num");
 
 function handleCategory() {
   if (catBtnActive) {
@@ -41,6 +42,16 @@ hamMenu.addEventListener("click", () => {
   catBtnActive = false;
   handleCategory();
   handleMenu();
+});
+
+function updateCartNum() {
+  const cartIds = localStorage.getItem('nisargiCart101');
+  const parsedIds = cartIds ? JSON.parse(cartIds) : [];
+  navNum.innerHTML = parsedIds.length;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  updateCartNum();
 });
 
 // Function to close the modal

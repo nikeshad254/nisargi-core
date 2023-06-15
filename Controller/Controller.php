@@ -150,6 +150,33 @@ class Controller extends Model
 					}
 
 					break;
+
+				case '/products':
+					$category = '';
+					if($_SERVER['REQUEST_METHOD'] == "GET"){
+						if(isset($_GET['category'])){
+							$category = $_GET['category'];
+						}
+					}
+					$where = ['deleteFlag'=>'o'];
+					$selectEx = $this->SelectData('product_view', $where);
+					if($selectEx['Code']==false){
+						echo "Error Occured";
+						exit;
+					}
+					$products = $selectEx['Data'];
+					
+					// echo "<pre>";
+					// print_r($products);
+					// exit;
+					
+					include 'Views/consumer/header.php';
+					include 'Views/consumer/category.php';
+					include 'Views/consumer/footer.php';
+
+					break;
+
+
 				case '/registerShop':
 					if (!isset($_SESSION['user_data'])) {
 						$this->redirect("/login", 0);

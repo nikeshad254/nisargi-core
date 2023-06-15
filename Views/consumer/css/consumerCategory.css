@@ -80,6 +80,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     gap: 0.3rem;
     text-align: center;
 }
@@ -106,9 +107,11 @@
     border-radius: 1rem;
     cursor: pointer;
     transition: 0.5s ease;
+    background-color: var(--irish-300);
 }
 .one-product .content button:hover{
-    background-color: var(--gray-300);
+    background-color: var(--irish-500);
+    color: var(--gray-100);
     transition: 0.5s ease;
 }
 .paging-container{
@@ -134,6 +137,13 @@
     width: 1.5rem;
     transform: rotateZ(-90deg);
     cursor: pointer;
+}
+.one-product .content button.inCart{
+    background-color: var(--pink-300);
+}
+.one-product .content button.inCart:hover{
+    background-color: var(--pink-500);
+    color: var(--gray-100);
 }
 
 @media (max-width: 1384px) {

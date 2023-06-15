@@ -151,7 +151,8 @@ body {
     color: var(--gray-100);
     border-radius: 10px;
     font-size: 0.7rem;
-    padding: 1px;
+    padding: 3px;
+    z-index: 200;
 }
 
 .search-bar {

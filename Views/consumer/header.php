@@ -13,6 +13,8 @@
             echo '<link rel="stylesheet" href="Views/consumer/css/consumerHome.css">';
         }else if($path == '/registerShop'){
             echo '<link rel="stylesheet" href="Views/producer/css/producer-create.css">';
+        }else if($path == '/products'){
+            echo '<link rel="stylesheet" href="Views/consumer/css/consumerCategory.css">';
         }
     ?>
 </head>
@@ -69,7 +71,7 @@
                 <a href="./consumer-cart.html" class="nav-btn cart-btn link">
                     <img src="Views/images/icons/cart.svg" alt="">
                     <p>Cart</p>
-                    <small id="cart-num">99</small>
+                    <small id="cart-num">X</small>
                 </a>
             </div>
         </div>

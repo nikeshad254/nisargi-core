@@ -181,12 +181,24 @@ class Controller extends Model
 					break;
 				
 				case '/yourcart':
-
+					$cartData = [];
+					if (!isset($_COOKIE['nisargiCart101'])) {
+						$cartDataUnparse = $_COOKIE['nisargiCart101'];
+						$cartData = json_decode($cartDataUnparse, true);
+					}
+					
+					
 					include 'Views/consumer/header.php';
 					include 'Views/consumer/cart.php';
-					$cart = "<script>document.write(localStorage.getItem('nisargiCart101'));</script>";
-					print_r($cart);
 					include 'Views/consumer/footer.php';
+					$cartItemsIds = [];
+					$where = [];
+					
+					include 'Model/store_data.php';
+					var_dump($_SESSION['nisargiCart101']);
+					echo "hello";
+					exit;
+					
 					break;
 
 

@@ -70,7 +70,7 @@
                     ?>
                 </div>
 
-                <a href="./consumer-cart.html" class="nav-btn cart-btn link">
+                <a href="./yourcart" class="nav-btn cart-btn link">
                     <img src="Views/images/icons/cart.svg" alt="">
                     <p>Cart</p>
                     <small id="cart-num">X</small>

@@ -44,15 +44,34 @@ hamMenu.addEventListener("click", () => {
   handleMenu();
 });
 
+function getCookie(name) {
+  const cookieArr = document.cookie.split("; ");
+  for (let i = 0; i < cookieArr.length; i++) {
+    const cookiePair = cookieArr[i].split("=");
+    if (cookiePair[0] === name) {
+      return decodeURIComponent(cookiePair[1]);
+    }
+  }
+  return null;
+}
+
+function setCookie(name, value, days) {
+  const expires = new Date();
+  expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+  document.cookie = name + "=" + value + ";expires=" + expires.toUTCString();
+}
+
+
 function updateCartNum() {
-  const cartIds = sessionStorage.getItem('nisargiCart101');;
+  const cartIds = getCookie("nisargiCart101");
   const parsedIds = cartIds ? JSON.parse(cartIds) : [];
   navNum.innerHTML = parsedIds.length;
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+
+
+document.addEventListener("DOMContentLoaded", function () {
   updateCartNum();
 });
 
 // Function to close the modal
-

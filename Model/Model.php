@@ -84,6 +84,30 @@ class Model {
 		
 	}
 
+	function SelectOrData(string $tblName, array $where = []){
+		$selSql = "SELECT * FROM $tblName";
+		if (!empty($where)) {
+			$selSql .= " WHERE " . implode(" OR ", $where);
+		}
+
+		$sqlEx = $this->connection->query($selSql);
+		if($sqlEx->num_rows > 0){
+			while ($FetchData = $sqlEx->fetch_object()) {
+			    $allData[] = $FetchData;
+			}
+			$response['Data'] = $allData;
+			$response['Code'] = true;
+			$response['Message'] = 'Data retrieved successfully.';
+		} else {
+			$response['Data'] = [];
+			$response['Code'] = false;
+			$response['Message'] = 'Data not retrieved.';
+		}
+		return $response;
+
+		
+	}
+
 	function UpdateData ($tbl, $data, $where) {
 		$sql = "UPDATE $tbl SET ";
 		foreach ($data as $key => $value) {

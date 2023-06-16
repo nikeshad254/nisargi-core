@@ -77,10 +77,10 @@ class Controller extends Model
 							$_SESSION['user_data'] = $loginEx['Data'];
 							$where = ['user_id' => $_SESSION['user_data']->id];
 							$selectEx = $this->SelectData('shop', $where);
-							if($selectEx['Code']){
+							if ($selectEx['Code']) {
 								$_SESSION['shop_data'] = $selectEx['Data'][0];
 							}
-							
+
 ?>
 							<script type="text/javascript">
 								openModal("Login Successful", "<?= $loginEx['Message'] ?>", 0, 1.5, '/nisargi');
@@ -153,60 +153,60 @@ class Controller extends Model
 
 				case '/products':
 					$category = '';
-					$where = ['deleteFlag'=>'o'];
-					if($_SERVER['REQUEST_METHOD'] == "GET"){
-						if(isset($_GET['category'])){
+					$where = ['deleteFlag' => 'o'];
+					if ($_SERVER['REQUEST_METHOD'] == "GET") {
+						if (isset($_GET['category'])) {
 							$category = $_GET['category'];
-							$where = ['deleteFlag'=>'o', 'category'=> $category];
-							if($category == '' || $category == 'all'){
-								$where = ['deleteFlag'=>'o'];
+							$where = ['deleteFlag' => 'o', 'category' => $category];
+							if ($category == '' || $category == 'all') {
+								$where = ['deleteFlag' => 'o'];
 							}
 						}
 					}
 					$selectEx = $this->SelectData('product_view', $where);
-					if($selectEx['Code']==false){
+					if ($selectEx['Code'] == false) {
 						echo "Error Occured Catgegory and Produccts not found";
 						// exit;
 					}
 					$products = $selectEx['Data'];
-					
+
 					// echo "<pre>";
 					// print_r($products);
 					// exit;
-					
+
 					include 'Views/consumer/header.php';
 					include 'Views/consumer/category.php';
 					include 'Views/consumer/footer.php';
 
 					break;
-				
+
 				case '/yourcart':
-					$cartData = [];
-					if (!isset($_COOKIE['nisargiCart101'])) {
-						$cartDataUnparse = $_COOKIE['nisargiCart101'];
-						$cartData = json_decode($cartDataUnparse, true);
-					}
-					
-					
 					include 'Views/consumer/header.php';
+					$cartDatas = [];
+					if (isset($_COOKIE['nisargiCart101'])) {
+						$cartDataUnparse = $_COOKIE['nisargiCart101'];
+						$cartDatas = json_decode($cartDataUnparse, true);
+					}
+					$where[] = "id = -1";
+					foreach ($cartDatas as $cartId) {
+						$where[] = "id = " . $cartId;
+					}
+
+					$selectEx = $this->SelectOrData('product_view', $where);
+
+					$cartItems = $selectEx['Data'];
+
 					include 'Views/consumer/cart.php';
 					include 'Views/consumer/footer.php';
-					$cartItemsIds = [];
-					$where = [];
-					
-					include 'Model/store_data.php';
-					var_dump($_SESSION['nisargiCart101']);
-					echo "hello";
-					exit;
-					
+
 					break;
 
 
 				case '/registerShop':
 					if (!isset($_SESSION['user_data'])) {
 						$this->redirect("/login", 0);
-					}else{
-						if(isset($_SESSION['shop_data'])){
+					} else {
+						if (isset($_SESSION['shop_data'])) {
 							$this->redirect('/farmerZone', 0);
 						}
 					}
@@ -240,7 +240,7 @@ class Controller extends Model
 						if ($insertEx['Code']) {
 							$where = ['user_id' => $_SESSION['user_data']->id];
 							$dataEx = $this->SelectData('shop', $where);
-							if($dataEx['Code']){
+							if ($dataEx['Code']) {
 								$_SESSION['shop_data'] = $dataEx['Data'][0];
 							}
 						?>
@@ -261,8 +261,8 @@ class Controller extends Model
 				case '/farmerZone':
 					if (!isset($_SESSION['user_data'])) {
 						$this->redirect("/login", 0);
-					}else{
-						if(!isset($_SESSION['shop_data'])){
+					} else {
+						if (!isset($_SESSION['shop_data'])) {
 							$this->redirect('/registerShop', 0);
 						}
 					}
@@ -417,9 +417,9 @@ class Controller extends Model
 					include 'Views/producer/footer.php';
 
 					break;
-				
+
 				case '/productDelete':
-					if($_SERVER['REQUEST_METHOD'] == "GET"){
+					if ($_SERVER['REQUEST_METHOD'] == "GET") {
 						include 'Views/producer/header.php';
 						include 'Views/producer/productDelete.php';
 						include 'Views/producer/footer.php';
@@ -428,7 +428,7 @@ class Controller extends Model
 						if ($_POST['delete'] == 'yes') {
 							$where = ['id' => $_GET['id']];
 							$del_data = $this->FlagDelete('product', $where);
-							if($del_data){
+							if ($del_data) {
 								$this->redirect('./farmerProduct', 0);
 							}
 						}

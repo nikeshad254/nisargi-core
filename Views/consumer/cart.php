@@ -4,6 +4,24 @@
         echo '<p>There is No Item In Your Cart</p>';
         exit;
     }
+
+    function findProduct($cartDatas, $productId){
+        $foundProduct = null;
+        
+        foreach ($cartDatas as $cartItem) {
+            if ($cartItem['productId'] == $productId) {
+                $foundProduct = $cartItem;
+                break;
+            }
+        }
+        
+        if ($foundProduct) {
+            $quantity = $foundProduct['quantity'];
+            return $quantity;
+        } else {
+            return 0;
+        }
+    }
     ?>
     <div class="cart-items">
         <h3>Items in your Cart ( <?= count($cartItems)?> )</h3>
@@ -17,7 +35,9 @@
             </div>
             <div class="qty-rate mob-v">
                 <p>Rate: Rs. <?=$cartItem->price;?></p>
-                <p>Qty: 1</p>
+                <p>Qty:
+                <?= findProduct($cartDatas, $cartItem->id);?>
+                </p>
             </div>
             <div class="extras mob-v">
                 <p>Delivery</p>

@@ -40,7 +40,6 @@
     </div>
 </footer>
 
-<script src="Views/consumer/js/main.js"></script>
 </body>
 
 </html>

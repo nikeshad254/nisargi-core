@@ -17,6 +17,8 @@
         echo '<link rel="stylesheet" href="Views/consumer/css/consumerCategory.css">';
     } else if ($path == '/yourcart') {
         echo '<link rel="stylesheet" href="Views/consumer/css/consumerCart.css">';
+    } else if ($path == '/product') {
+        echo '<link rel="stylesheet" href="Views/consumer/css/consumerProduct.css">';
     }
     ?>
 </head>
@@ -111,3 +113,5 @@
 
         <img class="three-bars" id="three-bars" src="Views/images/icons/3bars.svg" alt="">
     </nav>
+
+    <script src="Views/consumer/js/main.js"></script>

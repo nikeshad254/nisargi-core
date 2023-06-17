@@ -1,3 +1,4 @@
+<script src="Views/consumer/js/category.js"></script>
 <div class="category-top-hero container">
     <?php
         if(empty($products)){
@@ -132,4 +133,3 @@
     <img src="Views/images/icons/arrow.svg" class="right-arrow" alt="">
 </div>
 
-<script src="Views/consumer/js/category.js"></script>

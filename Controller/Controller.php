@@ -184,12 +184,15 @@ class Controller extends Model
 					include 'Views/consumer/header.php';
 					$cartDatas = [];
 					if (isset($_COOKIE['nisargiCart101'])) {
-						$cartDataUnparse = $_COOKIE['nisargiCart101'];
-						$cartDatas = json_decode($cartDataUnparse, true);
+						$cartDataUnparsed = $_COOKIE['nisargiCart101'];
+						$cartDataUp = json_decode($cartDataUnparsed, true);
+						$cartDatas = json_decode($cartDataUp, true);
 					}
-					$where[] = "id = -1";
-					foreach ($cartDatas as $cartId) {
-						$where[] = "id = " . $cartId;
+					$where = ["id = -1"];
+
+					foreach ($cartDatas as $cartItem) {
+						$productId = $cartItem['productId'];
+						$where[] = "id = " . $productId;
 					}
 
 					$selectEx = $this->SelectOrData('product_view', $where);
@@ -197,8 +200,24 @@ class Controller extends Model
 					$cartItems = $selectEx['Data'];
 
 					include 'Views/consumer/cart.php';
+
 					include 'Views/consumer/footer.php';
 
+					break;
+
+				case '/product':
+					include 'Views/consumer/header.php';
+					$product = [];
+					$where = ['id' => -1];
+					if(isset($_GET['id'])){
+						$where = ['id'=>$_GET['id']];
+					}
+					$selectEx = $this->SelectData('product_view', $where);
+					if($selectEx['Code']==true){
+						$product = $selectEx['Data'][0];
+					}
+					include 'Views/consumer/oneProduct.php';
+					include 'Views/consumer/footer.php';
 					break;
 
 

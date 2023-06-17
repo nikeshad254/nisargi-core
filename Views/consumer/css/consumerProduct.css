@@ -23,10 +23,12 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    width: 100%;
 }
 
 .details-container .product {
     font-size: 2rem;
+    text-transform: capitalize;
 }
 
 .details-container .seller {

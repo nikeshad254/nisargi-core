@@ -49,7 +49,7 @@ function getCookie(name) {
   for (let i = 0; i < cookieArr.length; i++) {
     const cookiePair = cookieArr[i].split("=");
     if (cookiePair[0] === name) {
-      return decodeURIComponent(cookiePair[1]);
+      return JSON.parse(decodeURIComponent(cookiePair[1]));
     }
   }
   return null;
@@ -58,20 +58,18 @@ function getCookie(name) {
 function setCookie(name, value, days) {
   const expires = new Date();
   expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
-  document.cookie = name + "=" + value + ";expires=" + expires.toUTCString();
+  document.cookie = name + "=" + encodeURIComponent(JSON.stringify(value)) + ";expires=" + expires.toUTCString();
 }
-
 
 function updateCartNum() {
-  const cartIds = getCookie("nisargiCart101");
-  const parsedIds = cartIds ? JSON.parse(cartIds) : [];
-  navNum.innerHTML = parsedIds.length;
+  const cartItems = getCookie("nisargiCart101");
+  const parsedItems = cartItems ? JSON.parse(cartItems) : [];
+  navNum.innerHTML = parsedItems.length;
 }
-
-
 
 document.addEventListener("DOMContentLoaded", function () {
   updateCartNum();
 });
+
 
 // Function to close the modal

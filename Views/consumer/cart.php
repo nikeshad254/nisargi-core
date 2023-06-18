@@ -4,7 +4,9 @@
         echo '<p>There is No Item In Your Cart</p>';
         exit;
     }
-
+    ?>
+    <script src="Views/consumer/js/cart.js"></script>
+    <?php
     function findProduct($cartDatas, $productId){
         $foundProduct = null;
         
@@ -30,7 +32,9 @@
         <div class="one-item">
             <img class="productImg" src="uploads/products/<?=$cartItem->image;?>" alt="">
             <div class="product-seller">
-                <h3><?=$cartItem->name;?></h3>
+                <a href="./product?id=<?=$cartItem->id?>" class="link">
+                    <h3><?=$cartItem->name;?></h3>
+                </a>
                 <p>Seller: <?=$cartItem->shop_name;?></p>
             </div>
             <div class="qty-rate mob-v">
@@ -43,7 +47,7 @@
                 <p>Delivery</p>
                 <p>Free</p>
             </div>
-            <img id="removeIcon" src="Views/images/icons/minus-circle.svg" alt="">
+            <img id="removeIcon" src="Views/images/icons/minus-circle.svg" alt="" onClick="removeItem(<?=$cartItem->id;?>)">
         </div>
         <?php endforeach;?>
     </div>
@@ -89,13 +93,27 @@
             </form>
 
         </div>
+        <?php
+        $groupedItems = [];
+        foreach ($cartItems as $item) {
+            $shopName = $item->shop_name;
+            if (!isset($groupedItems[$shopName])) {
+                $groupedItems[$shopName] = [];
+            }
+            $groupedItems[$shopName][] = $item;
+        }
+        ?>
 
         <div class="billing">
             <h3>Billing: </h3>
+            <?php 
+            $billTotal= 0;
+            foreach($groupedItems as $pasal):?>
+                
             <div class="one-shop">
                 <div class="heading">
-                    <p>Raju's Shop</p>
-                    <p>#1029</p>
+                    <p><?=$pasal[0]->shop_name;?></p>
+                    <!-- <p>####</p> -->
                 </div>
 
                 <table>
@@ -106,65 +124,38 @@
                         <th>Price</th>
                     </thead>
                     <tbody>
+                        <?php
+                        $sum = 0;
+                        foreach($pasal as $product):
+                            $quantity = findProduct($cartDatas, $product->id);
+                            $rate = $product->price;
+                            $total = $quantity * $rate;
+                            $sum += $total;
+                            $billTotal += $total;
+                        ?>
                         <tr>
-                            <td>Apple</td>
-                            <td>10</td>
-                            <td>100</td>
-                            <td>1000</td>
+                            <td><?=$product->name;?></td>
+                            <td><?= $quantity;?></td>
+                            <td><?= $rate;?></td>
+                            <td><?= $total;?></td>
                         </tr>
+                        <?php endforeach;?>
                         <tr class="spanner">
                             <td colspan="3">Delivery</td>
-                            <td>10</td>
+                            <td>Free</td>
                         </tr>
                     </tbody>
                     <tfoot class="spanner">
                         <td colspan="3">Total:</td>
-                        <td>1020</td>
+                        <td><?= $sum;?></td>
                     </tfoot>
                 </table>
             </div>
-
-            <div class="one-shop">
-                <div class="heading">
-                    <p>Raju's Shop</p>
-                    <p>#1029</p>
-                </div>
-
-                <table>
-                    <thead>
-                        <th>Name</th>
-                        <th>Qty</th>
-                        <th>Rate</th>
-                        <th>Price</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Apple</td>
-                            <td>10</td>
-                            <td>100</td>
-                            <td>1000</td>
-                        </tr>
-                        <tr>
-                            <td>Apple</td>
-                            <td>10</td>
-                            <td>100</td>
-                            <td>1000</td>
-                        </tr>
-                        <tr class="spanner">
-                            <td colspan="3">Delivery</td>
-                            <td>10</td>
-                        </tr>
-                    </tbody>
-                    <tfoot class="spanner">
-                        <td colspan="3">Total:</td>
-                        <td>1020</td>
-                    </tfoot>
-                </table>
-            </div>
-
+            <?php 
+            endforeach;?>
             <div class="totalBill">
                 <p>Total Bill:</p>
-                <p>Rs. 1928</p>
+                <p>Rs. <?=$billTotal;?></p>
             </div>
         </div>
 

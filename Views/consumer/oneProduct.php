@@ -5,6 +5,24 @@
             echo "<h4 style='text-align: center;'>Product Not Found !! </h4>";
             exit;
         }
+
+        function findQty($cartDatas, $productId){
+            $foundProduct = null;
+            
+            foreach ($cartDatas as $cartItem) {
+                if ($cartItem['productId'] == $productId) {
+                    $foundProduct = $cartItem;
+                    break;
+                }
+            }
+            
+            if ($foundProduct) {
+                $quantity = $foundProduct['quantity'];
+                return $quantity;
+            } else {
+                return 0;
+            }
+        }
     ?>
 </div>
 
@@ -41,20 +59,28 @@
             <div class="qtys">
                 <div class="qty">
                     <p onclick="decrement()">-</p>
-                    <div class="incrementer" id="incrPlace"></div>
+                    <div class="incrementer" id="incrPlace">
+                        <?php 
+                            if(!empty($cartDatas) && findQty($cartDatas, $product->id) > 0){
+                                echo findQty($cartDatas, $product->id);
+                            }else{
+                                echo 1;
+                            }
+                        ?>
+                    </div>
                     <p onclick="increment()">+</p>
                 </div>
 
                 <p class="unit"><?=$product->unit;?></p>
             </div>
-            <p class="stock">Stock: <?=$product->stock;?> <?=$product->unit;?></p>
+            <p class="stock">Stock: <span id="pStock"><?=$product->stock;?></span> <?=$product->unit;?></p>
         </div>
 
         <div class="buyCartBtn">
             <button class="btn" id="buyOneProduct">
                 Buy Now
             </button>
-            <button class="btn" id="addOneCart">
+            <button class="btn" id="addOneCart" name="productBtn<?=$product->id;?>">
                 Add to Cart
             </button>
         </div>

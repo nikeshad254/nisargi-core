@@ -126,6 +126,16 @@
     margin-top: 2rem;
 }
 
+button.inCart{
+    background-color: var(--pink-400);
+    color: var(--gray-900);
+}
+
+button.inCart:hover{
+    background-color: var(--pink-600);
+    color: var(--gray-100);
+}
+
 .buyCartBtn .btn {
     width: 35%;
     font-size: 1.4rem;

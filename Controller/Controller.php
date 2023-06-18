@@ -216,6 +216,13 @@ class Controller extends Model
 					if($selectEx['Code']==true){
 						$product = $selectEx['Data'][0];
 					}
+					$cartDatas = [];
+					if (isset($_COOKIE['nisargiCart101'])) {
+						$cartDataUnparsed = $_COOKIE['nisargiCart101'];
+						$cartDataUp = json_decode($cartDataUnparsed, true);
+						$cartDatas = json_decode($cartDataUp, true);
+					}
+					include 'Views/modal.php';
 					include 'Views/consumer/oneProduct.php';
 					include 'Views/consumer/footer.php';
 					break;

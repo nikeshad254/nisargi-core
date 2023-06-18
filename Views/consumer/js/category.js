@@ -16,12 +16,12 @@ function updateCartBtn() {
     } else {
       btn.classList.remove("inCart");
       btn.textContent = "Add to Cart";
-      btn.onclick = () => addToCart(productId);
+      btn.onclick = () => addToCart(productId, 1);
     }
   });
 }
 
-function addToCart(productId, quantity = 1) {
+function addToCart(productId, quantity) {
   const cartItems = getCookie("nisargiCart101");
   const parsedItems = cartItems ? JSON.parse(cartItems) : [];
   parsedItems.push({ productId, quantity });

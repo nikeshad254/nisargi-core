@@ -199,6 +199,7 @@ class Controller extends Model
 
 					$cartItems = $selectEx['Data'];
 
+					include 'Views/modal.php';
 					include 'Views/consumer/cart.php';
 
 					include 'Views/consumer/footer.php';

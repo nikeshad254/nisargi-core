@@ -54,7 +54,7 @@
 </div>
 <div class="address-billing container">
     <div class="default-header">
-        <input type="checkbox" id="defaultAddressCheckbox">
+        <input type="checkbox" id="defaultAddressCheckbox" onclick="assignDefaultAddress()">
         <p>Default Address </p>
     </div>
 
@@ -62,7 +62,7 @@
         <div class="delivery-info">
             <div class="headings">
                 <h3>Delivery Information</h3>
-                <button id="setDefault" class="btn">Set Default</button>
+                <button id="setDefault" class="btn" onclick="setDefaultAddress()">Set Default</button>
             </div>
 
             <form action="" class="delivery-form" method="post">

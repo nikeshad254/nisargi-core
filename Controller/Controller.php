@@ -182,7 +182,25 @@ class Controller extends Model
 
 				case '/yourcart':
 					include 'Views/consumer/header.php';
+					include 'Views/modal.php';
 					$cartDatas = [];
+					$order_data = array(
+						"user_id" => -1,
+
+						"ordered_product" => [],
+
+						"delivery" => array(
+							"name" => "",
+							"city" => "",
+							"street" => "",
+							"mobile" => "",
+							"message" => "",
+						),
+					);
+					if (isset($_SESSION['user_data'])) {
+						$order_data['user_id'] = $_SESSION['user_data']->id;
+					}
+
 					if (isset($_COOKIE['nisargiCart101'])) {
 						$cartDataUnparsed = $_COOKIE['nisargiCart101'];
 						$cartDataUp = json_decode($cartDataUnparsed, true);
@@ -199,22 +217,55 @@ class Controller extends Model
 
 					$cartItems = $selectEx['Data'];
 
-					include 'Views/modal.php';
 					include 'Views/consumer/cart.php';
-
 					include 'Views/consumer/footer.php';
+					include 'Views/modal.php';
 
+					if ($_SERVER['REQUEST_METHOD'] == "POST") {
+						if (!isset($_SESSION['user_data'])) {
+						?>
+							<script>
+								openModal("Failed", "Please Login First", 1, 1.5, '');
+							</script>
+						<?php
+						} else {
+
+							$order_data['delivery']['name'] = $_POST['full-name'];
+							$order_data['delivery']['city'] = $_POST['city'];
+							$order_data['delivery']['street'] = $_POST['street'];
+							$order_data['delivery']['mobile'] = $_POST['mobile'];
+							$order_data['delivery']['message'] = $_POST['message'];
+
+							$insertEx = $this->InsertOrderData($order_data);
+							print_r($insertEx);
+
+							if($insertEx['Code']){
+								?>
+								<script>
+									deleteCookie("nisargiCart101");
+									openModal("Success", "Successfully Created Order", 0, 1.5, '/nisargi');
+								</script>
+								<?php
+							}else{
+								?>
+								<script>
+									openModal("Failed", <?php $insertEx['Message'] ?>, 1, 1.5, '');
+								</script>
+								<?php
+							}
+						}
+					}
 					break;
 
 				case '/product':
 					include 'Views/consumer/header.php';
 					$product = [];
 					$where = ['id' => -1];
-					if(isset($_GET['id'])){
-						$where = ['id'=>$_GET['id']];
+					if (isset($_GET['id'])) {
+						$where = ['id' => $_GET['id']];
 					}
 					$selectEx = $this->SelectData('product_view', $where);
-					if($selectEx['Code']==true){
+					if ($selectEx['Code'] == true) {
 						$product = $selectEx['Data'][0];
 					}
 					$cartDatas = [];

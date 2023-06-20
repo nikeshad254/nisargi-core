@@ -61,6 +61,10 @@ function setCookie(name, value, days) {
   document.cookie = name + "=" + encodeURIComponent(JSON.stringify(value)) + ";expires=" + expires.toUTCString();
 }
 
+function deleteCookie(cookieName) {
+  setCookie(cookieName, '');
+}
+
 function updateCartNum() {
   const cartItems = getCookie("nisargiCart101");
   const parsedItems = cartItems ? JSON.parse(cartItems) : [];

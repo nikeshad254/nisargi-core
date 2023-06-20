@@ -61,6 +61,7 @@
 .form-billing{
     display: flex;
     gap: 2rem;
+    justify-content: space-around;
 }
 
 .delivery-info{
@@ -68,6 +69,7 @@
     border-radius: 10px;
     padding: 1rem;
     width: 35%;
+    height: fit-content;
 }
 .delivery-info .headings{
     display: flex;
@@ -78,6 +80,11 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+}
+.delivery-info .orderBtn{
+    font-size: 1.2rem;
+    width: 100%;
+    padding: 0.3rem;
 }
 .delivery-form input{
     height: 2rem;

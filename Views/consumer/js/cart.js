@@ -1,4 +1,4 @@
-function removeItem(productId) {
+function removeItem(productId, time) {
   const cartItems = getCookie("nisargiCart101");
   const parsedItems = cartItems ? JSON.parse(cartItems) : [];
   const updatedItems = parsedItems.filter(
@@ -6,8 +6,9 @@ function removeItem(productId) {
   );
   setCookie("nisargiCart101", JSON.stringify(updatedItems), 30);
   updateCartNum();
-  location.reload();
   console.log("Product ID removed from the cart:", productId);
+
+  location.reload();
 }
 
 function getDefaultAddress() {
@@ -38,20 +39,12 @@ function assignDefaultAddress(){
       city.value = defaultAddress.city;
       mobile.value = defaultAddress.mobile;
       street.value = defaultAddress.street;
+      checkBox.checked = false;
 
-      fname.disabled = true;
-      city.disabled = true;
-      street.disabled = true;
-      mobile.disabled = true;
     }else{
       openModal("Failed", "default address not found", 1, 1.5, "");
       checkBox.checked = false;
     }
-  }else{
-    fname.disabled = false;
-    city.disabled = false;
-    street.disabled = false;
-    mobile.disabled = false;
   }
 }
 
@@ -78,4 +71,22 @@ function setDefaultAddress() {
   } catch (error) {
     openModal("Error", "Failed to set default address.", 1, 1.5, "");
   }
+}
+
+
+function getFormData() {
+  const fname = document.querySelector('input[name="full-name"]').value;
+  const city = document.querySelector('input[name="city"]').value;
+  const street = document.querySelector('input[name="street"]').value;
+  const mobile = document.querySelector('input[name="mobile"]').value;
+  const message = document.querySelector('textarea[name="message"]').value;
+
+  let formData = {
+    fname: fname,
+    city: city,
+    street: street,
+    mobile: mobile,
+    message: message
+  };
+  return formData;
 }

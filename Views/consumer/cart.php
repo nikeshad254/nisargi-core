@@ -28,7 +28,16 @@
     <div class="cart-items">
         <h3>Items in your Cart ( <?= count($cartItems)?> )</h3>
 
-        <?php foreach($cartItems as $cartItem):?>
+        <?php foreach($cartItems as $cartItem):
+            
+            if(isset($_SESSION['shop_data'])){
+                if($_SESSION['shop_data']->id == $cartItem->shop_id){
+                    echo "<script>removeItem($cartItem->id) 
+                            openModal('Items Removed', 'Some Items were removed from your cart.', 0, 3, '')
+                        </script>";
+                }
+            }
+        ?>
         <div class="one-item">
             <img class="productImg" src="uploads/products/<?=$cartItem->image;?>" alt="">
             <div class="product-seller">
@@ -49,7 +58,12 @@
             </div>
             <img id="removeIcon" src="Views/images/icons/minus-circle.svg" alt="" onClick="removeItem(<?=$cartItem->id;?>)">
         </div>
-        <?php endforeach;?>
+        <?php 
+        $new_item = array("product_id" => $cartItem->id, "quantity" =>  findProduct($cartDatas, $cartItem->id));
+        $order_data["ordered_product"][] = $new_item;
+
+        endforeach;
+        ?>
     </div>
 </div>
 <div class="address-billing container">
@@ -68,28 +82,31 @@
             <form action="" class="delivery-form" method="post">
                 <div class="label-txt">
                     <label for="full-name">Full Name</label>
-                    <input type="text" name="full-name" placeholder="enter your name..">
+                    <input type="text" name="full-name" placeholder="enter your name.." required>
                 </div>
 
                 <div class="label-txt">
                     <label for="city">City</label>
-                    <input type="text" name="city" placeholder="enter your city..">
+                    <input type="text" name="city" placeholder="enter your city.." required>
                 </div>
 
                 <div class="label-txt">
                     <label for="street">Street Address</label>
-                    <input type="text" name="street" placeholder="enter your street..">
+                    <input type="text" name="street" placeholder="enter your street.." required>
                 </div>
 
                 <div class="label-txt">
                     <label for="mobile">Mobile</label>
-                    <input type="text" name="mobile" placeholder="enter your number..">
+                    <input type="text" name="mobile" placeholder="enter your number.." required>
                 </div>
 
                 <div class="label-txt">
                     <label for="message">Message:</label>
                     <textarea name="message" id="message" cols="30" rows="10" style="resize:none" placeholder="enter your message.."></textarea>
                 </div>
+
+                <button class="btn orderBtn">Place Order</button>
+            
             </form>
 
         </div>
@@ -157,12 +174,6 @@
                 <p>Total Bill:</p>
                 <p>Rs. <?=$billTotal;?></p>
             </div>
-        </div>
-
-        <div class="btns">
-            <img src="Views/images/order-gif.gif" alt="">
-            <img src="Views/images/down-gif.gif" alt="">
-            <button class="btn">Place Order</button>
         </div>
     </div>
 </div>

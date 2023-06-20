@@ -54,6 +54,50 @@ class Model {
 		return $response;
 	}
 
+	function InsertOrderData ($orderData){
+		$orderID = 1;
+		$sql = "insert into orders (user_id) values ('".$orderData['user_id']."')";
+
+		$result =  $this->connection->query($sql);
+		if (!$result) {
+			$response['Data'] = null;
+			$response['Code'] = false;
+			$response['Message'] = 'Data creation failed 01.';
+			return $response;
+		}
+
+		$orderID = mysqli_insert_id($this->connection);
+
+		$ordered_products = $orderData['ordered_product'];
+		foreach ($ordered_products as $product) {
+			$product_id = $product['product_id'];
+			$quantity = $product['quantity'];
+			$sql = "INSERT INTO ordered_product (order_id, product_id, quantity) VALUES ('$orderID','$product_id', '$quantity')";
+			$result =  $this->connection->query($sql);
+		}
+
+		if (!$result) {
+			$response['Data'] = null;
+			$response['Code'] = false;
+			$response['Message'] = 'Order creation failed 02.';
+			return $response;
+		}
+
+		$sql = "insert into delivery (name, city, street, mobile, message, order_id) values ('".$orderData['delivery']['name']."', '".$orderData['delivery']['city']."', '".$orderData['delivery']['street']."', '".$orderData['delivery']['mobile']."', '".$orderData['delivery']['message']."', '$orderID')";
+
+		$result =  $this->connection->query($sql);
+		if ($result) {
+			$response['Data'] = null;
+			$response['Code'] = true;
+			$response['Message'] = 'Order creation success.';
+		}else{
+			$response['Data'] = null;
+			$response['Code'] = false;
+			$response['Message'] = 'Order creation failed 03.';
+		}
+		return $response;
+	}
+
 	function SelectData(string $tblName, array $where = []){
 		$selSql = "SELECT * FROM $tblName";
 		if(!empty($where)){
@@ -107,6 +151,8 @@ class Model {
 
 		
 	}
+
+
 
 	function UpdateData ($tbl, $data, $where) {
 		$sql = "UPDATE $tbl SET ";

@@ -107,8 +107,6 @@ class Model {
 			}
 			$selSql = rtrim($selSql, 'AND');
 		}
-		// echo $selSql;
-		// exit;
 
 		$sqlEx = $this->connection->query($selSql);
 		if($sqlEx->num_rows > 0){
@@ -127,6 +125,53 @@ class Model {
 
 		
 	}
+
+	function SelectColumnData(string $tblName, array $columnName, array $where = []){
+		$columnList = implode(' ,', $columnName);
+		$selSql = "SELECT $columnList FROM $tblName";
+		if(!empty($where)){
+			$selSql .= " WHERE ";
+			foreach ($where as $key => $value) {
+				$selSql .= " $key = '$value' AND";
+			}
+			$selSql = rtrim($selSql, 'AND');
+		}
+
+		$sqlEx = $this->connection->query($selSql);
+
+		if($sqlEx->num_rows > 0){
+			while ($FetchData = $sqlEx->fetch_object()) {
+			    $allData[] = $FetchData;
+			}
+			$response['Data'] = $allData;
+			$response['Code'] = true;
+			$response['Message'] = 'Data retrieved successfully.';
+		} else {
+			$response['Data'] = [];
+			$response['Code'] = false;
+			$response['Message'] = 'Data not retrieved.';
+		}
+		return $response;
+
+		
+	}
+
+	function UpdateStock($productId, $quantity) {
+		$updateSql = "UPDATE product SET stock = stock - $quantity WHERE id = $productId";
+		echo $updateSql;
+		$sqlEx = $this->connection->query($updateSql);
+		if($sqlEx){
+			$response['Data'] = $sqlEx;
+			$response['Code'] = true;
+			$response['Message'] = 'Data updated successfully.';
+		}else {
+			$response['Data'] = [];
+			$response['Code'] = false;
+			$response['Message'] = 'Data not updated.';
+		}
+		return $response;
+	}
+	
 
 	function SelectOrData(string $tblName, array $where = []){
 		$selSql = "SELECT * FROM $tblName";
@@ -151,7 +196,6 @@ class Model {
 
 		
 	}
-
 
 
 	function UpdateData ($tbl, $data, $where) {
@@ -185,6 +229,33 @@ class Model {
 		return $this->connection->query($sql);
 	}
 
-}
+	function GetDataCount(string $tblName, array $where = []) {
+		$selSql = "SELECT COUNT(*) AS count FROM $tblName";
+	
+		if (!empty($where)) {
+			$selSql .= " WHERE ";
+			foreach ($where as $key => $value) {
+				$selSql .= " $key = '$value' AND";
+			}
+			$selSql = rtrim($selSql, 'AND');
+		}
+	
+		$sqlEx = $this->connection->query($selSql);
+		if ($sqlEx->num_rows > 0) {
+			$FetchData = $sqlEx->fetch_object();
+			$count = $FetchData->count;
+	
+			$response['Count'] = $count;
+			$response['Code'] = true;
+			$response['Message'] = 'Count retrieved successfully.';
+		} else {
+			$response['Count'] = 0;
+			$response['Code'] = false;
+			$response['Message'] = 'Count not retrieved.';
+		}
+	
+		return $response;
+	}
 
-?>
+
+}

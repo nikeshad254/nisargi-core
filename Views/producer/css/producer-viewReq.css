@@ -4,6 +4,7 @@
 .first-hero .heading{
     text-transform: capitalize;
     margin-bottom: 1rem;
+    margin-top: 1rem;
     border-bottom: 1px solid var(--irish-500);
     width: fit-content;
 }
@@ -34,20 +35,25 @@
     font-size: 0.9rem;
     margin-left: 0.3rem;
 }
-.delivery button,
-.billing button{
+.delivery .button,
+.billing .button{
     font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
     padding: 0.3rem;
     border-radius: 10px;
     margin-top: 1rem;
     cursor: pointer;
     transition: 0.3s ease;
+    text-align: center;
+    background-color: var(--pink-100);
+    border: 1px solid var(--gray-900);
 }
-.delivery button:hover{
+.delivery .button:hover{
     background-color: var(--pink-700);
     color: var(--gray-100);
 }
-.billing button:hover{
+.billing .button:hover{
     background-color: var(--irish-500);
     color: var(--gray-100);
 }
@@ -76,4 +82,7 @@
 }
 .billing table tfoot{
     font-weight: 600;
+}
+.backBtn{
+    margin-bottom: 1rem;
 }

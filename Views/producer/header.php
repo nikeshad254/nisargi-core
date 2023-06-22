@@ -16,8 +16,12 @@
             echo '<link rel="stylesheet" href="Views/producer/css/producer-home.css">';
         }else if($path == '/productCreate' || $path == '/productEdit' || $path == '/registerShop'){
             echo '<link rel="stylesheet" href="Views/producer/css/producer-create.css">';
+        }else if($path == '/requests'){
+            echo '<link rel="stylesheet" href="Views/producer/css/producer-request.css">';
+        }else if($path == '/viewrequest'){
+            echo '<link rel="stylesheet" href="Views/producer/css/producer-viewReq.css">';
         }
-    ?>
+    ?>  
 </head>
 
 <body>
@@ -40,7 +44,7 @@
                     <p>Reviews</p>
                     <img src="Views/images/icons/star.svg" alt="" class="icon">
                 </a>
-                <a href="#" class="Link nav-btn">
+                <a href="./requests" class="Link nav-btn">
                     <p>Requests</p>
                     <img src="Views/images/icons/clipboard.svg" alt="" class="icon">
                 </a>

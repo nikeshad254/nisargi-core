@@ -8,7 +8,7 @@
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 .one-request{
     display: flex;
@@ -16,7 +16,7 @@
     gap: 1rem;
     background-color: var(--gray-100);
     width: fit-content;
-    padding: 1rem;
+    padding: 0.5rem;
     border-radius: 10px;
 }
 .one-request .left-side .image{
@@ -49,6 +49,7 @@
     gap: 0.5rem;
     width: 100%;
     justify-content: space-between;
+    font-size: 0.9rem;
 }
 .one-request .right-side .total{
     border-top: 1px solid var(--gray-600);

@@ -1,0 +1,114 @@
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.first-hero {
+    margin-top: var(--nav-size);
+}
+
+.first-hero .headers {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.order-container {
+    width: 100%;
+    text-align: center;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 0.5px solid black;
+}
+
+.order-container thead th {
+    background-color: var(--gray-100);
+}
+.order-container thead th,
+.order-container tbody tr td{
+    border-bottom: 0.5px solid black;
+}
+
+.order-container tbody tr:nth-child(2n) {
+    background-color: var(--pink-200);
+}
+
+.order-container tbody tr:nth-child(2n+1) {
+    background-color: var(--irish-200);
+}
+
+.order-container tbody tr td:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.035);
+}
+
+.order-container tbody tr td:last-child {
+    text-align: center;
+}
+
+
+.order-container thead th {
+    padding: 0.4rem;
+    font-size: 1.2rem;
+}
+
+.order-container tbody tr td {
+    padding: 0.4rem;
+}
+
+.status {
+    display: flex;
+    width: auto;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.status .dot {
+    width: 8px;
+    height: 8px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.status.complete .dot {
+    background-color: #00b500;
+}
+
+.status.canceled .dot {
+    background-color: #b50024;
+}
+
+.status.incomplete .dot {
+    background-color: #ff9900;
+}
+
+.status.indelivery .dot {
+    background-color: #0054ff;
+}
+
+.orderBelow {
+    padding: 1rem;
+}
+
+.orderBelow .headers {
+    margin-bottom: 1rem;
+}
+
+.blinking1 {
+    animation: blink 1s infinite;
+}
+
+.blinking2 {
+    animation: blink 1.5s infinite;
+}

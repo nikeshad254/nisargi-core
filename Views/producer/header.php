@@ -20,6 +20,8 @@
             echo '<link rel="stylesheet" href="Views/producer/css/producer-request.css">';
         }else if($path == '/viewrequest'){
             echo '<link rel="stylesheet" href="Views/producer/css/producer-viewReq.css">';
+        }else if($path == '/shoporders'){
+            echo '<link rel="stylesheet" href="Views/producer/css/producerOrder.css">';
         }
     ?>  
 </head>
@@ -36,7 +38,7 @@
                     <p>Products</p>
                     <img src="Views/images/icons/shopping-bag.svg" alt="" class="icon">
                 </a>
-                <a href="#" class="Link nav-btn">
+                <a href="./shoporders" class="Link nav-btn">
                     <p>Orders</p>
                     <img src="Views/images/icons/queue-list.svg" alt="" class="icon">
                 </a>

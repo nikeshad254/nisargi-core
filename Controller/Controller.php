@@ -591,6 +591,7 @@ class Controller extends Model
 					include 'Views/producer/footer.php';
 
 					break;
+
 				case '/handleRequest':
 					$id = -1; 
 					$status = '';
@@ -630,6 +631,58 @@ class Controller extends Model
 						$this->redirect('/requests', 0);
 					}
 
+					break;
+				
+				case '/shoporders':
+					if(!isset($_SESSION['shop_data'])){
+						$this->redirect('/', 0);
+					}
+					$approvedOrders = [];
+					$completedOrders = [];
+					$canceledOrders = [];
+					$inDeliveryOrders = [];
+					$where = ['shop_id' => $_SESSION['shop_data']->id, 'status' => 'approved'];
+					$selectEx = $this->SelectData('orderproduct_view', $where);
+
+					if($selectEx['Code']){
+						$orderUnfilter = $selectEx['Data'];
+						if(count($orderUnfilter) > 0){
+							$approvedOrders = $this->filterOrderProductView($orderUnfilter);
+						}
+					}
+
+					$where = ['shop_id' => $_SESSION['shop_data']->id, 'status' => 'complete'];
+					$selectEx = $this->SelectData('orderproduct_view', $where);
+
+					if($selectEx['Code']){
+						$orderUnfilter = $selectEx['Data'];
+						if(count($orderUnfilter) > 0){
+							$completedOrders = $this->filterOrderProductView($orderUnfilter);
+						}
+					}
+
+					$where = ['shop_id' => $_SESSION['shop_data']->id, 'status' => 'canceled'];
+					$selectEx = $this->SelectData('orderproduct_view', $where);
+
+					if($selectEx['Code']){
+						$orderUnfilter = $selectEx['Data'];
+						if(count($orderUnfilter) > 0){
+							$canceledOrders = $this->filterOrderProductView($orderUnfilter);
+						}
+					}
+
+					$where = ['shop_id' => $_SESSION['shop_data']->id, 'status' => 'in delivery'];
+					$selectEx = $this->SelectData('orderproduct_view', $where);
+
+					if($selectEx['Code']){
+						$orderUnfilter = $selectEx['Data'];
+						if(count($orderUnfilter) > 0){
+							$inDeliveryOrders = $this->filterOrderProductView($orderUnfilter);
+						}
+					}
+					include 'Views/producer/header.php';
+					include 'Views/producer/orders.php';
+					include 'Views/producer/footer.php';
 					break;
 
 				case '/logout':

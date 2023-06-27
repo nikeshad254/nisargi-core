@@ -22,6 +22,8 @@
             echo '<link rel="stylesheet" href="Views/producer/css/producer-viewReq.css">';
         }else if($path == '/shoporders'){
             echo '<link rel="stylesheet" href="Views/producer/css/producerOrder.css">';
+        }else if($path == '/shoporder'){
+            echo '<link rel="stylesheet" href="Views/producer/css/producer-oneOrder.css">';
         }
     ?>  
 </head>

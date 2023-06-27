@@ -112,3 +112,22 @@
 .blinking2 {
     animation: blink 1.5s infinite;
 }
+
+.nav-btns{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* background-color: var(--gray-100); */
+    padding: 0.3rem;
+    /* border-radius: 1rem; */
+    border-bottom: 1px solid var(--gray-400);
+    margin-bottom: 0.3rem;
+}
+.nav-btns form{
+    display: flex;
+    gap: 1rem;
+}
+.btn.active{
+    background-color: var(--irish-400);
+    color: var(--gray-900);
+}

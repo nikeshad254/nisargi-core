@@ -45,17 +45,18 @@ class Controller extends Model
 		return $errors;
 	}
 
-	function filterOrderProductView($orders){
+	function filterOrderProductView($orders)
+	{
 		$newArray = array();
 
 		foreach ($orders as $order) {
 			$orderID = $order->order_id;
-	
+
 			if (!isset($newArray[$orderID])) {
 				$newArray[$orderID] = clone $order; // Clone the object to preserve other properties
 				$newArray[$orderID]->products = array(); // Initialize the products array
 			}
-	
+
 			$product = array(
 				'price' => $order->price,
 				'stock' => $order->stock,
@@ -63,10 +64,12 @@ class Controller extends Model
 				'id' => $order->product_id,
 				'deleteFlag' => $order->deleteFlag,
 				'product_name' => $order->product_name,
+				'unit' => $order->unit,
+				'product_image' => $order->product_image,
 			);
-	
+
 			$newArray[$orderID]->products[] = $product;
-	
+
 			// Unset the duplicated properties
 			unset($newArray[$orderID]->price);
 			unset($newArray[$orderID]->stock);
@@ -74,8 +77,10 @@ class Controller extends Model
 			unset($newArray[$orderID]->product_id);
 			unset($newArray[$orderID]->deleteFlag);
 			unset($newArray[$orderID]->product_name);
+			unset($newArray[$orderID]->unit);
+			unset($newArray[$orderID]->product_image);
 		}
-	
+
 		$newArray = array_values($newArray); // Reset the array keys to be sequential
 		return $newArray;
 	}
@@ -262,7 +267,7 @@ class Controller extends Model
 							<script>
 								openModal("Failed", "Please Login First", 1, 1.5, '');
 							</script>
-						<?php
+							<?php
 						} else {
 
 							$order_data['delivery']['name'] = $_POST['full-name'];
@@ -274,19 +279,19 @@ class Controller extends Model
 							$insertEx = $this->InsertOrderData($order_data);
 							print_r($insertEx);
 
-							if($insertEx['Code']){
-								?>
+							if ($insertEx['Code']) {
+							?>
 								<script>
 									deleteCookie("nisargiCart101");
 									openModal("Success", "Successfully Created Order", 0, 1.5, '/nisargi');
 								</script>
-								<?php
-							}else{
-								?>
+							<?php
+							} else {
+							?>
 								<script>
 									openModal("Failed", <?php $insertEx['Message'] ?>, 1, 1.5, '');
 								</script>
-								<?php
+							<?php
 							}
 						}
 					}
@@ -342,7 +347,7 @@ class Controller extends Model
 						$error = [];
 						$error = $this->validateForm($insert_data);
 						if ($error) {
-						?>
+							?>
 							<script>
 								openModal("Failed Insertion", "<?= $error[0] ?>", 1, 1.5, '');
 							</script>
@@ -547,18 +552,18 @@ class Controller extends Model
 						}
 					}
 					break;
-				
+
 				case '/requests':
-					if(!isset($_SESSION['shop_data'])){
+					if (!isset($_SESSION['shop_data'])) {
 						$this->redirect('/', 0);
 					}
-					$orders = []; 
+					$orders = [];
 					$where = ['shop_id' => $_SESSION['shop_data']->id, 'status' => 'in review'];
 					$selectEx = $this->SelectData('orderproduct_view', $where);
 
-					if($selectEx['Code']){
+					if ($selectEx['Code']) {
 						$orderUnfilter = $selectEx['Data'];
-						if(count($orderUnfilter) > 0){
+						if (count($orderUnfilter) > 0) {
 							$orders = $this->filterOrderProductView($orderUnfilter);
 						}
 					}
@@ -569,19 +574,19 @@ class Controller extends Model
 					break;
 
 				case '/viewrequest':
-					if(!isset($_GET['id'])){
+					if (!isset($_GET['id'])) {
 						echo "Such Record doesn't exist.";
 						$this->redirect('/requests', 1);
 						exit;
 					}
 
-					$orders = []; 
-					$where = ['shop_id' => $_SESSION['shop_data']->id,'order_id' =>  $_GET['id'],'status' => 'in review'];
+					$orders = [];
+					$where = ['shop_id' => $_SESSION['shop_data']->id, 'order_id' =>  $_GET['id'], 'status' => 'in review'];
 					$selectEx = $this->SelectData('orderproduct_view', $where);
 
-					if($selectEx['Code']){
+					if ($selectEx['Code']) {
 						$orderUnfilter = $selectEx['Data'];
-						if(count($orderUnfilter) > 0){
+						if (count($orderUnfilter) > 0) {
 							$orders = $this->filterOrderProductView($orderUnfilter);
 						}
 					}
@@ -593,69 +598,69 @@ class Controller extends Model
 					break;
 
 				case '/handleRequest':
-					$id = -1; 
+					$id = -1;
 					$status = '';
-					if(isset($_GET['id']) && isset($_GET['approve'])){
+					if (isset($_GET['id']) && isset($_GET['approve'])) {
 						$id = $_GET['id'];
-						$status = ($_GET['approve'] == 'true')? 'approved': 'canceled';
-					}else{
+						$status = ($_GET['approve'] == 'true') ? 'approved' : 'canceled';
+					} else {
 						echo "invalid request";
 						$this->redirect('/requests', 0.5);
 						exit;
 					}
-					
+
 					var_dump($id, $status);
-					if($status == 'canceled'){
-						$where = ['id'=> $_GET['id']];
-						$data = ['status'=> $status];
-						$this->UpdateData ('orders', $data, $where);
+					if ($status == 'canceled') {
+						$where = ['id' => $_GET['id']];
+						$data = ['status' => $status];
+						$this->UpdateData('orders', $data, $where);
 						$this->redirect('/requests', 0);
-					}else if($status == 'approved'){
+					} else if ($status == 'approved') {
 
 						$columns = ['product_id', 'quantity'];
-						$where = ['order_id'=>$_GET['id'], 'status'=>'in review'];
+						$where = ['order_id' => $_GET['id'], 'status' => 'in review'];
 						$selectEx = $this->SelectColumnData('orderproduct_view', $columns, $where);
-						if($selectEx['Code']==true){
+						if ($selectEx['Code'] == true) {
 							$products = $selectEx['Data'];
-							foreach($products as $product){
+							foreach ($products as $product) {
 								$this->UpdateStock($product->product_id, $product->quantity);
 							}
 
-							$where = ['id'=> $_GET['id']];
-							$data = ['status'=> $status];
+							$where = ['id' => $_GET['id']];
+							$data = ['status' => $status];
 							$this->UpdateData('orders', $data, $where);
 						}
 
 						$this->redirect('/requests', 0);
-					}else{
+					} else {
 						$this->redirect('/requests', 0);
 					}
 
 					break;
-				
+
 				case '/shoporders':
-					if(!isset($_SESSION['shop_data'])){
+					if (!isset($_SESSION['shop_data'])) {
 						$this->redirect('/', 0);
 					}
 					$orders = [];
 					$where = ['shop_id' => $_SESSION['shop_data']->id, 'status' => 'approved'];
-					if(isset($_GET['type'])){
+					if (isset($_GET['type'])) {
 						$type = $_GET['type'];
-						if($type == 'active' || $type == ''){
+						if ($type == 'active' || $type == '') {
 							$where = ['shop_id' => $_SESSION['shop_data']->id, 'status' => 'approved'];
-						}else if($type == 'delivery'){
+						} else if ($type == 'delivery') {
 							$where = ['shop_id' => $_SESSION['shop_data']->id, 'status' => 'in delivery'];
-						}else if($type == 'completed'){
+						} else if ($type == 'completed') {
 							$where = ['shop_id' => $_SESSION['shop_data']->id, 'status' => 'complete'];
-						}else if($type == 'canceled'){
+						} else if ($type == 'canceled') {
 							$where = ['shop_id' => $_SESSION['shop_data']->id, 'status' => 'canceled'];
 						}
 					}
 					$selectEx = $this->SelectData('orderproduct_view', $where);
 
-					if($selectEx['Code']){
+					if ($selectEx['Code']) {
 						$orderUnfilter = $selectEx['Data'];
-						if(count($orderUnfilter) > 0){
+						if (count($orderUnfilter) > 0) {
 							$orders = $this->filterOrderProductView($orderUnfilter);
 						}
 					}
@@ -664,9 +669,24 @@ class Controller extends Model
 					include 'Views/producer/orders.php';
 					include 'Views/producer/footer.php';
 					break;
-				
-				case '/shoporder':
 
+				case '/shoporder':
+					if (!isset($_SESSION['shop_data'])) {
+						$this->redirect('/', 0);
+					}
+
+					$order = [];
+					if (isset($_GET['id'])) {
+						$where = ['shop_id' => $_SESSION['shop_data']->id,'order_id' => $_GET['id']];
+						$selectEx = $this->SelectData('orderproduct_view', $where);
+
+						if ($selectEx['Code']) {
+							$orderUnfilter = $selectEx['Data'];
+							if (count($orderUnfilter) > 0) {
+								$order = $this->filterOrderProductView($orderUnfilter);
+							}
+						}
+					}
 					include 'Views/producer/header.php';
 					include 'Views/producer/shopOrder.php';
 					include 'Views/producer/footer.php';

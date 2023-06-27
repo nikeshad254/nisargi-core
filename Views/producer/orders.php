@@ -3,7 +3,7 @@
     <div class="nav-btns">
         <h3 class="heading">Filters:</h3>
         <form action="" method="get">
-            <button type="submit" name="type" value="active" class="btn <?php if (isset($_GET['type']) && ($_GET['type'] == 'active' || $_GET['type'] == '')) {
+            <button type="submit" name="type" value="active" class="btn <?php if ((isset($_GET['type']) && ($_GET['type'] == 'active' || $_GET['type'] == '')) || !isset($_GET['type'])) {
                                                                             echo 'active';
                                                                         } ?>">Active Order</button>
             <button type="submit" name="type" value="delivery" class="btn <?php if (isset($_GET['type']) && $_GET['type'] == 'delivery') {
@@ -54,7 +54,7 @@
                     <tr>
 
                         <td>
-                            <a href="./shoporder" class="Link">#<?= $order->order_id; ?></a>
+                            <a href="./shoporder?id=<?= $order->order_id; ?>" class="Link">#<?= $order->order_id; ?></a>
                         </td>
                         <td><?= $order->date; ?></td>
                         <td>

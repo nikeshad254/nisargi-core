@@ -158,7 +158,8 @@ class Model {
 
 	function UpdateStock($productId, $quantity) {
 		$updateSql = "UPDATE product SET stock = stock - $quantity WHERE id = $productId";
-		echo $updateSql;
+		// echo $updateSql;
+		// exit;
 		$sqlEx = $this->connection->query($updateSql);
 		if($sqlEx){
 			$response['Data'] = $sqlEx;
@@ -209,7 +210,8 @@ class Model {
 			$sql .= "$key = '$value' AND";
 		}
 		$sql = rtrim($sql, 'AND');
-
+		// echo $sql;
+		// exit;
 		return $updEx = $this->connection->query($sql);
 	}
 

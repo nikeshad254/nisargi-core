@@ -42,7 +42,7 @@
         <div class="buttons">
             <a href="./shoporders" class="btn">Back</a>
             <?php if ($order->status == "approved") {
-                echo "<a href='#' class='btn'>Deliver Now</a>";
+                echo '<a href="./setdelivery?id='.$order->order_id.'" class="btn">Deliver Now</a>';
             } else {
                 echo "<p>Current Status: ".$order->status."</p>";
             }

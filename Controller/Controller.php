@@ -376,6 +376,8 @@ class Controller extends Model
 					}
 					break;
 
+//		Farmers Codes Start from Here: 
+
 				case '/farmerZone':
 					if (!isset($_SESSION['user_data'])) {
 						$this->redirect("/login", 0);
@@ -690,6 +692,34 @@ class Controller extends Model
 					include 'Views/producer/header.php';
 					include 'Views/producer/shopOrder.php';
 					include 'Views/producer/footer.php';
+					break;
+				
+				case '/setdelivery':
+					if (!isset($_SESSION['shop_data'])) {
+						$this->redirect('/', 0);
+					}
+
+					if(!isset($_GET['id'])){
+						$this->redirect('/shoporders', 0);
+					}
+					include 'Views/producer/header.php';
+					include 'Views/modal.php';
+					$where = ['id' => $_GET['id']];
+					$data = ['status' => 'in delivery'];
+					$updateEx = $this->UpdateData('orders', $data, $where);
+					if($updateEx['Code']){
+						?>
+							<script type="text/javascript">
+								openModal("Sucess", "Item set for delivery", 0, 2, './shoporders');
+							</script>
+						<?php
+					}else{
+						?>
+							<script type="text/javascript">
+								openModal("Failed", "Item can't be set for delivery", 1, 2, './shoporders');
+							</script>
+						<?php
+					}
 					break;
 
 				case '/logout':

@@ -39,18 +39,18 @@
                     <img src="Views/images/icons/cat-down.svg" alt="">
                 </div>
 
-                <div class="nav-btn">
-                    <p>Today's Deal</p>
-                </div>
+                <a href="./products" class="link nav-btn">
+                    <p>Shop Now</p>
+                </a>
 
+                
+                <a href="./myorders" class="link nav-btn">
+                    <p>Your Orders</p>
+                </a>
+                
                 <a href="./farmerZone" class="link nav-btn">
                     <p>Farmer's Zone</p>
                 </a>
-
-                <div class="nav-btn">
-                    <p>About Us</p>
-                </div>
-
             </div>
             <div class="right-nav">
 

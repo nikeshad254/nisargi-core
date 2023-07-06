@@ -319,6 +319,23 @@ class Controller extends Model
 					include 'Views/consumer/footer.php';
 					break;
 
+				case '/myorders':
+					include 'Views/consumer/header.php';
+					include 'Views/modal.php';
+
+					if (!isset($_SESSION['user_data'])) {
+						?>
+						<script>
+							openModal("Failed", "Please Login First", 1, 1.5, './login');
+						</script>
+						<?php
+					}
+
+
+					include 'Views/consumer/footer.php';
+					break;
+
+//		Farmers Codes Start from Here: 
 
 				case '/registerShop':
 					if (!isset($_SESSION['user_data'])) {
@@ -375,8 +392,6 @@ class Controller extends Model
 						}
 					}
 					break;
-
-//		Farmers Codes Start from Here: 
 
 				case '/farmerZone':
 					if (!isset($_SESSION['user_data'])) {

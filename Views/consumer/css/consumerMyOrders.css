@@ -1,0 +1,88 @@
+.first-one{
+    margin-top: var(--nav-size);
+    padding: 1rem;
+}
+.items-container{
+    background-color: var(--gray-100);
+    padding: 0.5rem;
+    border-radius: 10px;
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.items-container .item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem;
+    border-radius: 10px;
+}
+.items-container .item:hover{
+    background-color: var(--gray-200);
+}
+.items-container .products{
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+.items-container .one-product{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+.items-container .one-product .product-img{
+    height: 2.5rem;
+    width: 2.5rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.items-container .one-product p{
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+.items-container .approve{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.history{
+    padding: 1rem;
+}
+
+.history .heading{
+    margin-bottom: 1rem;
+}
+.history table{
+    text-align: center;
+    border-spacing: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px solid var(--gray-900);
+}
+.history table th{
+    background-color: var(--gray-100);
+    padding: 5px;
+    font-size: 1.2rem;
+}
+.history table tr td{
+    background-color: var(--gray-100);
+    font-size: 1.1rem;
+    padding: 5px;
+}
+.history thead th,
+.history tbody tr td{
+    border-bottom: 0.5px solid black;
+}
+
+.history table tbody tr:nth-child(2n) td{
+    background-color: var(--pink-200);
+}
+
+.history table tbody tr:nth-child(2n+1) td{
+    background-color: var(--irish-200);
+}

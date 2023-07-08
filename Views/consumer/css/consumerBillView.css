@@ -1,0 +1,65 @@
+.first-hero {
+    margin-top: var(--nav-size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+}
+
+.first-hero .headers {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.orderBill{
+    background-color: var(--irish-100);
+    border: 1px solid var(--gray-400);
+    border-radius: 10px;
+    width: 45%;
+    min-width: fit-content;
+    padding: 1rem;
+}
+.orderBill .orderInfo{
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+.orderBill .products{
+    margin-top: 1rem;
+}
+.orderBill .orders{
+    display: flex;
+    gap: 0.3rem;
+    flex-direction: column;
+}
+.orderBill .orders .oneOrder{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--pink-100);
+    border: 1px solid var(--gray-400);
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+}
+
+.orderBill .orders .oneOrder img{
+    height: 90px;
+    width: 90px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid var(--gray-400);
+}
+
+.orderBill .total{
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.buttons{
+    display: flex;
+    justify-content: space-between;
+}

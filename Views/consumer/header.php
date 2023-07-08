@@ -21,6 +21,8 @@
         echo '<link rel="stylesheet" href="Views/consumer/css/consumerProduct.css">';
     }else if ($path == '/myorders') {
         echo '<link rel="stylesheet" href="Views/consumer/css/consumerMyOrders.css">';
+    }else if ($path == '/billview') {
+        echo '<link rel="stylesheet" href="Views/consumer/css/consumerBillView.css">';
     }
     ?>
 </head>

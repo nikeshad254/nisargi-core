@@ -4,7 +4,7 @@
 
         <?php
         if(count($inDelivery)<1){
-            echo "<p> There are no Orders in delivery </p>";
+            echo "<p> There are no orders in delivery </p>";
         }
         ?>
 
@@ -38,7 +38,7 @@
 
             <div class="approve">
                 <p>Has Delivery Arrived?</p>
-                <div class="btn">Click To Approve!</div>
+                <a href="./billview?id=<?=$orders->order_id;?>" class="btn">Click To Approve!</a>
             </div>
         </div>
         <?php endforeach; ?>
@@ -53,6 +53,7 @@
         <thead>
             <th>Order</th>
             <th>Status</th>
+            <th>Shop Name</th>
             <th>Ordered Date</th>
             <th>Products</th>
             <th>Total Price</th>
@@ -69,6 +70,7 @@
             ?>
             <tr>
                 <td>#<?=$order->order_id;?></td>
+                <td><?=$order->status;?></td>
                 <td><?=$order->shop_name;?></td>
                 <td><?=$order->date;?></td>
                 <td>
@@ -82,7 +84,7 @@
                 </td>
                 <td>Rs. <?=$total;?></td>
                 <td>
-                    <a href="#" class="btn">View</a>
+                    <a href="./billview?id=<?=$order->order_id;?>" class="btn">View</a>
                 </td>
             </tr>
             <?php endforeach;?>

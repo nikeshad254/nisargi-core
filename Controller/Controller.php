@@ -291,7 +291,7 @@ class Controller extends Model
 								<script>
 									openModal("Failed", <?php $insertEx['Message'] ?>, 1, 1.5, '');
 								</script>
-							<?php
+						<?php
 							}
 						}
 					}
@@ -332,24 +332,75 @@ class Controller extends Model
 					}
 					$inDelivery = [];
 					$allOrders = [];
-					
+
 					$where = ['user_id' => $_SESSION['user_data']->id, 'status' => 'in delivery'];
 					$selectEx = $this->SelectData('orderproduct_view', $where);
-					if($selectEx['Code']){
+					if ($selectEx['Code']) {
 						$inDelivery = $this->filterOrderProductView($selectEx['Data']);
 					}
-					
+
 					$where = ['user_id' => $_SESSION['user_data']->id];
 					$selectEx = $this->SelectData('orderproduct_view', $where);
-					if($selectEx['Code']){
+					if ($selectEx['Code']) {
 						$allOrders = $this->filterOrderProductView($selectEx['Data']);
 					}
-					
+
 					include 'Views/consumer/myorders.php';
 					include 'Views/consumer/footer.php';
 					break;
 
-//		Farmers Codes Start from Here: 
+				case '/billview':
+
+					if (!isset($_SESSION['user_data'])) {
+						$this->redirect("/", 0);
+					}
+					$order = [];
+
+					if (isset($_GET['id'])) {
+						$where = ['order_id' => $_GET['id']];
+						$selectEx = $this->SelectData('orderproduct_view', $where);
+						if ($selectEx['Code']) {
+							$orders = $this->filterOrderProductView($selectEx['Data']);
+							$order = $orders[0];
+						}
+					}
+					include 'Views/consumer/header.php';
+					include 'Views/consumer/billView.php';
+					include 'Views/consumer/footer.php';
+
+					break;
+				
+				case '/approveorder':
+
+					if (!isset($_SESSION['user_data'])) {
+						$this->redirect("/", 0);
+					}
+
+					if(!isset($_GET['id'])){
+						$this->redirect("/myorders", 0);
+					}
+
+					$where = ['id' => $_GET['id']];
+					$currentDate = date('Y-m-d');
+					$data = ['delivery_date' => $currentDate, 'status'=>'complete'];
+					$updateEx = $this->UpdateData('orders', $data, $where);
+					include 'Views/consumer/header.php';
+					include 'Views/modal.php';
+					if($updateEx){
+						?>
+						<script>
+							openModal("Success", "Delivery is Complete", 0, 1.5, './myorders');
+						</script>
+						<?php
+					}else{
+						?>
+						<script>
+							openModal("Failed", "Delivery is not Complete", 1, 1.5, './myorders');
+						</script>
+						<?php
+					}
+					break;
+					//		Farmers Codes Start from Here: 
 
 				case '/registerShop':
 					if (!isset($_SESSION['user_data'])) {
@@ -378,7 +429,7 @@ class Controller extends Model
 						$error = [];
 						$error = $this->validateForm($insert_data);
 						if ($error) {
-							?>
+						?>
 							<script>
 								openModal("Failed Insertion", "<?= $error[0] ?>", 1, 1.5, '');
 							</script>
@@ -422,7 +473,13 @@ class Controller extends Model
 					break;
 
 				case '/farmerProduct':
-
+					if (!isset($_SESSION['user_data'])) {
+						$this->redirect("/login", 0);
+					} else {
+						if (!isset($_SESSION['shop_data'])) {
+							$this->redirect('/registerShop', 0);
+						}
+					}
 					$where = ['shop_id' => $_SESSION['shop_data']->id, 'deleteFlag' => 'o'];
 					$products = $this->SelectData('product', $where);
 
@@ -559,7 +616,7 @@ class Controller extends Model
 							<script type="text/javascript">
 								openModal("Failed", "data update failed", 1, 1.5, '');
 							</script>
-<?php
+						<?php
 						}
 					}
 
@@ -708,7 +765,7 @@ class Controller extends Model
 
 					$order = [];
 					if (isset($_GET['id'])) {
-						$where = ['shop_id' => $_SESSION['shop_data']->id,'order_id' => $_GET['id']];
+						$where = ['shop_id' => $_SESSION['shop_data']->id, 'order_id' => $_GET['id']];
 						$selectEx = $this->SelectData('orderproduct_view', $where);
 
 						if ($selectEx['Code']) {
@@ -722,13 +779,13 @@ class Controller extends Model
 					include 'Views/producer/shopOrder.php';
 					include 'Views/producer/footer.php';
 					break;
-				
+
 				case '/setdelivery':
 					if (!isset($_SESSION['shop_data'])) {
 						$this->redirect('/', 0);
 					}
 
-					if(!isset($_GET['id'])){
+					if (!isset($_GET['id'])) {
 						$this->redirect('/shoporders', 0);
 					}
 					include 'Views/producer/header.php';
@@ -736,18 +793,18 @@ class Controller extends Model
 					$where = ['id' => $_GET['id']];
 					$data = ['status' => 'in delivery'];
 					$updateEx = $this->UpdateData('orders', $data, $where);
-					if($updateEx['Code']){
+					if ($updateEx['Code']) {
 						?>
-							<script type="text/javascript">
-								openModal("Sucess", "Item set for delivery", 0, 2, './shoporders');
-							</script>
-						<?php
-					}else{
-						?>
-							<script type="text/javascript">
-								openModal("Failed", "Item can't be set for delivery", 1, 2, './shoporders');
-							</script>
-						<?php
+						<script type="text/javascript">
+							openModal("Sucess", "Item set for delivery", 0, 2, './shoporders');
+						</script>
+					<?php
+					} else {
+					?>
+						<script type="text/javascript">
+							openModal("Failed", "Item can't be set for delivery", 1, 2, './shoporders');
+						</script>
+<?php
 					}
 					break;
 

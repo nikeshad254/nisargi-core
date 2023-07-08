@@ -108,6 +108,9 @@ class Model {
 			$selSql = rtrim($selSql, 'AND');
 		}
 
+		// echo $selSql;
+		// exit;
+
 		$sqlEx = $this->connection->query($selSql);
 		if($sqlEx->num_rows > 0){
 			while ($FetchData = $sqlEx->fetch_object()) {

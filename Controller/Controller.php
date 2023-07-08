@@ -330,8 +330,22 @@ class Controller extends Model
 						</script>
 						<?php
 					}
-
-
+					$inDelivery = [];
+					$allOrders = [];
+					
+					$where = ['user_id' => $_SESSION['user_data']->id, 'status' => 'in delivery'];
+					$selectEx = $this->SelectData('orderproduct_view', $where);
+					if($selectEx['Code']){
+						$inDelivery = $this->filterOrderProductView($selectEx['Data']);
+					}
+					
+					$where = ['user_id' => $_SESSION['user_data']->id];
+					$selectEx = $this->SelectData('orderproduct_view', $where);
+					if($selectEx['Code']){
+						$allOrders = $this->filterOrderProductView($selectEx['Data']);
+					}
+					
+					include 'Views/consumer/myorders.php';
 					include 'Views/consumer/footer.php';
 					break;
 

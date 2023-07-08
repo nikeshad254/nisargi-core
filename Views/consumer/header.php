@@ -19,6 +19,8 @@
         echo '<link rel="stylesheet" href="Views/consumer/css/consumerCart.css">';
     } else if ($path == '/product') {
         echo '<link rel="stylesheet" href="Views/consumer/css/consumerProduct.css">';
+    }else if ($path == '/myorders') {
+        echo '<link rel="stylesheet" href="Views/consumer/css/consumerMyOrders.css">';
     }
     ?>
 </head>

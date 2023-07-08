@@ -54,7 +54,6 @@
 /* https://goodpalette.io/008059-e833c4-a6b3af */
 body {
     background: var(--bg-gray);
-    /* width: 100lvw; */
     /* overflow-x: hidden; */
 }
 

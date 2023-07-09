@@ -49,7 +49,7 @@
     font-family: 'Montserrat', sans-serif;
 }
 body{
-    background: var(--bg-gray);
+    background: #f8f8f8;
 }
 
 /* utility starts here */
@@ -87,7 +87,7 @@ body{
 /* navigation starts here */
 
 .top-nav{
-    background-color: var(--gray-100);
+    background: linear-gradient(45deg, #ffc1fa, #ffd5ff);
     height: var(--nav-size);
     position: fixed;
     top: 0;
@@ -102,23 +102,35 @@ body{
     width: 100%;
     align-items: center;
     padding: 0 1rem;
+    height: 100%;
+    padding: 5px;
 }
 .navigation .middle-nav,
 .navigation .right-nav{
     display: flex;
     gap: 2rem;
+    height: 100%;
 }
 .nisargi{
+    font-family: 'EB Garamond', serif;
     font-size: 1.5rem;
-    font-weight: 700;
+    text-transform: uppercase;
     letter-spacing: 1px;
+    font-weight: 600;
 }
+
 .nav-btn{
     font-size: 1.2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 0.5rem;
+    height: 100%;
+    padding: 0px 7px;
+}
+.nav-btn:hover{
+    background-color: #e500ff29;
+    border-radius: 10px;
 }
 .nav-btn .icon{
     height: 1.5rem;

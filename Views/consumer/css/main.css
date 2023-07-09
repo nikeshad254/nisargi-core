@@ -213,6 +213,7 @@ body {
     align-items: center;
     padding: 0px 3px;
     border-radius: 5px;
+    height: 100%;
 }
 .acc-btn:hover{
     background-color: #95eec4;

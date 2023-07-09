@@ -1,4 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap'); */
+@import url('../../fonts.css');
 :root{
     --irish-900: #002612;
     --irish-800: #003D20;
@@ -50,7 +50,6 @@
 }
 body{
     background: var(--bg-gray);
-    /* overflow-x: hidden; */
 }
 
 /* utility starts here */

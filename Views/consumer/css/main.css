@@ -1,5 +1,5 @@
 /* main css is for minwidth 1200px and above */
-/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap'); */
+@import url('../../fonts.css');
 
 :root {
     --irish-900: #002612;
@@ -49,6 +49,8 @@
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
     color: var(--text-dark);
+    /* background-color: #00eaff25;
+    border: 1px solid red; */
 }
 
 /* https://goodpalette.io/008059-e833c4-a6b3af */

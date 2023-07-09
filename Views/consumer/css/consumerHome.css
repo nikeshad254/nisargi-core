@@ -1,8 +1,6 @@
 .first-hero{
     display: flex;
     height: 80vh;
-    width: 100vw;
-    overflow: hidden;
     max-width: var(--max-screen-width);
     margin: 0 auto;
 }

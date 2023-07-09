@@ -55,7 +55,7 @@
 
 /* https://goodpalette.io/008059-e833c4-a6b3af */
 body {
-    background: var(--bg-gray);
+    background: #f8f8f8;
     /* overflow-x: hidden; */
 }
 
@@ -78,7 +78,7 @@ body {
 
 
 .top-nav {
-    background: var(--pure-white);
+    background: linear-gradient(45deg, #afffd0, #dcffeb);
     display: flex;
     justify-content: center;
     position: fixed;
@@ -99,61 +99,30 @@ body {
     height: var(--nav-size);
 }
 
-.left-nav {
-    flex: 1 1 10%;
-}
-
-.middle-nav {
-    flex: 1 1 50%;
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.right-nav {
-    flex: 1 1 40%;
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.main-nav h3 {
-    font-size: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.nav-btn {
+.left-nav, .middle-nav, .right-nav {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
+    height: 100%;
+}
+.left-nav{
+    flex: 1 1 15%;
+}
+.middle-nav{
+    flex: 1 1 50%;
+    justify-content: space-between;
+}
+.right-nav{
+    flex:  1 1 35%;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-right: 1rem;
 }
 
-.nav-btn img {
-    height: 25px;
-    width: 25px;
-}
-.nav-btn .profileImg{
-    height: 30px;
-    width: 30px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 1px solid var(--gray-900);
-}
-
-.cart-btn {
-    position: relative;
-}
-
-.cart-btn #cart-num {
-    position: absolute;
-    top: 0;
-    right: -1.1rem;
-    background-color: var(--pink-500);
-    color: var(--gray-100);
-    border-radius: 10px;
-    font-size: 0.7rem;
-    padding: 3px;
-    z-index: 200;
+.left-nav .logo{
+    font-family: 'EB Garamond', serif;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .search-bar {
@@ -162,18 +131,54 @@ body {
     position: relative;
 }
 
-.search-bar input {
+.search-bar .search-inp {
     height: 1.7rem;
-    border-radius: 20px;
-    padding: 0px 25px 0px 10px;
-    background-color: var(--bg-gray);
+    border-radius: 5px;
+    padding: 0px 0px 0px 10px;
+    background-color: #f8f8f8;
+    border: 1px solid var(--gray-400);
+    width: 15rem;
 }
 
-.search-bar img {
-    position: absolute;
-    right: 5px;
-    height: 20px;
-    width: 20px;
+.img-btn{
+    border: none;
+    background: none;
+    margin-left: 3px;
+    padding: 3px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+.img-btn:hover{
+    background-color: #0026122e;
+}
+.img-btn img{
+    width: 23px;
+    height: 23px;
+}
+
+.middle-nav .btns{
+    display: flex;
+    gap: 1rem;
+    height: 100%;
+}
+
+.nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    padding: 0px 10px;
+    height: 100%;
+}
+.nav-btn:hover{
+    background-color: #95eec4;
+    transition: 0.3s ease;
+    border-radius: 5px;
+}
+
+.nav-btn img {
+    height: 25px;
+    width: 25px;
 }
 
 .cat-btn {
@@ -181,6 +186,12 @@ body {
     align-items: center;
     gap: 0.5rem;
     cursor: pointer;
+    padding: 0px 10px;
+}
+.cat-btn:hover{
+    background-color: #95eec4;
+    border-radius: 5px;
+    transition: 0.3s ease;
 }
 
 .cat-btn img {
@@ -189,43 +200,102 @@ body {
     transform: rotateZ(0deg);
     transition: 0.1s ease-in;
 }
-
-.cat-btn.active img {
-    transform: rotateZ(180deg);
-    transition: 0.1s ease-in;
+.farmer-zone img{
+    height: 24px;
+    width: 24px;
 }
 
-.categories-display {
-    display: none;
-    position: absolute;
-    top: var(--nav-size);
-    left: 0;
-    right: 0;
-    background-color: var(--gray-200);
-    transition: 0.5s ease-in;
-    border-top: 1px solid var(--gray-500);
-    border-bottom: 1px solid var(--gray-500);
-}
-
-.categories-display .container {
-    flex-direction: row;
-    padding: 1rem;
-    justify-content: space-between;
-}
-
-.categories-display .container .cat-group {
+.acc-btn{
+    width: 8rem;
+    cursor: pointer;
     display: flex;
-    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0px 3px;
+    border-radius: 5px;
+}
+.acc-btn:hover{
+    background-color: #95eec4;
+}
+.acc-btn .downArr{
+    margin-left: 1rem;
+    width: 20px;
+    height: 20px;
 }
 
-.categories-display.active {
+.acc-btn img{
+    height: 35px;
+    width: 35px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* dropdown hover utilities and more */
+.dropdown{
+    position: relative;
+    /* display: block; */
+}
+.dropdown-ul{
+    position: absolute;
+    left: 0;
+    top: calc(var(--nav-size) - 7px);
+    width: 100%;
+    display: none;
+    transition: 0.3s ease;
+    opacity: 0;
+}
+.dropdown-ul li{
+    list-style: none;
+    margin-bottom: 1px;
+    text-align: center;
+    padding: 3px 0px;
+    border: 2px solid rgba(0, 128, 0, 0.382);
+    background-color: #8fffae;
+    border-radius: 2px;
+}
+.dropdown-ul li:hover{
+    background-color: #7fe49c;
+
+}
+.dropdown-ul li a{
+    text-decoration: none;
+}
+.dropdown:hover .dropdown-ul{
     display: block;
+    transition: 0.3s ease;
+    opacity: 1;
+}
+.dropdown:hover .downArr{
+    transition: 0.3s ease;
+    transform: rotateZ(180deg);
 }
 
-.cat-group p {
-    font-weight: 700;
-    margin-bottom: 0.3rem;
+
+
+.cart-btn {
+    position: relative;
 }
+
+.cart-btn:hover{
+    background-color: #95eec4;
+}
+
+.cart-btn #cart-num {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--pink-500);
+    color: var(--gray-100);
+    border-radius: 10px;
+    font-size: 0.7rem;
+    padding: 3px;
+    z-index: 200;
+}
+.acc-btn .dropdown-ul{
+    top: calc(var(--nav-size) - 15px);
+}
+/* navigation ends here */
+
 
 .bg-img {
     width: 100%;
@@ -443,10 +513,6 @@ img#three-bars {
         height: var(--top-nav-tSize);
     }
 
-    .categories-display {
-        top: var(--top-nav-tSize);
-    }
-
     .main-nav {
         flex-direction: column;
     }
@@ -491,14 +557,6 @@ img#three-bars {
         flex-direction: column;
         justify-content: space-between;
         height: 100vh;
-    }
-
-    .categories-display {
-        top: 23vh;
-    }
-
-    .categories-display .container {
-        flex-wrap: wrap;
     }
 
     .top-nav .main-nav .middle-nav,

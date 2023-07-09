@@ -19,9 +19,9 @@
         echo '<link rel="stylesheet" href="Views/consumer/css/consumerCart.css">';
     } else if ($path == '/product') {
         echo '<link rel="stylesheet" href="Views/consumer/css/consumerProduct.css">';
-    }else if ($path == '/myorders') {
+    } else if ($path == '/myorders') {
         echo '<link rel="stylesheet" href="Views/consumer/css/consumerMyOrders.css">';
-    }else if ($path == '/billview') {
+    } else if ($path == '/billview') {
         echo '<link rel="stylesheet" href="Views/consumer/css/consumerBillView.css">';
     }
     ?>
@@ -32,46 +32,61 @@
         <div class="main-nav" id="main-nav">
             <div class="left-nav">
                 <a href="./" class="link">
-                    <h3>Nisargi</h3>
+                    <h3 class="logo">Nisargi</h3>
                 </a>
+
             </div>
 
             <div class="middle-nav">
+                <form action="./products" method="get" class="search-bar">
+                    <input class="search-inp" type="text" placeholder="search products . . . " name="q">
+                    <button class="img-btn">
+                        <img src="Views/images/icons/search.svg" alt="">
+                    </button>
+                </form>
 
-                <div class="cat-btn" id="cat-btn">
-                    <p>Category</p>
-                    <img src="Views/images/icons/cat-down.svg" alt="">
+                <div class="btns">
+                    <div class="cat-btn dropdown" id="cat-btn">
+                        <p>Category</p>
+                        <img class="downArr" src="Views/images/icons/cat-down.svg" alt="">
+                        <ul class="dropdown-ul">
+                            <li><a href="./products?category=fruits">Fruits</a></li>
+                            <li><a href="./products?category=vegetables">Vegetable</a></li>
+                            <li><a href="./products?category=meat">Meat</a></li>
+                            <li><a href="./products?category=pickels">Pickel</a></li>
+                            <li><a href="./products?category=dairy">Dairy</a></li>
+                            <li><a href="./products?category=fertilizer">Fertilizer</a></li>
+                        </ul>
+                    </div>
+
+                    <a href="./products" class="link nav-btn">
+                        <p>Shop Now</p>
+                        <img src="Views/images/icons/shopping-bag.svg" alt="">
+                    </a>
                 </div>
 
-                <a href="./products" class="link nav-btn">
-                    <p>Shop Now</p>
-                </a>
-
-                
-                <a href="./myorders" class="link nav-btn">
-                    <p>Your Orders</p>
-                </a>
-                
-                <a href="./farmerZone" class="link nav-btn">
-                    <p>Farmer's Zone</p>
-                </a>
             </div>
             <div class="right-nav">
 
-                <div class="search-bar">
-                    <input type="text" placeholder="search here ... ">
-                    <img src="Views/images/icons/search.svg" alt="">
-                </div>
+                <a href="./farmerZone" class="farmer-zone nav-btn link">
+                    <p>Your Shop</p>
+                    <img src="Views/images/icons/store.svg" alt="">
+                </a>
 
-                <div href="login" class="link nav-btn">
-
+                <div href="login" class="link acc-btn dropdown">
                     <?php
                     if (isset($_SESSION['user_data'])) {
                         echo '<img src="uploads/' . $_SESSION["user_data"]->photo . '" alt="" class="profileImg">';
-                        echo '<a  class="btn btn-success" href="logout">Logout</a>';
+                        echo '<img class="downArr" src="Views/images/icons/cat-down.svg" alt="">';
+                    ?>
+                        <ul class="dropdown-ul">
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="./myorders">My Orders</a></li>
+                            <li><a href="logout">Logout</a></li>
+                        </ul>
+                    <?php
                     } else {
-                        echo '<img src="Views/images/icons/user-circle.svg" alt="">';
-                        echo '<a  class="btn btn-success" href="login">Login</a>';
+                        echo '<a class="link" href="login">Login</a>';
                     }
                     ?>
                 </div>
@@ -81,35 +96,6 @@
                     <p>Cart</p>
                     <small id="cart-num">X</small>
                 </a>
-            </div>
-        </div>
-
-        <div id="categories" class="categories-display">
-            <div class="container">
-                <div class="first-group cat-group">
-                    <p><a href="#" class="link">Fruits</a></p>
-                    <a href="#" class="link">Apple</a>
-                    <a href="#" class="link">Mango</a>
-                    <a href="#" class="link">Banana</a>
-                    <a href="#" class="link">Cucumber</a>
-                    <a href="#" class="link">more...</a>
-                </div>
-                <div class="second-group cat-group">
-                    <p><a href="#" class="link">Fruits</a></p>
-                    <a href="#" class="link">Apple</a>
-                    <a href="#" class="link">Mango</a>
-                    <a href="#" class="link">Banana</a>
-                    <a href="#" class="link">Cucumber</a>
-                    <a href="#" class="link">more...</a>
-                </div>
-                <div class="third-group cat-group">
-                    <p><a href="#" class="link">Fruits</a></p>
-                    <a href="#" class="link">Apple</a>
-                    <a href="#" class="link">Mango</a>
-                    <a href="#" class="link">Banana</a>
-                    <a href="#" class="link">Cucumber</a>
-                    <a href="#" class="link">more...</a>
-                </div>
             </div>
         </div>
 

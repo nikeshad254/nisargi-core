@@ -5,7 +5,7 @@
         <p>At Nisargi, we're dedicated to bringing you the freshest and most flavorful produce straight from the
             farm to your doorstep. Trust Nisargi to deliver nature's bounty to your door, and enjoy the authentic
             taste of farm-fresh goodness.</p>
-        <a href="./products" class="btn">
+        <a href="./products" class="btn discover-btn">
             Discover Our Product
         </a>
     </div>

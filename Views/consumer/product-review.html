@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nisargi</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/consumerReview.css">
+</head>
+
+<body>
+    <nav class="top-nav">
+        <div class="main-nav" id="main-nav">
+            <div class="left-nav">
+                <a href="./" class="link">
+                    <h3 class="logo">Nisargi</h3>
+                </a>
+
+            </div>
+
+            <div class="middle-nav">
+                <form action="./products" method="get" class="search-bar">
+                    <input class="search-inp" type="text" placeholder="search products . . . " name="q">
+                    <button class="img-btn">
+                        <img src="../images/icons/search.svg" alt="">
+                    </button>
+                </form>
+
+                <div class="btns">
+                    <div class="cat-btn dropdown" id="cat-btn">
+                        <p>Category</p>
+                        <img class="downArr" src="../images/icons/cat-down.svg" alt="">
+                        <ul class="dropdown-ul">
+                            <li><a href="./products?category=fruits">Fruits</a></li>
+                            <li><a href="./products?category=vegetables">Vegetable</a></li>
+                            <li><a href="./products?category=meat">Meat</a></li>
+                            <li><a href="./products?category=pickels">Pickel</a></li>
+                            <li><a href="./products?category=dairy">Dairy</a></li>
+                            <li><a href="./products?category=fertilizer">Fertilizer</a></li>
+                        </ul>
+                    </div>
+
+                    <a href="./products" class="link nav-btn">
+                        <p>Shop Now</p>
+                        <img src="../images/icons/shopping-bag.svg" alt="">
+                    </a>
+                </div>
+
+            </div>
+            <div class="right-nav">
+
+                <a href="./farmerZone" class="farmer-zone nav-btn link">
+                    <p>Your Shop</p>
+                    <img src="../images/icons/store.svg" alt="">
+                </a>
+
+                <div href="login" class="link acc-btn dropdown">
+                    <img src="../images/carrot-demo.png" alt="" class="profileImg">
+                    <img class="downArr" src="../images/icons/cat-down.svg" alt="">
+                    <ul class="dropdown-ul">
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="./myorders">My Orders</a></li>
+                        <li><a href="logout">Logout</a></li>
+                    </ul>
+                </div>
+
+                <a href="./yourcart" class="nav-btn cart-btn link">
+                    <img src="../images/icons/cart.svg" alt="">
+                    <p>Cart</p>
+                    <small id="cart-num">X</small>
+                </a>
+            </div>
+        </div>
+
+
+
+        <img class="three-bars" id="three-bars" src="../images/icons/3bars.svg" alt="">
+    </nav>
+
+
+    <div class="first-container container">
+        <h3 class="heading">Leave a review</h3>
+    </div>
+
+    <div class="review-container container">
+
+        <form action="" method="get">
+            <p>Your Review</p>
+            <div class="stars">
+                <input class="star" name="star" value="1" type="checkbox" title="bookmark page">
+                <input class="star" name="star" value="2" type="checkbox" title="bookmark page">
+                <input class="star" name="star" value="3" type="checkbox" title="bookmark page">
+                <input class="star" name="star" value="4" type="checkbox" title="bookmark page">
+                <input class="star" name="star" value="5" type="checkbox" title="bookmark page">
+            </div>
+            <p>Help other by sharing you feedback</p>
+            <p>What you like? Did it come in time? Describe your experience with shop/product.</p>
+
+            <textarea name="reviewTxt" class="reviewTxt" placeholder="Enter your message here . . . "></textarea>
+
+            <button type="submit" class="submitBtn btn">Submit Review</button>
+            <a href="#" class="btn">Back to your Orders</a>
+        </form> 
+
+        <div class="review-item">
+            <h3 class="heading">You are Reviewing:</h3>
+
+            <div class="items">
+                
+                <div class="itemContainer">
+                    <div class="item">
+                        <p class="title">Shop Name: </p>
+                        <p>Nikesh Adhikari</p>
+                    </div>
+                    
+                    <div class="item">
+                        <p class="title">Bio: </p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque cumque, numquam at, necessitatibus laborum reiciendis eius ipsam saepe consequuntur voluptate animi neque voluptatem obcaecati.</p>
+                    </div>
+
+                    <div class="item">
+                        <p class="title">Link: </p>
+                        <a href="#">Visit Shop</a>
+                    </div>
+                </div>
+                
+                <img src="../images/apple-demo-product.jpg" alt="" class="itemImg">
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let star = document.querySelectorAll('.star');
+
+        function updateStars(count) {
+            let star = document.querySelectorAll('.star');
+            console.log(count);
+            let originalCount = count;
+            star.forEach(element => {
+                if (count > 0) {
+                    element.classList.add('checked');
+                    if (count == 1) {
+                        element.checked = true;
+                    } else {
+                        element.checked = false;
+                    }
+                } else {
+                    element.classList.remove('checked');
+                    element.checked = false;
+                }
+                --count;
+            });
+        }
+
+        star.forEach(element => {
+            element.addEventListener('change', () => {
+                updateStars(element.value);
+            })
+        });
+    </script>
+
+    <div class="container">
+        <section class="top-footer">
+            <div class="first-block block">
+                <h3>Shop</h3>
+                <a href="#" class="link">Sitemap</a>
+                <a href="#" class="link">Nisargi Blog</a>
+                <a href="#" class="link">Random Product</a>
+            </div>
+
+            <div class="second-block block">
+                <h3>Sell</h3>
+                <a href="#" class="link">Sell on Nisargi</a>
+                <a href="#" class="link">Farmer's Zone</a>
+                <a href="#" class="link">Forum</a>
+            </div>
+
+            <div class="third-block block">
+                <h3>About</h3>
+                <a href="#" class="link">Nisargi</a>
+                <a href="#" class="link">Policies</a>
+                <a href="#" class="link">Terms & Use</a>
+                <a href="#" class="link">Legal Imprints</a>
+            </div>
+
+            <div class="fourth-block block">
+                <h3>Help</h3>
+                <a href="#" class="link">Help Center</a>
+                <a href="#" class="link">Privacy Setting</a>
+                <p>Find Us</p>
+                <p>Kathmandhu, Nepal</p>
+                <p>number not available</p>
+            </div>
+        </section>
+    </div>
+
+    <footer class="">
+        <div class="container">
+            <p>Nepal | English | Rs.(NPR)</p>
+            <p>&copy; 2023 Nisargi</p>
+        </div>
+    </footer>
+
+    <script src="./js/main.js"></script>
+</body>
+
+</html>

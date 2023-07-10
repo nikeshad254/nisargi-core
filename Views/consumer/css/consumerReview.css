@@ -1,0 +1,94 @@
+.first-container{
+    margin-top: var(--nav-size);
+    padding: 1rem;
+}
+.stars{
+    display: flex;
+    gap: 1rem;
+    height: 25px;
+}
+.star {
+    visibility: hidden;
+    font-size: 30px;
+    cursor: pointer;
+    position: relative;
+}
+
+.star:before {
+    content: "\2606";
+    position: absolute;
+    visibility: visible;
+    top: 0;
+}
+
+.star.checked:before {
+    content: "\2605";
+    position: absolute;
+    top: 0;
+}
+
+.review-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0rem 1rem;
+    margin-bottom: 1rem;
+}
+
+.review-container form{
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    width: 45%;
+}
+.review-container form p{
+    font-size: 0.9rem;
+}
+.review-container form .reviewTxt{
+    resize: none;
+    height: 15rem;
+    padding: 0.5rem;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+.review-container form .reviewTxt:focus{
+    outline: none;
+    border: 1px solid var(--pink-400);
+}
+.review-container form .submitBtn{
+    width: 100%;
+    font-size: 1.0rem;
+    letter-spacing: 1px;
+}
+.review-container .review-item{
+    padding: 0 1rem;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.review-container .review-item .items{
+    display: flex;
+    gap: 1rem;
+}
+.review-container .review-item .items .itemContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1 1 50%;
+    text-align: justify;
+}
+.review-container .review-item .items .item{
+    display: flex;
+    gap: 0.5rem;
+}
+.review-container .review-item .items .title{
+    font-weight: 600;
+}
+.review-container .review-item .items .itemImg{
+    width: 10rem;
+    height: 10rem;
+    object-fit: cover;
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+}

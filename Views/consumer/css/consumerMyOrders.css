@@ -3,7 +3,7 @@
     padding: 1rem;
 }
 .items-container{
-    background-color: var(--gray-100);
+    background-color: var(--irish-100);
     padding: 0.5rem;
     border-radius: 10px;
     margin-top: 0.5rem;
@@ -20,7 +20,7 @@
     border-radius: 10px;
 }
 .items-container .item:hover{
-    background-color: var(--gray-200);
+    background-color: rgba(221, 255, 221, 0.467);
 }
 .items-container .products{
     display: flex;
@@ -57,32 +57,88 @@
 .history .heading{
     margin-bottom: 1rem;
 }
-.history table{
-    text-align: center;
-    border-spacing: 0;
+.orders-list{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.singleOrder{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.singleOrder .productContainer{
+    flex: 1 1 80%;
+    border: 1px solid #000;
+    border-radius: 5px;
     overflow: hidden;
+}
+.singleOrder .description{
+    flex:  1 1 20%;
+}
+
+.singleOrder .productContainer .purchase-txt{
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #000;
+    background: var(--gray-200);
+}
+.singleOrder .productContainer .purchase-txt a{
+    font-weight: bold;
+}
+.singleOrder .productContainer .products{
+    padding: 0.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.singleOrder .productContainer .products .one-product{
+    display: flex;
+    gap: 2rem;
+}
+.singleOrder .productContainer .products .product-img img{
+    height: 7rem;
+    width: 7rem;
+    object-fit: cover;
+    border: 1px solid var(--gray-200);
     border-radius: 10px;
-    border: 1px solid var(--gray-900);
-}
-.history table th{
-    background-color: var(--gray-100);
-    padding: 5px;
-    font-size: 1.2rem;
-}
-.history table tr td{
-    background-color: var(--gray-100);
-    font-size: 1.1rem;
-    padding: 5px;
-}
-.history thead th,
-.history tbody tr td{
-    border-bottom: 0.5px solid black;
 }
 
-.history table tbody tr:nth-child(2n) td{
-    background-color: var(--pink-200);
+.singleOrder .productContainer .products .review{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    background-color: var(--gray-200);
+    padding: 0.5rem;
+    border-radius: 10px;
+    height: fit-content;
+    width: 100%;
 }
-
-.history table tbody tr:nth-child(2n+1) td{
-    background-color: var(--irish-200);
+.singleOrder .productContainer .products .review .top{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.singleOrder .productContainer .products .review .top .product-name{
+    font-weight: 600;
+}
+.singleOrder .productContainer .products .review .top .stars{
+    font-size: 1.0rem;
+    display: flex;
+    gap: 0.3rem;
+}
+.singleOrder .description{
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--gray-200);
+    padding: 1rem;
+    height: fit-content;
+    border-radius: 10px;
+    font-size: 0.9rem;
 }

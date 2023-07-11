@@ -23,6 +23,8 @@
         echo '<link rel="stylesheet" href="Views/consumer/css/consumerMyOrders.css">';
     } else if ($path == '/billview') {
         echo '<link rel="stylesheet" href="Views/consumer/css/consumerBillView.css">';
+    }else if ($path == '/givereview') {
+        echo '<link rel="stylesheet" href="Views/consumer/css/consumerReview.css">';
     }
     ?>
 </head>

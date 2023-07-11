@@ -202,21 +202,21 @@ class Model {
 	}
 
 
-	function UpdateData ($tbl, $data, $where) {
+	function UpdateData($tbl, $data, $where) {
 		$sql = "UPDATE $tbl SET ";
 		foreach ($data as $key => $value) {
-			$sql .= "$key = '$value',"; 
+			$sql .= "$key = '$value',";
 		}
 		$sql = rtrim($sql, ',');
 		$sql .= " WHERE ";
+		$whereConditions = array();
 		foreach ($where as $key => $value) {
-			$sql .= "$key = '$value' AND";
+			$whereConditions[] = "$key = '$value'";
 		}
-		$sql = rtrim($sql, 'AND');
-		// echo $sql;
-		// exit;
+		$sql .= implode(' AND ', $whereConditions);
 		return $updEx = $this->connection->query($sql);
 	}
+	
 
 	function DeleteData($tbl, $where){
 		$sql = "DELETE FROM $tbl WHERE ";

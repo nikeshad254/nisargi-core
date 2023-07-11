@@ -328,7 +328,7 @@ class Controller extends Model
 						<script>
 							openModal("Failed", "Please Login First", 1, 1.5, './login');
 						</script>
-						<?php
+					<?php
 					}
 					$inDelivery = [];
 					$allOrders = [];
@@ -369,37 +369,178 @@ class Controller extends Model
 					include 'Views/consumer/footer.php';
 
 					break;
-				
+
 				case '/approveorder':
 
 					if (!isset($_SESSION['user_data'])) {
 						$this->redirect("/", 0);
 					}
 
-					if(!isset($_GET['id'])){
+					if (!isset($_GET['id'])) {
 						$this->redirect("/myorders", 0);
 					}
 
 					$where = ['id' => $_GET['id']];
 					$currentDate = date('Y-m-d');
-					$data = ['delivery_date' => $currentDate, 'status'=>'complete'];
+					$data = ['delivery_date' => $currentDate, 'status' => 'complete'];
 					$updateEx = $this->UpdateData('orders', $data, $where);
 					include 'Views/consumer/header.php';
 					include 'Views/modal.php';
-					if($updateEx){
-						?>
+					if ($updateEx) {
+					?>
 						<script>
 							openModal("Success", "Delivery is Complete", 0, 1.5, './myorders');
 						</script>
-						<?php
-					}else{
-						?>
+					<?php
+					} else {
+					?>
 						<script>
 							openModal("Failed", "Delivery is not Complete", 1, 1.5, './myorders');
 						</script>
-						<?php
+					<?php
 					}
 					break;
+				case '/givereview':
+					include 'Views/consumer/header.php';
+					include 'Views/modal.php';
+					$item = [];
+					$review = [];
+
+					if (!isset($_SESSION['user_data'])) {
+						$this->redirect("/", 0);
+					}
+
+					if (!isset($_GET['id'])) {
+						?>
+						<script>
+							openModal("Invalid Url", "item or shop not found", 1, 1.5, './myorders');
+						</script>
+						<?php
+						exit;
+					}
+
+					if (!isset($_GET['item'])) {
+						?>
+						<script>
+							openModal("Invalid Url", "item or shop not found", 1, 1.5, './myorders');
+						</script>
+						<?php
+						exit;
+					}
+
+
+					if ($_GET['item'] == 'shop') {
+
+						$where = ['id' => $_GET['id']];
+						$selectEx = $this->SelectData('shop', $where);
+						if($selectEx['Code']){
+							$data = $selectEx['Data'][0];
+							$item = [
+								'type' => 'shop',
+								'id' => $data->id,
+								'name' => $data->name,
+								'desc' => $data->bio,
+								'address' => $data->address,
+								'badge' => $data->badge,
+								'img_path' => '/'.$data->image,
+							];
+						}
+
+					} elseif ($_GET['item'] == 'product') {
+
+						$where = ['id' => $_GET['id']];
+						$selectEx = $this->SelectData('product', $where);
+						if ($selectEx['Code']) {
+							$data = $selectEx['Data'][0];
+							if($data->deleteFlag != 'd'){
+								$item = [
+									'type' => 'product',
+									'id' => $data->id,
+									'name' => $data->name,
+									'desc' => $data->description,
+									'category' => $data->category,
+									'price' => $data->price,
+									'unit' => $data->unit,
+									'shop_id' => $data->shop_id,
+									'img_path'=> '/products/'.$data->image,
+								];
+							}
+						}
+
+					} else {
+					?>
+						<script>
+							openModal("Invalid Item", "item not found", 1, 1.5, './myorders');
+						</script>
+						<?php
+					}
+
+					$where = ['item_id' => $_GET['id']];
+					$selectEx = $this->SelectData('review', $where);
+					if($selectEx['Code']){
+						$data = $selectEx['Data'][0];
+						if($data->type == $_GET['item']){
+							$review = $data;
+						}
+					}
+
+					if($_SERVER['REQUEST_METHOD'] == 'POST'){
+						$data = [
+							'star_count' => $_POST['star'],
+							'message' => $_POST['reviewTxt'],
+							'customer_id' => $_SESSION['user_data']->id,
+							'item_id' => $_GET['id'],
+							'type' => $_GET['item']
+						];
+
+						if(empty($review)){
+							$insertEx = $this->InsertData('review', $data);
+							if($insertEx['Code']){
+								?>
+								<script>
+									openModal("Success", "Thank your for reviewing", 0, 1.5, './myorders');
+								</script>
+								<?php
+								exit;
+							}else{
+								?>
+								<script>
+									openModal("Failed", "Failed to review", 1, 1.5, '');
+								</script>
+								<?php
+								exit;
+							}
+						}else{
+							$where = [
+								'customer_id' => $_SESSION['user_data']->id,
+								'item_id' => $_GET['id'],
+								'type' => $_GET['item']
+							];
+							$updateEx = $this->UpdateData('review', $data, $where);
+							if($updateEx){
+								?>
+								<script>
+									openModal("Success", "Thank your for reviewing", 0, 1.5, './myorders');
+								</script>
+								<?php
+								exit;
+							}else{
+								?>
+								<script>
+									openModal("Failed", "Failed to update review", 1, 1.5, '');
+								</script>
+								<?php
+							}
+						}
+					}
+
+					include 'Views/consumer/givereview.php';
+					include 'Views/consumer/footer.php';
+
+					break;
+
+
+
 					//		Farmers Codes Start from Here: 
 
 				case '/registerShop':

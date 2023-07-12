@@ -45,6 +45,15 @@ class Controller extends Model
 		return $errors;
 	}
 
+	function getReview($productId, $userId, $allFetchedReviews){
+		foreach($allFetchedReviews as $review){
+			if($productId == $review->product_id && $userId == $review->reviewer_id){
+				return $review;
+			}
+		}
+		return [];
+	}
+
 	function filterOrderProductView($orders)
 	{
 		$newArray = array();
@@ -332,6 +341,7 @@ class Controller extends Model
 					}
 					$inDelivery = [];
 					$allOrders = [];
+					$allReviews = [];
 
 					$where = ['user_id' => $_SESSION['user_data']->id, 'status' => 'in delivery'];
 					$selectEx = $this->SelectData('orderproduct_view', $where);
@@ -343,6 +353,12 @@ class Controller extends Model
 					$selectEx = $this->SelectData('orderproduct_view', $where);
 					if ($selectEx['Code']) {
 						$allOrders = $this->filterOrderProductView($selectEx['Data']);
+					}
+					
+					$where = ['reviewer_id' => $_SESSION['user_data']->id];
+					$selectEx = $this->SelectData('product_review_view', $where);
+					if ($selectEx['Code']) {
+						$allReviews = $selectEx['Data'];
 					}
 
 					include 'Views/consumer/myorders.php';
@@ -538,7 +554,10 @@ class Controller extends Model
 					include 'Views/consumer/footer.php';
 
 					break;
-
+				
+					case '/viewshop':
+						echo $_GET['id'];
+						break;
 
 
 					//		Farmers Codes Start from Here: 

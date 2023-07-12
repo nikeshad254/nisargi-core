@@ -125,6 +125,7 @@
 }
 .singleOrder .productContainer .products .review .top .product-name{
     font-weight: 600;
+    text-transform: capitalize;
 }
 .singleOrder .productContainer .products .review .top .stars{
     font-size: 1.0rem;
@@ -141,4 +142,7 @@
     height: fit-content;
     border-radius: 10px;
     font-size: 0.9rem;
+}
+.singleOrder .description .heading{
+    text-transform: uppercase;
 }

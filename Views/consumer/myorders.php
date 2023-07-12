@@ -3,6 +3,19 @@
         <h3 class="heading">On Delivery:</h3>
 
         <?php
+        // echo '<pre>';
+
+        function findTotalPrice($products){
+            $sum = 0;
+            foreach($products as $product){
+                $sum += $product['price']*$product['quantity'];
+            }
+            return $sum;
+        }
+        // print_r($inDelivery);
+        // print_r($allOrders);
+        // print_r($allReviews);
+
         if (count($inDelivery) < 1) {
             echo "<p> There are no orders in delivery </p>";
         }
@@ -51,229 +64,80 @@
 
     <div class="orders-list">
 
-
-        <div class="singleOrder">
-            <div class="productContainer">
-                <div class="purchase-txt">
-                    <p>Purchased from <a href="#">Raju shop</a> on 1020-02-02</p>
-                    <p>Rs. 1092</p>
-                </div>
-
-                <div class="products">
-                    <div class="one-product">
-                        <div class="product-img">
-                            <img src="uploads/products/Dahi_20230614110552.png" alt="">
-                        </div>
-
-                        <div class="review">
-                            <div class="top">
-                                <p class="product-name">Product Name</p>
-                                <div class="stars">
-                                    <b>&starf;</b>
-                                    <b>&starf;</b>
-                                    <b>&starf;</b>
-                                    <b>&star;</b>
-                                    <b>&star;</b>
-                                </div>
-                            </div>
-
-                            <p class="message">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos doloribus excepturi asperiores accusamus nam eligendi. Dolores hic iste illum, dolor numquam illo sapiente iure.
-                            </p>
-
-                            <a href="#">Edit review</a>
-                        </div>
+        <?php foreach ($allOrders as $orders) : ?>
+            <div class="singleOrder">
+                <div class="productContainer">
+                    <div class="purchase-txt">
+                        <p>Purchased from <a href="#"><?= $orders->shop_name; ?></a> on <?= $orders->date; ?></p>
+                        <p>Rs. <?=findTotalPrice($orders->products);?></p>
                     </div>
 
+                    <div class="products">
+                        <?php
+                        foreach ($orders->products as $product) :
+                            $review = $this->getReview($product['id'], $orders->user_id, $allReviews);
+                            // print_r($review);
+                        ?>
+                            <div class="one-product">
+                                <div class="product-img">
+                                    <img src="uploads/products/<?= $product['product_image'] ?>" alt="">
+                                </div>
 
-                    <div class="one-product">
-                        <div class="product-img">
-                            <img src="uploads/products/Dahi_20230614110552.png" alt="">
-                        </div>
+                                <div class="review">
+                                    <div class="top">
+                                        <p class="product-name"><?= $product['product_name'] ?></p>
+                                        <div class="stars">
+                                            <?php
+                                            if (empty($review)) {
+                                                for ($i = 1; $i <= 5; $i++) {
+                                                    echo '<b>&star;</b>';
+                                                }
+                                            } else {
+                                                $count = $review->rating;
+                                                for ($i = 1; $i <= 5; $i++) {
+                                                    if ($count > 0) {
+                                                        echo '<b>&starf;</b>';
+                                                    } else {
+                                                        echo '<b>&star;</b>';
+                                                    }
+                                                    $count--;
+                                                }
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
 
-                        <div class="review">
-                            <div class="top">
-                                <p class="product-name">Product Name</p>
-                                <div class="stars">
-                                    <b>&starf;</b>
-                                    <b>&starf;</b>
-                                    <b>&starf;</b>
-                                    <b>&star;</b>
-                                    <b>&star;</b>
+                                    <p class="message">
+                                        <?php
+                                        echo (empty($review)) ? 'Leave a review.' : $review->review_msg;
+                                        ?>
+                                    </p>
+
+                                    <a href="./givereview?id=<?= $product['id'] ?>&item=product">Edit review</a>
                                 </div>
                             </div>
-
-                            <p class="message">
-                                Leave a review.
-                            </p>
-
-                            <a href="#">Add review</a>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
-            </div>
 
-            <div class="description">
-                <h3 class="heading">Status</h3>
-                <p>On 2020-02-02</p>
-                <p>From Delivery, Address</p>
+                <div class="description">
+                    <h3 class="heading"><?= $orders->status; ?></h3>
+                    <p>On <?= $orders->date; ?></p>
+                    <p>From <?= $orders->city; ?>, <?= $orders->street; ?></p>
 
-                <a href="#" class="btn">
-                    View Order
-                </a>
+                    <a href="./billview?id=<?= $orders->order_id; ?>" class="btn">
+                        View Order
+                    </a>
 
-                <a href="#" class="btn">
-                    View Shop
-                </a>
+                    <a href="./viewshop?id=<?= $orders->shop_id; ?>" class="btn">
+                        View Shop
+                    </a>
 
-                <a href="#" class="btn">
-                    Review Shop
-                </a>
-            </div>
-        </div>
-
-        <div class="singleOrder">
-            <div class="productContainer">
-                <div class="purchase-txt">
-                    <p>Purchased from <a href="#">Raju shop</a> on 1020-02-02</p>
-                    <p>Rs. 1092</p>
-                </div>
-
-                <div class="products">
-                    <div class="one-product">
-                        <div class="product-img">
-                            <img src="uploads/products/Dahi_20230614110552.png" alt="">
-                        </div>
-
-                        <div class="review">
-                            <div class="top">
-                                <p>Your Review</p>
-                                <div class="stars">
-                                    <b>&starf;</b>
-                                    <b>&starf;</b>
-                                    <b>&starf;</b>
-                                    <b>&star;</b>
-                                    <b>&star;</b>
-                                </div>
-                            </div>
-
-                            <p class="message">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos doloribus excepturi asperiores accusamus nam eligendi. Dolores hic iste illum, dolor numquam illo sapiente iure.
-                            </p>
-
-                            <a href="#">Edit review</a>
-                        </div>
-                    </div>
-
-
-                    <div class="one-product">
-                        <div class="product-img">
-                            <img src="uploads/products/Dahi_20230614110552.png" alt="">
-                        </div>
-
-                        <div class="review">
-                            <div class="top">
-                                <p class="product-name">Product Name</p>
-                                <div class="stars">
-                                    <b>&starf;</b>
-                                    <b>&starf;</b>
-                                    <b>&starf;</b>
-                                    <b>&star;</b>
-                                    <b>&star;</b>
-                                </div>
-                            </div>
-
-                            <p class="message">
-                                Leave a review.
-                            </p>
-
-                            <a href="#">Add review</a>
-                        </div>
-                    </div>
+                    <a href="./givereview?id=<?= $orders->shop_id; ?>&item=shop" class="btn">
+                        Review Shop
+                    </a>
                 </div>
             </div>
-
-            <div class="description">
-                <h3 class="heading">Status</h3>
-                <p>On 2020-02-02</p>
-                <p>From Delivery, Address</p>
-
-                <a href="#" class="btn">
-                    View Order
-                </a>
-            </div>
-        </div>
-
-        <div class="singleOrder">
-            <div class="productContainer">
-                <div class="purchase-txt">
-                    <p>Purchased from <a href="#">Raju shop</a> on 1020-02-02</p>
-                    <p>Rs. 1092</p>
-                </div>
-
-                <div class="products">
-                    <div class="one-product">
-                        <div class="product-img">
-                            <img src="uploads/products/Dahi_20230614110552.png" alt="">
-                        </div>
-
-                        <div class="review">
-                            <div class="top">
-                                <p>Your Review</p>
-                                <div class="stars">
-                                    <b>&starf;</b>
-                                    <b>&starf;</b>
-                                    <b>&starf;</b>
-                                    <b>&star;</b>
-                                    <b>&star;</b>
-                                </div>
-                            </div>
-
-                            <p class="message">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos doloribus excepturi asperiores accusamus nam eligendi. Dolores hic iste illum, dolor numquam illo sapiente iure.
-                            </p>
-
-                            <a href="#">Edit review</a>
-                        </div>
-                    </div>
-
-
-                    <div class="one-product">
-                        <div class="product-img">
-                            <img src="uploads/products/Dahi_20230614110552.png" alt="">
-                        </div>
-
-                        <div class="review">
-                            <div class="top">
-                                <p class="product-name">Product Name</p>
-                                <div class="stars">
-                                    <b>&starf;</b>
-                                    <b>&starf;</b>
-                                    <b>&starf;</b>
-                                    <b>&star;</b>
-                                    <b>&star;</b>
-                                </div>
-                            </div>
-
-                            <p class="message">
-                                Leave a review.
-                            </p>
-
-                            <a href="#">Add review</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="description">
-                <h3 class="heading">Status</h3>
-                <p>On 2020-02-02</p>
-                <p>From Delivery, Address</p>
-
-                <a href="#" class="btn">
-                    View Order
-                </a>
-            </div>
-        </div>
+        <?php endforeach; ?>
     </div>
 </div>

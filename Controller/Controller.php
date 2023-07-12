@@ -45,9 +45,10 @@ class Controller extends Model
 		return $errors;
 	}
 
-	function getReview($productId, $userId, $allFetchedReviews){
-		foreach($allFetchedReviews as $review){
-			if($productId == $review->product_id && $userId == $review->reviewer_id){
+	function getReview($productId, $userId, $allFetchedReviews)
+	{
+		foreach ($allFetchedReviews as $review) {
+			if ($productId == $review->product_id && $userId == $review->reviewer_id) {
 				return $review;
 			}
 		}
@@ -94,12 +95,32 @@ class Controller extends Model
 		return $newArray;
 	}
 
+	function convertPaginationArr($pageItemsCount, $totalArr)
+	{
+		$pages = ceil(count($totalArr) / $pageItemsCount);
+		$newArr = [];
+		$item = 0;
+		for ($i = 0; $i < $pages; $i++) {
+			$arr = [];
+			for ($j = 0; $j < $pageItemsCount; $j++) {
+				if ($item < count($totalArr)) {
+					array_push($arr, $totalArr[$item]);
+				}
+				$item++;
+			}
+			$newArr[$i] = $arr;
+		}
+		return $newArr;
+	}
+
 	function __construct()
 	{
 		parent::__construct();
 
 		if (isset($_SERVER['PATH_INFO'])) {
 			switch ($_SERVER['PATH_INFO']) {
+
+				// link: --home 
 				case '/':
 					include 'Views/consumer/header.php';
 					include 'Views/consumer/home.php';
@@ -107,6 +128,7 @@ class Controller extends Model
 					break;
 
 
+					// link: --login 
 				case '/login':
 					if (isset($_SESSION['user_data'])) {
 						// print_r($_SESSION['user_data']);
@@ -146,6 +168,7 @@ class Controller extends Model
 
 					break;
 
+					// link: --register 
 				case '/register':
 					if (isset($_SESSION['user_data'])) {
 						$this->redirect("/", 0);
@@ -200,6 +223,7 @@ class Controller extends Model
 
 					break;
 
+					// link: --products
 				case '/products':
 					$category = '';
 					$where = ['deleteFlag' => 'o'];
@@ -217,8 +241,19 @@ class Controller extends Model
 						echo "Error Occured Catgegory and Produccts not found";
 						// exit;
 					}
-					$products = $selectEx['Data'];
 
+					// products-pagination
+					$nonpagedProducts = $selectEx['Data'];
+
+					$pageNum = 1;
+					$itemCount = 10;
+					$pagedProducts = $this->convertPaginationArr( $itemCount, $nonpagedProducts);
+					$pageCount = count($pagedProducts);
+					if(isset($_GET['p'])){
+						$pageNum = $_GET['p'];
+					}
+
+					$products = $pagedProducts[$pageNum - 1];
 					// echo "<pre>";
 					// print_r($products);
 					// exit;
@@ -229,6 +264,7 @@ class Controller extends Model
 
 					break;
 
+					// link: --yourcart 
 				case '/yourcart':
 					include 'Views/consumer/header.php';
 					include 'Views/modal.php';
@@ -306,6 +342,7 @@ class Controller extends Model
 					}
 					break;
 
+					// link: --product 
 				case '/product':
 					include 'Views/consumer/header.php';
 					$product = [];
@@ -328,6 +365,7 @@ class Controller extends Model
 					include 'Views/consumer/footer.php';
 					break;
 
+					// link: --myorders 
 				case '/myorders':
 					include 'Views/consumer/header.php';
 					include 'Views/modal.php';
@@ -354,7 +392,7 @@ class Controller extends Model
 					if ($selectEx['Code']) {
 						$allOrders = $this->filterOrderProductView($selectEx['Data']);
 					}
-					
+
 					$where = ['reviewer_id' => $_SESSION['user_data']->id];
 					$selectEx = $this->SelectData('product_review_view', $where);
 					if ($selectEx['Code']) {
@@ -365,6 +403,7 @@ class Controller extends Model
 					include 'Views/consumer/footer.php';
 					break;
 
+					// link: --billview 
 				case '/billview':
 
 					if (!isset($_SESSION['user_data'])) {
@@ -386,6 +425,7 @@ class Controller extends Model
 
 					break;
 
+					// link: --approveorder 
 				case '/approveorder':
 
 					if (!isset($_SESSION['user_data'])) {
@@ -416,6 +456,8 @@ class Controller extends Model
 					<?php
 					}
 					break;
+
+					// link: --givereview 
 				case '/givereview':
 					include 'Views/consumer/header.php';
 					include 'Views/modal.php';
@@ -427,20 +469,20 @@ class Controller extends Model
 					}
 
 					if (!isset($_GET['id'])) {
-						?>
+					?>
 						<script>
 							openModal("Invalid Url", "item or shop not found", 1, 1.5, './myorders');
 						</script>
-						<?php
+					<?php
 						exit;
 					}
 
 					if (!isset($_GET['item'])) {
-						?>
+					?>
 						<script>
 							openModal("Invalid Url", "item or shop not found", 1, 1.5, './myorders');
 						</script>
-						<?php
+					<?php
 						exit;
 					}
 
@@ -449,7 +491,7 @@ class Controller extends Model
 
 						$where = ['id' => $_GET['id']];
 						$selectEx = $this->SelectData('shop', $where);
-						if($selectEx['Code']){
+						if ($selectEx['Code']) {
 							$data = $selectEx['Data'][0];
 							$item = [
 								'type' => 'shop',
@@ -458,17 +500,16 @@ class Controller extends Model
 								'desc' => $data->bio,
 								'address' => $data->address,
 								'badge' => $data->badge,
-								'img_path' => '/'.$data->image,
+								'img_path' => '/' . $data->image,
 							];
 						}
-
 					} elseif ($_GET['item'] == 'product') {
 
 						$where = ['id' => $_GET['id']];
 						$selectEx = $this->SelectData('product', $where);
 						if ($selectEx['Code']) {
 							$data = $selectEx['Data'][0];
-							if($data->deleteFlag != 'd'){
+							if ($data->deleteFlag != 'd') {
 								$item = [
 									'type' => 'product',
 									'id' => $data->id,
@@ -478,11 +519,10 @@ class Controller extends Model
 									'price' => $data->price,
 									'unit' => $data->unit,
 									'shop_id' => $data->shop_id,
-									'img_path'=> '/products/'.$data->image,
+									'img_path' => '/products/' . $data->image,
 								];
 							}
 						}
-
 					} else {
 					?>
 						<script>
@@ -493,14 +533,14 @@ class Controller extends Model
 
 					$where = ['item_id' => $_GET['id']];
 					$selectEx = $this->SelectData('review', $where);
-					if($selectEx['Code']){
+					if ($selectEx['Code']) {
 						$data = $selectEx['Data'][0];
-						if($data->type == $_GET['item']){
+						if ($data->type == $_GET['item']) {
 							$review = $data;
 						}
 					}
 
-					if($_SERVER['REQUEST_METHOD'] == 'POST'){
+					if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 						$data = [
 							'star_count' => $_POST['star'],
 							'message' => $_POST['reviewTxt'],
@@ -509,43 +549,43 @@ class Controller extends Model
 							'type' => $_GET['item']
 						];
 
-						if(empty($review)){
+						if (empty($review)) {
 							$insertEx = $this->InsertData('review', $data);
-							if($insertEx['Code']){
-								?>
+							if ($insertEx['Code']) {
+						?>
 								<script>
 									openModal("Success", "Thank your for reviewing", 0, 1.5, './myorders');
 								</script>
-								<?php
+							<?php
 								exit;
-							}else{
-								?>
+							} else {
+							?>
 								<script>
 									openModal("Failed", "Failed to review", 1, 1.5, '');
 								</script>
-								<?php
+							<?php
 								exit;
 							}
-						}else{
+						} else {
 							$where = [
 								'customer_id' => $_SESSION['user_data']->id,
 								'item_id' => $_GET['id'],
 								'type' => $_GET['item']
 							];
 							$updateEx = $this->UpdateData('review', $data, $where);
-							if($updateEx){
-								?>
+							if ($updateEx) {
+							?>
 								<script>
 									openModal("Success", "Thank your for reviewing", 0, 1.5, './myorders');
 								</script>
-								<?php
+							<?php
 								exit;
-							}else{
-								?>
+							} else {
+							?>
 								<script>
 									openModal("Failed", "Failed to update review", 1, 1.5, '');
 								</script>
-								<?php
+							<?php
 							}
 						}
 					}
@@ -554,14 +594,16 @@ class Controller extends Model
 					include 'Views/consumer/footer.php';
 
 					break;
-				
-					case '/viewshop':
-						echo $_GET['id'];
-						break;
+
+					// link: --viewshop 
+				case '/viewshop':
+					echo $_GET['id'];
+					break;
 
 
 					//		Farmers Codes Start from Here: 
 
+					// link: --registerShop 
 				case '/registerShop':
 					if (!isset($_SESSION['user_data'])) {
 						$this->redirect("/login", 0);
@@ -589,7 +631,7 @@ class Controller extends Model
 						$error = [];
 						$error = $this->validateForm($insert_data);
 						if ($error) {
-						?>
+							?>
 							<script>
 								openModal("Failed Insertion", "<?= $error[0] ?>", 1, 1.5, '');
 							</script>
@@ -618,6 +660,7 @@ class Controller extends Model
 					}
 					break;
 
+					// link: --farmerZone 
 				case '/farmerZone':
 					if (!isset($_SESSION['user_data'])) {
 						$this->redirect("/login", 0);
@@ -632,6 +675,7 @@ class Controller extends Model
 					include 'Views/producer/footer.php';
 					break;
 
+					// link: --farmerProduct 
 				case '/farmerProduct':
 					if (!isset($_SESSION['user_data'])) {
 						$this->redirect("/login", 0);
@@ -648,6 +692,8 @@ class Controller extends Model
 					include 'Views/producer/footer.php';
 					break;
 
+
+					// link: --productCreate 
 				case '/productCreate':
 
 					include 'Views/producer/header.php';
@@ -705,6 +751,7 @@ class Controller extends Model
 					include 'Views/producer/footer.php';
 					break;
 
+					// link: --productEdit
 				case '/productEdit':
 					include 'Views/producer/header.php';
 
@@ -784,6 +831,7 @@ class Controller extends Model
 
 					break;
 
+					// link: --productDelete
 				case '/productDelete':
 					if ($_SERVER['REQUEST_METHOD'] == "GET") {
 						include 'Views/producer/header.php';
@@ -801,6 +849,7 @@ class Controller extends Model
 					}
 					break;
 
+					// link: --requests 
 				case '/requests':
 					if (!isset($_SESSION['shop_data'])) {
 						$this->redirect('/', 0);
@@ -821,6 +870,7 @@ class Controller extends Model
 
 					break;
 
+					// link: --viewrequest 
 				case '/viewrequest':
 					if (!isset($_GET['id'])) {
 						echo "Such Record doesn't exist.";
@@ -845,6 +895,7 @@ class Controller extends Model
 
 					break;
 
+					// link: --handleRequest 
 				case '/handleRequest':
 					$id = -1;
 					$status = '';
@@ -886,6 +937,7 @@ class Controller extends Model
 
 					break;
 
+					// link: --shoporders 
 				case '/shoporders':
 					if (!isset($_SESSION['shop_data'])) {
 						$this->redirect('/', 0);
@@ -918,6 +970,7 @@ class Controller extends Model
 					include 'Views/producer/footer.php';
 					break;
 
+					// link: --shoporder 
 				case '/shoporder':
 					if (!isset($_SESSION['shop_data'])) {
 						$this->redirect('/', 0);
@@ -940,6 +993,7 @@ class Controller extends Model
 					include 'Views/producer/footer.php';
 					break;
 
+					// link: --setdelivery 
 				case '/setdelivery':
 					if (!isset($_SESSION['shop_data'])) {
 						$this->redirect('/', 0);
@@ -968,6 +1022,7 @@ class Controller extends Model
 					}
 					break;
 
+					// link: --logout 
 				case '/logout':
 					if (!isset($_SESSION['user_data'])) {
 						$this->redirect("/", 0);
@@ -983,6 +1038,7 @@ class Controller extends Model
 					include 'Views/logout.php';
 					break;
 
+					// link: --404
 				default:
 					break;
 			}

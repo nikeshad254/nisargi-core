@@ -440,7 +440,10 @@ img#three-bars {
 .paging-container .pages a {
     text-decoration: none;
 }
-
+.paging-container .pages a.active{
+    font-weight: 600;
+    text-decoration: underline;
+}
 .paging-container .left-arrow {
     height: 1.5rem;
     width: 1.5rem;

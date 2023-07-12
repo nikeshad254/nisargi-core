@@ -1,18 +1,18 @@
 <script src="Views/consumer/js/category.js"></script>
 <div class="category-top-hero container">
     <?php
-        if(empty($products)){
-            echo "<p>No Products Found</p>";
-            exit;
-        }
+    if (empty($products)) {
+        echo "<p>No Products Found</p>";
+        exit;
+    }
     ?>
 
     <div class="name-label">
         <h3>Fruits</h3>
         <div class="label">
-            <a href="#">All</a><span>></span><a href="#"><?=$category?></a>
+            <a href="#">All</a><span>></span><a href="#"><?= $category ?></a>
         </div>
-        <small>(<?=count($products);?>) results found</small>
+        <small>(<?= count($products); ?>) results found</small>
     </div>
     <div class="all-cats">
         <!-- contain max 9 -->
@@ -92,44 +92,36 @@
     </div>
 
     <ul class="products-list">
-        <?php foreach ($products as $product):?>
-        <li class="one-product" id="<?=$product->id;?>">
-            <div class="image">
-                <img class="img" src="uploads/products/<?=$product->image;?>" alt="">
-            </div>
-            <div class="content">
-                <h4><?=$product->name;?></h4>
-                <p><?php
-                    echo($product->shop_name);
-                    if(isset($_SESSION['shop_data'])  && $product->shop_id  === $_SESSION['shop_data']->id){
-                        echo " <b style='color: var(--pink-400);'>(you)</b>";
-                    }
-                ?></p>
-                <p class="price">Rs. <?=$product->price;?></p>
-                <div class="stars" id="stars">
-                    <img src="Views/images/icons/star.svg" alt="" class="star">
-                    <img src="Views/images/icons/star.svg" alt="" class="star">
-                    <img src="Views/images/icons/star.svg" alt="" class="star">
-                    <img src="Views/images/icons/star.svg" alt="" class="star">
-                    <img src="Views/images/icons/star.svg" alt="" class="star">
-                    <small>(<?=$product->review_count;?>)</small>
+        <?php foreach ($products as $product) : ?>
+            <li class="one-product" id="<?= $product->id; ?>">
+                <div class="image">
+                    <img class="img" src="uploads/products/<?= $product->image; ?>" alt="">
                 </div>
-                <button id="productBtn<?=$product->id;?>" name="<?=$product->id;?>" class="productBtn">Add to Cart</button>
-            </div>
-        </li>
-        <?php endforeach;?>
+                <div class="content">
+                    <h4><?= $product->name; ?></h4>
+                    <p><?php
+                        echo ($product->shop_name);
+                        if (isset($_SESSION['shop_data'])  && $product->shop_id  === $_SESSION['shop_data']->id) {
+                            echo " <b style='color: var(--pink-400);'>(you)</b>";
+                        }
+                        ?></p>
+                    <p class="price">Rs. <?= $product->price; ?></p>
+                    <div class="stars" id="stars">
+                        <img src="Views/images/icons/star.svg" alt="" class="star">
+                        <img src="Views/images/icons/star.svg" alt="" class="star">
+                        <img src="Views/images/icons/star.svg" alt="" class="star">
+                        <img src="Views/images/icons/star.svg" alt="" class="star">
+                        <img src="Views/images/icons/star.svg" alt="" class="star">
+                        <small>(<?= $product->review_count; ?>)</small>
+                    </div>
+                    <button id="productBtn<?= $product->id; ?>" name="<?= $product->id; ?>" class="productBtn">Add to Cart</button>
+                </div>
+            </li>
+        <?php endforeach; ?>
     </ul>
 </div>
+<?php
+$pagePath = './products';
 
-<div class="paging-container">
-    <img src="Views/images/icons/arrow.svg" class="left-arrow" alt="">
-    <div class="pages">
-        <a href="#">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-    </div>
-    <img src="Views/images/icons/arrow.svg" class="right-arrow" alt="">
-</div>
-
+include 'Views/paging.php';
+?>

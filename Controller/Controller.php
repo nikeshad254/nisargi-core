@@ -247,8 +247,6 @@ class Controller extends Model
 						echo "Error Occured Catgegory and Produccts not found";
 						// exit;
 					}
-
-
 					
 					// products-pagination
 					$nonpagedProducts = $selectEx['Data'];

@@ -201,6 +201,25 @@ class Model {
 		
 	}
 
+	function SearchProducts($query){
+		$sql = "SELECT * FROM `product_view` WHERE name LIKE '%$query%' or category like '%$query%' or shop_name LIKE '%$query%' and deleteFlag = 'o';";
+		// echo $sql;
+		// exit;
+		$sqlEx = $this->connection->query($sql);
+		if($sqlEx->num_rows > 0){
+			while ($FetchData = $sqlEx->fetch_object()) {
+			    $allData[] = $FetchData;
+			}
+			$response['Data'] = $allData;
+			$response['Code'] = true;
+			$response['Message'] = 'Data retrieved successfully.';
+		} else {
+			$response['Data'] = [];
+			$response['Code'] = false;
+			$response['Message'] = 'Data not retrieved.';
+		}
+		return $response;
+	}
 
 	function UpdateData($tbl, $data, $where) {
 		$sql = "UPDATE $tbl SET ";

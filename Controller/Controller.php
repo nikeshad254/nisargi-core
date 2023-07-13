@@ -236,15 +236,22 @@ class Controller extends Model
 							}
 						}
 					}
-					$selectEx = $this->SelectData('product_view', $where);
+
+										
+					if(isset($_GET['q'])){
+						$selectEx = $this->SearchProducts($_GET['q']);
+					}else{
+						$selectEx = $this->SelectData('product_view', $where);
+					}
 					if ($selectEx['Code'] == false) {
 						echo "Error Occured Catgegory and Produccts not found";
 						// exit;
 					}
 
+
+					
 					// products-pagination
 					$nonpagedProducts = $selectEx['Data'];
-
 					$pageNum = 1;
 					$itemCount = 10;
 					$pagedProducts = $this->convertPaginationArr($itemCount, $nonpagedProducts);

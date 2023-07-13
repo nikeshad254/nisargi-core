@@ -120,7 +120,7 @@ class Controller extends Model
 		if (isset($_SERVER['PATH_INFO'])) {
 			switch ($_SERVER['PATH_INFO']) {
 
-				// link: --home 
+					// link: --home 
 				case '/':
 					include 'Views/consumer/header.php';
 					include 'Views/consumer/home.php';
@@ -247,9 +247,9 @@ class Controller extends Model
 
 					$pageNum = 1;
 					$itemCount = 10;
-					$pagedProducts = $this->convertPaginationArr( $itemCount, $nonpagedProducts);
+					$pagedProducts = $this->convertPaginationArr($itemCount, $nonpagedProducts);
 					$pageCount = count($pagedProducts);
-					if(isset($_GET['p'])){
+					if (isset($_GET['p'])) {
 						$pageNum = $_GET['p'];
 					}
 
@@ -585,7 +585,7 @@ class Controller extends Model
 								<script>
 									openModal("Failed", "Failed to update review", 1, 1.5, '');
 								</script>
-							<?php
+						<?php
 							}
 						}
 					}
@@ -597,7 +597,61 @@ class Controller extends Model
 
 					// link: --viewshop 
 				case '/viewshop':
-					echo $_GET['id'];
+					include 'Views/consumer/header.php';
+					include 'Views/modal.php';
+
+					if (!isset($_GET['id'])) {
+						?>
+						<script>
+							openModal("Invalid Url", "shop your are searching cant be found!", 1, 1.5, './');
+						</script>
+						<?php
+						exit;
+					}
+
+					$shop = [];
+					$shop_items = [];
+					$reviews = [];
+					$where = ['id' => $_GET['id']];
+					$selectEx = $this->SelectData('shop', $where);
+					if(!$selectEx['Code']){
+						?>
+						<script>
+							openModal("Invalid Id", "shop your are searching cant be found!", 1, 1.5, './');
+						</script>
+						<?php
+						exit;
+					}
+
+					$shop = $selectEx['Data'][0];
+
+					$sql = 'SELECT sum(quantity) as sales from orderproduct_view where shop_id = 1';
+					$salesCount = $this->customQuery($sql);
+
+					$where = ['shop_id' => $shop->id, 'deleteFlag' => 'o'];
+					$selectEx = $this->SelectData('product', $where);
+					if($selectEx['Code']){
+						$shop_items = $selectEx['Data'];
+					}
+
+					$where = ['shop_id' => $shop->id];
+					$selectEx = $this->SelectData('shop_review_view', $where);
+					$pageCount = 0;
+					if($selectEx['Code']){
+						$unFilterReviews = $selectEx['Data'];
+					}
+
+					$pageNum = 1;
+					$itemCount = 10;
+					$reviews = $this->convertPaginationArr($itemCount, $unFilterReviews);
+					$pageCount = count($reviews);
+					if (isset($_GET['p'])) {
+						$pageNum = $_GET['p'];
+					}
+
+					$reviews = $reviews[$pageNum - 1];
+					include 'Views/consumer/viewshop.php';
+					include 'Views/consumer/footer.php';
 					break;
 
 
@@ -631,7 +685,7 @@ class Controller extends Model
 						$error = [];
 						$error = $this->validateForm($insert_data);
 						if ($error) {
-							?>
+						?>
 							<script>
 								openModal("Failed Insertion", "<?= $error[0] ?>", 1, 1.5, '');
 							</script>

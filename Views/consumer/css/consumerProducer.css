@@ -59,39 +59,31 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: fit-content;
-    height: fit-content;
-    overflow: scroll;
+    width: 10rem;
+    height: 12rem;
+    overflow: hidden;
     transition: 0.3s ease;
+    background-color: var(--irish-100);
+    border: 2px solid var(--gray-300);
 }
 
 .one-more-product:hover {
-    background-color: var(--gray-100);
     border-radius: 10px;
 }
 
 .one-more-product .img {
     height: 9rem;
-    width: 9rem;
+    min-width: 9rem;
+    width: 100%;
     object-fit: cover;
     border: 1px solid var(--gray-700);
 }
 
 .one-more-product p {
     font-size: 1.1rem;
+    text-align: center;
 }
 
-.one-more-product::-webkit-scrollbar {
-    width: 0;
-    /* Remove scrollbar space */
-    background: transparent;
-    /* Optional: just make scrollbar invisible */
-}
-
-/* Optional: show position indicator in red */
-.one-more-product::-webkit-scrollbar-thumb {
-    background: #FF0000;
-}
 
 .product-shop h3 {
     font-size: 1.3rem;
@@ -99,8 +91,8 @@
 }
 
 .one-product-collection {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    display: flex;
+    flex-wrap: wrap;
     gap: 0.5rem;
     align-items: center;
 }

@@ -262,5 +262,8 @@ class Model {
 		return $response;
 	}
 
-
+	function customQuery($sql){
+		$result = $this->connection->query($sql);
+		return $result->fetch_object();
+	}
 }

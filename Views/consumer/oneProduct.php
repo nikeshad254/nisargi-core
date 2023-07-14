@@ -1,86 +1,106 @@
 <div class="labels container">
     <!-- <a href="#">All</a><span>></span><a href="#">Fruits</a><span> -->
     <?php
-        if(empty($product) || $product==null){
-            echo "<h4 style='text-align: center;'>Product Not Found !! </h4>";
-            exit;
+    if (empty($product) || $product == null) {
+        echo "<h4 style='text-align: center;'>Product Not Found !! </h4>";
+        exit;
+    }
+
+    function findQty($cartDatas, $productId)
+    {
+        $foundProduct = null;
+
+        foreach ($cartDatas as $cartItem) {
+            if ($cartItem['productId'] == $productId) {
+                $foundProduct = $cartItem;
+                break;
+            }
         }
 
-        function findQty($cartDatas, $productId){
-            $foundProduct = null;
-            
-            foreach ($cartDatas as $cartItem) {
-                if ($cartItem['productId'] == $productId) {
-                    $foundProduct = $cartItem;
-                    break;
-                }
-            }
-            
-            if ($foundProduct) {
-                $quantity = $foundProduct['quantity'];
-                return $quantity;
-            } else {
-                return 0;
-            }
+        if ($foundProduct) {
+            $quantity = $foundProduct['quantity'];
+            return $quantity;
+        } else {
+            return 0;
         }
+    }
     ?>
 </div>
 
 <div class="container product-view">
     <div class="image-container">
-        <img src="uploads/products/<?=$product->image;?>" alt="">
+        <img src="uploads/products/<?= $product->image; ?>" alt="">
     </div>
     <div class="details-container">
-        <h3 class="product"><?=$product->name;?></h3>
-        <p class="seller">Seller: <a href="./consumer-producer.html" class="link"><?=$product->shop_name;?></a></p>
-        <p class="description"><?=$product->description;?></p>
+        <h3 class="product"><?= $product->name; ?></h3>
+        <p class="seller">Seller: <a href="./consumer-producer.html" class="link"><?= $product->shop_name; ?></a></p>
+        <p class="description"><?= $product->description; ?></p>
         <div class="stars-and-award">
             <div class="stars">
+
+                <?php $rating = ($product->avg_rating == null) ? 0 : round($product->avg_rating * 2) / 2;; ?>
                 <div class="stars-collection">
-                    <img src="Views/images/icons/star.svg" alt="" class="icons">
-                    <img src="Views/images/icons/star.svg" alt="" class="icons">
-                    <img src="Views/images/icons/star.svg" alt="" class="icons">
-                    <img src="Views/images/icons/star.svg" alt="" class="icons">
-                    <img src="Views/images/icons/star.svg" alt="" class="icons">
+                    <?php
+
+                    $count = floor($rating); // Get the integer part of the rating
+                    $hasHalfStar = false; // Flag to track if a half star should be displayed
+
+                    if ($rating - $count >= 0.5) {
+                        $hasHalfStar = true; // Set the flag if the decimal part is greater than or equal to 0.5
+                    }
+
+                    for ($i = 1; $i <= 5; $i++) {
+                        if ($count > 0) {
+                            echo '<img src="Views/images/icons/ystar-fill.svg" alt="" class="icons">';
+                            $count--;
+                        } elseif ($hasHalfStar) {
+                            echo '<img src="Views/images/icons/ystar-half.svg" alt="" class="icons">';
+                            $hasHalfStar = false; // Display the half star only once
+                        } else {
+                            echo '<img src="Views/images/icons/ystar.svg" alt="" class="icons">';
+                        }
+                    }
+
+                    ?>
                 </div>
-                <small>(<?=$product->review_count;?>)</small>
+                <small>(<?= $product->review_count; ?>)</small>
             </div>
 
-            <?php if($product->avg_rating >20){?>
-            <div class="seller-award">
-                <img src="Views/images/icons/cloudTick.svg" alt="" class="icons">
-                <p>Best Seller</p>
-            </div>
-            <?php }?>
+            <?php if ($product->avg_rating > 20) { ?>
+                <div class="seller-award">
+                    <img src="Views/images/icons/cloudTick.svg" alt="" class="icons">
+                    <p>Best Seller</p>
+                </div>
+            <?php } ?>
         </div>
 
-        <p class="price">Rs. <?=$product->price;?></p>
+        <p class="price">Rs. <?= $product->price; ?></p>
         <div class="stockQty">
             <div class="qtys">
                 <div class="qty">
-                    <p onclick="decrement()">-</p>
+                    <p onclick="decrement(<?= $product->id ?>)">-</p>
                     <div class="incrementer" id="incrPlace">
-                        <?php 
-                            if(!empty($cartDatas) && findQty($cartDatas, $product->id) > 0){
-                                echo findQty($cartDatas, $product->id);
-                            }else{
-                                echo 1;
-                            }
+                        <?php
+                        if (!empty($cartDatas) && findQty($cartDatas, $product->id) > 0) {
+                            echo findQty($cartDatas, $product->id);
+                        } else {
+                            echo 1;
+                        }
                         ?>
                     </div>
-                    <p onclick="increment()">+</p>
+                    <p onclick="increment(<?= $product->id ?>)">+</p>
                 </div>
 
-                <p class="unit"><?=$product->unit;?></p>
+                <p class="unit"><?= $product->unit; ?></p>
             </div>
-            <p class="stock">Stock: <span id="pStock"><?=$product->stock;?></span> <?=$product->unit;?></p>
+            <p class="stock">Stock: <span id="pStock"><?= $product->stock; ?></span> <?= $product->unit; ?></p>
         </div>
 
         <div class="buyCartBtn">
             <button class="btn" id="buyOneProduct">
                 Buy Now
             </button>
-            <button class="btn" id="addOneCart" name="productBtn<?=$product->id;?>">
+            <button class="btn" id="addOneCart" name="productBtn<?= $product->id; ?>">
                 Add to Cart
             </button>
         </div>
@@ -92,174 +112,91 @@
 <div class="reviews-section container">
     <div class="avgReview">
         <div class="stars">
+
+
             <div class="stars-collection">
-                <img src="Views/images/icons/star.svg" alt="" class="icons">
-                <img src="Views/images/icons/star.svg" alt="" class="icons">
-                <img src="Views/images/icons/star.svg" alt="" class="icons">
-                <img src="Views/images/icons/star.svg" alt="" class="icons">
-                <img src="Views/images/icons/star.svg" alt="" class="icons">
+                <?php
+
+                $count = floor($rating); // Get the integer part of the rating
+                $hasHalfStar = false; // Flag to track if a half star should be displayed
+
+                if ($rating - $count >= 0.5) {
+                    $hasHalfStar = true; // Set the flag if the decimal part is greater than or equal to 0.5
+                }
+
+                for ($i = 1; $i <= 5; $i++) {
+                    if ($count > 0) {
+                        echo '<img src="Views/images/icons/ystar-fill.svg" alt="" class="icons">';
+                        $count--;
+                    } elseif ($hasHalfStar) {
+                        echo '<img src="Views/images/icons/ystar-half.svg" alt="" class="icons">';
+                        $hasHalfStar = false; // Display the half star only once
+                    } else {
+                        echo '<img src="Views/images/icons/ystar.svg" alt="" class="icons">';
+                    }
+                }
+
+                ?>
             </div>
-            <small><?=($product->avg_rating == null)?'0':$product->avg_rating;?> : Average Rating</small>
+
+            <small><?= $rating ?> : Average Rating</small>
         </div>
     </div>
-    <h3>Reviews for this product <span>(<?=$product->review_count;?>)</span></h3>
+    <h3>Reviews for this product <span>(<?= $product->review_count; ?>)</span></h3>
+
     <div class="reviewsContainer">
-        <div class="one-review">
-            <div class="stars-n-more">
-                <div class="stars-collection">
-                    <img src="Views/images/icons/star.svg" alt="" class="icons">
-                    <img src="Views/images/icons/star.svg" alt="" class="icons">
-                    <img src="Views/images/icons/star.svg" alt="" class="icons">
-                    <img src="Views/images/icons/star.svg" alt="" class="icons">
-                    <img src="Views/images/icons/star.svg" alt="" class="icons">
+        <?php foreach ($reviews as $review) : ?>
+            <div class="one-review">
+                <div class="stars-n-more">
+                    <div class="stars-collection">
+                        <?php
+                        $count = $review->rating;
+                        for ($i = 1; $i <= 5; $i++) {
+                            if ($count > 0) {
+                                echo '<img src="Views/images/icons/ystar-fill.svg" alt="" class="icons">';
+                            } else {
+                                echo '<img src="Views/images/icons/ystar.svg" alt="" class="icons">';
+                            }
+                            $count--;
+                        }
+                        ?>
+                    </div>
+                    <!-- <img src="Views/images/icons/3dots.svg" alt="" class="icons"> -->
                 </div>
-                <img src="Views/images/icons/3dots.svg" alt="" class="icons">
-            </div>
-            <div class="profile-name">
-                <img class="profile-img" src="Views/images/demo-person.jpg" alt="">
-                <h3 class="name">Ram Bahadur Pokhrel</h3>
-                <p class="date">2020-20-20</p>
-            </div>
-            <p class="reviewPara">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique beatae autem laudantium eum qui aperiam alias, tempore consectetur labore fuga quae nemo? Doloremque repellat nemo cumque iusto dolorem impedit facere eaque unde error omnis.
-            </p>
-        </div>
-
-        <div class="one-review">
-            <div class="stars-n-more">
-                <div class="stars-collection">
-                    <img src="Views/images/icons/star.svg" alt="" class="icons">
-                    <img src="Views/images/icons/star.svg" alt="" class="icons">
-                    <img src="Views/images/icons/star.svg" alt="" class="icons">
-                    <img src="Views/images/icons/star.svg" alt="" class="icons">
-                    <img src="Views/images/icons/star.svg" alt="" class="icons">
+                <div class="profile-name">
+                    <img class="profile-img" src="uploads/<?= $review->reviewer_pic; ?>" alt="">
+                    <h3 class="name"><?= $review->reviewer_name; ?></h3>
+                    <p class="date"><?= $review->review_date; ?></p>
                 </div>
-                <img src="Views/images/icons/3dots.svg" alt="" class="icons">
+                <p class="reviewPara">
+                    <?= $review->review_msg; ?>
+                </p>
             </div>
-            <div class="profile-name">
-                <img class="profile-img" src="Views/images/demo-person.jpg" alt="">
-                <h3 class="name">Ram Bahadur Pokhrel</h3>
-                <p class="date">2020-20-20</p>
-            </div>
-            <p class="reviewPara">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique beatae autem laudantium eum qui aperiam alias, tempore consectetur labore fuga quae nemo? Doloremque repellat nemo cumque iusto dolorem impedit facere eaque unde error omnis.
-            </p>
-        </div>
-
-        <div class="one-review">
-            <div class="stars-n-more">
-                <div class="stars-collection">
-                    <img src="Views/images/icons/star.svg" alt="" class="icons">
-                    <img src="Views/images/icons/star.svg" alt="" class="icons">
-                    <img src="Views/images/icons/star.svg" alt="" class="icons">
-                    <img src="Views/images/icons/star.svg" alt="" class="icons">
-                    <img src="Views/images/icons/star.svg" alt="" class="icons">
-                </div>
-                <img src="Views/images/icons/3dots.svg" alt="" class="icons">
-            </div>
-            <div class="profile-name">
-                <img class="profile-img" src="Views/images/demo-person.jpg" alt="">
-                <h3 class="name">Ram Bahadur Pokhrel</h3>
-                <p class="date">2020-20-20</p>
-            </div>
-            <p class="reviewPara">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique beatae autem laudantium eum qui aperiam alias, tempore consectetur labore fuga quae nemo? Doloremque repellat nemo cumque iusto dolorem impedit facere eaque unde error omnis.
-            </p>
-        </div>
-
-        <div class="one-review">
-            <div class="stars-n-more">
-                <div class="stars-collection">
-                    <img src="Views/images/icons/star.svg" alt="" class="icons">
-                    <img src="Views/images/icons/star.svg" alt="" class="icons">
-                    <img src="Views/images/icons/star.svg" alt="" class="icons">
-                    <img src="Views/images/icons/star.svg" alt="" class="icons">
-                    <img src="Views/images/icons/star.svg" alt="" class="icons">
-                </div>
-                <img src="Views/images/icons/3dots.svg" alt="" class="icons">
-            </div>
-            <div class="profile-name">
-                <img class="profile-img" src="Views/images/demo-person.jpg" alt="">
-                <h3 class="name">Ram Bahadur Pokhrel</h3>
-                <p class="date">2020-20-20</p>
-            </div>
-            <p class="reviewPara">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique beatae autem laudantium eum qui aperiam alias, tempore consectetur labore fuga quae nemo? Doloremque repellat nemo cumque iusto dolorem impedit facere eaque unde error omnis.
-            </p>
-
-        </div>
+        <?php endforeach; ?>
     </div>
 
-    <div class="paging-container">
-        <img src="Views/images/icons/arrow.svg" class="left-arrow" alt="">
-        <div class="pages">
-            <a href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-        </div>
-        <img src="Views/images/icons/arrow.svg" class="right-arrow" alt="">
-    </div>
+    <?php
+    $pagePath = './product';
+    include 'Views/paging.php'
+    ?>
 </div>
 
 <div class="more-shop container">
     <h3>More from this shop:</h3>
     <div class="one-product-collection">
         <!-- max seven -->
-        <div class="one-more-product">
-            <img class="img" src="Views/images/mango-demo.png" alt="">
-            <p class="productEn">Mango</p>
-            <p class="productNp">आप</p>
-            <p class="price">Rs.120</p>
-        </div>
+        <?php foreach ($shopProducts as $product) : ?>
+            <a href="./product?id=<?= $product->id; ?>" class="one-more-product link">
+                <img class="img" src="uploads/products/<?= $product->image; ?>" alt="">
+                <p class="productEn"><?= $product->name; ?></p>
+                <p class="price">Rs. <?= $product->price; ?></p>
+            </a>
+        <?php endforeach; ?>
 
-        <div class="one-more-product">
-            <img class="img" src="Views/images/mango-demo.png" alt="">
-            <p class="productEn">Mango</p>
-            <p class="productNp">आप</p>
-            <p class="price">Rs.120</p>
-        </div>
-
-        <div class="one-more-product">
-            <img class="img" src="Views/images/mango-demo.png" alt="">
-            <p class="productEn">Mango</p>
-            <p class="productNp">आप</p>
-            <p class="price">Rs.120</p>
-        </div>
-
-        <div class="one-more-product">
-            <img class="img" src="Views/images/mango-demo.png" alt="">
-            <p class="productEn">Mango</p>
-            <p class="productNp">आप</p>
-            <p class="price">Rs.120</p>
-        </div>
-
-        <div class="one-more-product">
-            <img class="img" src="Views/images/mango-demo.png" alt="">
-            <p class="productEn">Mango</p>
-            <p class="productNp">आप</p>
-            <p class="price">Rs.120</p>
-        </div>
-
-        <div class="one-more-product">
-            <img class="img" src="Views/images/mango-demo.png" alt="">
-            <p class="productEn">Mango</p>
-            <p class="productNp">आप</p>
-            <p class="price">Rs.120</p>
-        </div>
-
-        <div class="one-more-product">
-            <img class="img" src="Views/images/mango-demo.png" alt="">
-            <p class="productEn">Mango</p>
-            <p class="productNp">आप</p>
-            <p class="price">Rs.120</p>
-        </div>
-
-        <div class="view-more">
+        <a href="#" class="view-more link">
             <img src="Views/images/icons/arrow.svg" alt="">
-            <p>More</p>
-        </div>
+            <p>See All</p>
+        </a>
 
     </div>
 </div>
@@ -268,58 +205,17 @@
     <h3>Products you may like:</h3>
     <div class="one-product-collection">
         <!-- max seven -->
-        <div class="one-more-product">
-            <img class="img" src="Views/images/mango-demo.png" alt="">
-            <p class="productEn">Mango</p>
-            <p class="productNp">आप</p>
-            <p class="price">Rs.120</p>
-        </div>
-
-        <div class="one-more-product">
-            <img class="img" src="Views/images/mango-demo.png" alt="">
-            <p class="productEn">Mango</p>
-            <p class="productNp">आप</p>
-            <p class="price">Rs.120</p>
-        </div>
-
-        <div class="one-more-product">
-            <img class="img" src="Views/images/mango-demo.png" alt="">
-            <p class="productEn">Mango</p>
-            <p class="productNp">आप</p>
-            <p class="price">Rs.120</p>
-        </div>
-
-        <div class="one-more-product">
-            <img class="img" src="Views/images/mango-demo.png" alt="">
-            <p class="productEn">Mango</p>
-            <p class="productNp">आप</p>
-            <p class="price">Rs.120</p>
-        </div>
-
-        <div class="one-more-product">
-            <img class="img" src="Views/images/mango-demo.png" alt="">
-            <p class="productEn">Mango</p>
-            <p class="productNp">आप</p>
-            <p class="price">Rs.120</p>
-        </div>
-
-        <div class="one-more-product">
-            <img class="img" src="Views/images/mango-demo.png" alt="">
-            <p class="productEn">Mango</p>
-            <p class="productNp">आप</p>
-            <p class="price">Rs.120</p>
-        </div>
-
-        <div class="one-more-product">
-            <img class="img" src="Views/images/mango-demo.png" alt="">
-            <p class="productEn">Mango</p>
-            <p class="productNp">आप</p>
-            <p class="price">Rs.120</p>
-        </div>
+        <?php foreach ($similarProducts as $product) : ?>
+            <a href="./product?id=<?= $product->id; ?>" class="one-more-product link">
+                <img class="img" src="uploads/products/<?= $product->image; ?>" alt="">
+                <p class="productEn"><?= $product->name; ?></p>
+                <p class="price">Rs. <?= $product->price; ?></p>
+            </a>
+        <?php endforeach; ?>
 
         <div class="view-more">
             <img src="Views/images/icons/arrow.svg" alt="">
-            <p>More</p>
+            <p>See All</p>
         </div>
 
     </div>

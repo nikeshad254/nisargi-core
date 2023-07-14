@@ -98,7 +98,7 @@ class Model {
 		return $response;
 	}
 
-	function SelectData(string $tblName, array $where = []){
+	function SelectData(string $tblName, array $where = [], $limit=-1){
 		$selSql = "SELECT * FROM $tblName";
 		if(!empty($where)){
 			$selSql .= " WHERE ";
@@ -107,7 +107,9 @@ class Model {
 			}
 			$selSql = rtrim($selSql, 'AND');
 		}
-
+		if($limit > 0){
+			$selSql .= "LIMIT $limit";
+		}
 		// echo $selSql;
 		// exit;
 
@@ -129,7 +131,7 @@ class Model {
 		
 	}
 
-	function SelectColumnData(string $tblName, array $columnName, array $where = []){
+	function SelectColumnData(string $tblName, array $columnName, array $where = [], $limit = -1){
 		$columnList = implode(' ,', $columnName);
 		$selSql = "SELECT $columnList FROM $tblName";
 		if(!empty($where)){
@@ -139,6 +141,11 @@ class Model {
 			}
 			$selSql = rtrim($selSql, 'AND');
 		}
+		if($limit > 0){
+			$selSql .= "LIMIT $limit";
+		}
+		// echo $selSql;
+		// exit;
 
 		$sqlEx = $this->connection->query($selSql);
 

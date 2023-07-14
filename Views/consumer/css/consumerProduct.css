@@ -138,7 +138,7 @@ button.inCart:hover{
 
 .buyCartBtn .btn {
     width: 35%;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     transition: 0.3s ease;
     cursor: pointer;
 }
@@ -203,14 +203,15 @@ button.inCart:hover{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: fit-content;
-    height: fit-content;
-    overflow: scroll;
+    text-align: center;
+    width: 9rem;
+    height: 13rem;
     transition: 0.3s ease;
+    background-color: var(--irish-100);
+    border: 2px solid var(--gray-300);
 }
 
 .one-more-product:hover {
-    background-color: var(--gray-100);
     border-radius: 10px;
 }
 
@@ -245,7 +246,8 @@ button.inCart:hover{
 .one-product-collection {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    gap: 0.5rem;
+    /* justify-content: space-between; */
     align-items: center;
 }
 
@@ -265,6 +267,7 @@ button.inCart:hover{
     transition: 0.3s ease;
     border-radius: 50%;
     padding: 0.2rem;
+    cursor: pointer;
 }
 
 .more-shop .view-more:hover {

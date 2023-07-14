@@ -360,11 +360,44 @@ class Controller extends Model
 						$product = $selectEx['Data'][0];
 					}
 					$cartDatas = [];
+					$reviews = [];
+
+					$where = ['product_id' => $product->id];
+					$selectEx = $this->SelectData('product_review_view', $where);
+					$pageCount = 1;
+					if($selectEx['Code']){
+						$unFilterReviews = $selectEx['Data'];
+
+						$pageNum = 1;
+						$itemCount = 4;
+						$reviews = $this->convertPaginationArr($itemCount, $unFilterReviews);
+						$pageCount = count($reviews);
+						if (isset($_GET['p'])) {
+							$pageNum = $_GET['p'];
+						}
+	
+						$reviews = $reviews[$pageNum - 1];
+					}
+
 					if (isset($_COOKIE['nisargiCart101'])) {
 						$cartDataUnparsed = $_COOKIE['nisargiCart101'];
 						$cartDataUp = json_decode($cartDataUnparsed, true);
 						$cartDatas = json_decode($cartDataUp, true);
 					}
+
+					$shopProducts = [];
+					$similarProducts = [];
+					if(!empty($product)){
+						$columns = ['id', 'name', 'image', 'price'];
+						$where = ['shop_id' => $product->shop_id, 'deleteFlag' => 'o'];
+						$res = $this->SelectColumnData('product', $columns, $where, 7);
+						$shopProducts = ($res['Code']?$res['Data']:[]);
+						
+						$where = ['category' => $product->category, 'deleteFlag' => 'o'];
+						$res = $this->SelectColumnData('product', $columns, $where, 7);
+						$similarProducts = ($res['Code']?$res['Data']:[]);
+					}
+
 					include 'Views/modal.php';
 					include 'Views/consumer/oneProduct.php';
 					include 'Views/consumer/footer.php';
@@ -646,6 +679,7 @@ class Controller extends Model
 						$unFilterReviews = $selectEx['Data'];
 					}
 
+					// --paging implementation
 					$pageNum = 1;
 					$itemCount = 10;
 					$reviews = $this->convertPaginationArr($itemCount, $unFilterReviews);

@@ -1,17 +1,19 @@
-function decrement() {
+function decrement(productId) {
   var incrPlace = document.getElementById("incrPlace");
   var currentValue = parseInt(incrPlace.innerHTML);
 
   if (currentValue > 1) {
     incrPlace.innerHTML = currentValue - 1;
   }
+  checkAndRemove(productId);
 }
 
-function increment() {
+
+function increment(productId) {
   var incrPlace = document.getElementById("incrPlace");
   var currentValue = parseInt(incrPlace.innerHTML);
-
   incrPlace.innerHTML = currentValue + 1;
+  checkAndRemove(productId);
 }
 
 function addToCart(productId, quantity, stock) {
@@ -32,7 +34,9 @@ function addToCart(productId, quantity, stock) {
 function removeFromCart(productId) {
   const cartItems = getCookie("nisargiCart101");
   const parsedItems = cartItems ? JSON.parse(cartItems) : [];
-  const updatedItems = parsedItems.filter(item => item.productId !== productId);
+
+
+  const updatedItems = parsedItems.filter(item => item.productId != productId);
   setCookie("nisargiCart101", JSON.stringify(updatedItems), 30);
   updateCartNum();
   updateCartBtn();
@@ -63,6 +67,19 @@ function updateCartBtn() {
     btn.textContent = "Add to Cart";
     btn.onclick = () => addToCart(productId, parseInt(pQty.innerHTML), parseInt(pStock.innerHTML));
   }
+}
+
+
+function checkAndRemove(productId){
+  const cartItems = getCookie("nisargiCart101");
+  const parsedItems = cartItems ? JSON.parse(cartItems) : [];
+  parsedItems.forEach(item => {
+    if(item.productId == productId){
+      console.log("found in cart and removed");
+      removeFromCart(productId);
+      return;
+    }
+  });
 }
 
 

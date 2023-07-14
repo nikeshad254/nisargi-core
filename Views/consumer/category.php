@@ -110,17 +110,41 @@
                     <p class="price">Rs. <?= $product->price; ?></p>
 
                     <div class="stars" id="stars">
-                    <?php
+                    <!-- <?php
                     $count = $product->avg_rating;
                     for ($i = 1; $i <= 5; $i++) {
                         if ($count > 0) {
-                            echo '<img src="Views/images/icons/star-fill.svg" alt="" class="star">';
+                            echo '<img src="Views/images/icons/ystar-fill.svg" alt="" class="star">';
                         } else {
-                            echo '<img src="Views/images/icons/star.svg" alt="" class="star">';
+                            echo '<img src="Views/images/icons/ystar.svg" alt="" class="star">';
                         }
                         $count--;
                     }
+                    ?> -->
+                    <?php $rating = ($product->avg_rating == null) ? 0 : round($product->avg_rating * 2) / 2;; ?>
+                    <?php
+
+                    $count = floor($rating); // Get the integer part of the rating
+                    $hasHalfStar = false; // Flag to track if a half star should be displayed
+
+                    if ($rating - $count >= 0.5) {
+                        $hasHalfStar = true; // Set the flag if the decimal part is greater than or equal to 0.5
+                    }
+
+                    for ($i = 1; $i <= 5; $i++) {
+                        if ($count > 0) {
+                            echo '<img src="Views/images/icons/ystar-fill.svg" alt="" class="star">';
+                            $count--;
+                        } elseif ($hasHalfStar) {
+                            echo '<img src="Views/images/icons/ystar-half.svg" alt="" class="star">';
+                            $hasHalfStar = false; // Display the half star only once
+                        } else {
+                            echo '<img src="Views/images/icons/ystar.svg" alt="" class="star">';
+                        }
+                    }
+
                     ?>
+                    
                         <small>(<?= $product->review_count; ?>)</small>
                     </div>
                     <button id="productBtn<?= $product->id; ?>" name="<?= $product->id; ?>" class="productBtn">Add to Cart</button>

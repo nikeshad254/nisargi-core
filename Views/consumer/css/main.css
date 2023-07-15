@@ -512,6 +512,12 @@ img#three-bars {
     right: 0.5rem;
     cursor: pointer;
 }
+
+.stars-collection{
+    display: flex;
+    gap: 0.3rem;
+}
+
 @media (max-width: 920px) {
     .top-nav {
         height: var(--top-nav-tSize);

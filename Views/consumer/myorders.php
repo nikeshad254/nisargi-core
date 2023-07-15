@@ -23,9 +23,9 @@
 
         <?php foreach ($inDelivery as $orders) : ?>
             <div class="item">
-                <div class="shop-name">
+                <a href="./viewshop?id=<?=$orders->shop_id?>" class="shop-name link">
                     <h3><?= $orders->shop_name; ?></h3>
-                </div>
+                </a>
 
                 <div class="order-date">
                     <h3><?= $orders->date; ?></h3>
@@ -38,7 +38,7 @@
                     ?>
                         <div class="one-product">
                             <img src="uploads/products/<?= $product['product_image']; ?>" class="product-img" alt="">
-                            <p class="product-name"><?= $product['product_name']; ?></p>
+                            <a href="./product?id=<?=$product['id'];?>" class="product-name link"><?= $product['product_name']; ?></a>
                             <p class="product-qty"><?= $product['quantity']; ?> <?= $product['unit']; ?></p>
                         </div>
 
@@ -68,7 +68,7 @@
             <div class="singleOrder">
                 <div class="productContainer">
                     <div class="purchase-txt">
-                        <p>Purchased from <a href="#"><?= $orders->shop_name; ?></a> on <?= $orders->date; ?></p>
+                        <p>Purchased from <a href="./viewshop?id=<?= $orders->shop_id; ?>"><?= $orders->shop_name; ?></a> on <?= $orders->date; ?></p>
                         <p>Rs. <?=findTotalPrice($orders->products);?></p>
                     </div>
 
@@ -85,7 +85,7 @@
 
                                 <div class="review">
                                     <div class="top">
-                                        <p class="product-name"><?= $product['product_name'] ?></p>
+                                        <a href="./product?id=<?=$product['id']?>" class="product-name link"><?= $product['product_name'] ?></a>
                                         <div class="stars">
                                             <?php
                                             if (empty($review)) {

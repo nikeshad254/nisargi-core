@@ -132,6 +132,11 @@
     display: flex;
     gap: 0.3rem;
 }
+.singleOrder .productContainer .products .review .top .stars b{
+    color: #e2b207;
+}
+
+
 .singleOrder .description{
     display: flex;
     gap: 0.5rem;

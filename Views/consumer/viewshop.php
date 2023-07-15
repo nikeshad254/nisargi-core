@@ -68,9 +68,9 @@
                     $count = $review->rating;
                     for ($i = 1; $i <= 5; $i++) {
                         if ($count > 0) {
-                            echo '<img src="Views/images/icons/star-fill.svg" alt="" class="icons">';
+                            echo '<img src="Views/images/icons/ystar-fill.svg" alt="" class="icons">';
                         } else {
-                            echo '<img src="Views/images/icons/star.svg" alt="" class="icons">';
+                            echo '<img src="Views/images/icons/ystar.svg" alt="" class="icons">';
                         }
                         $count--;
                     }
@@ -79,11 +79,11 @@
             </div>
             <div class="profile-name">
                 <img class="profile-img" src="uploads/<?=$review->reviewer_img?>" alt="">
-                <h3 class="name">Ram Bahadur Pokhrel</h3>
-                <p class="date">2020-20-20</p>
+                <h3 class="name"><?=$review->reviewer_name?></h3>
+                <p class="date"><?=$review->review_on?></p>
             </div>
             <p class="reviewPara">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique beatae autem laudantium eum qui aperiam alias, tempore consectetur labore fuga quae nemo? Doloremque repellat nemo cumque iusto dolorem impedit facere eaque unde error omnis.
+                <?=$review->review_msg?>
             </p>
         </div>
         <?php endforeach;?>

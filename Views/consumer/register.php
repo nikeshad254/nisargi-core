@@ -44,11 +44,6 @@
                         <label for="password">Password</label>
                         <input type="password" name="password">
                     </div>
-
-                    <div class="lbl-inp">
-                        <label for="photo">Photo</label>
-                        <input type="file" name="photo">
-                    </div>
                 </div>
 
                 <button class="btn">Register</button>

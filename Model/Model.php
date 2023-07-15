@@ -240,6 +240,10 @@ class Model {
 			$whereConditions[] = "$key = '$value'";
 		}
 		$sql .= implode(' AND ', $whereConditions);
+
+		// echo $sql;
+		// exit;
+
 		return $updEx = $this->connection->query($sql);
 	}
 	

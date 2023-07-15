@@ -177,17 +177,12 @@ class Controller extends Model
 					include 'Views/consumer/register.php';
 
 					if ($_SERVER['REQUEST_METHOD'] == "POST") {
-						$path = 'uploads/';
-						$extention = pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
-						$file_name = $_POST['name'] . '_' . date('YmdHis') . '.' . $extention;
-						$photo = (file_exists($_FILES['photo']['tmp_name'])) ? $file_name : null;
 
 						$insert_data = [
 							'name' => $_POST['name'],
 							'address' => $_POST['address'],
 							'email' => $_POST['email'],
 							'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
-							'photo' => $photo,
 						];
 
 						$error = [];
@@ -202,9 +197,6 @@ class Controller extends Model
 						}
 						$insertEx = $this->InsertData('user', $insert_data);
 						if ($insertEx['Code']) {
-							if (!is_null($photo)) {
-								move_uploaded_file($_FILES['photo']['tmp_name'], $path . $file_name);
-							}
 						?>
 							<script>
 								console.log("hey success");
@@ -223,6 +215,76 @@ class Controller extends Model
 
 					break;
 
+					// link: --yourprofile
+				case '/yourprofile':
+
+					if (!isset($_SESSION['user_data'])) {
+						$this->redirect("/", 0);
+					}
+
+					include 'Views/consumer/header.php';
+					include 'Views/modal.php';
+
+					$userData = [
+						'id' => $_SESSION['user_data']->id,
+						'name' => $_SESSION['user_data']->name,
+						'address' => $_SESSION['user_data']->address,
+						'email' => $_SESSION['user_data']->email,
+						'photo' => $_SESSION['user_data']->photo,
+					];
+
+					if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+						$path = 'uploads/';
+						$extention = pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
+						$file_name = $_POST['name'] . '_' . date('YmdHis') . '.' . $extention;
+						$photo = (file_exists($_FILES['photo']['tmp_name'])) ? $file_name : $userData['photo'];
+
+						$data = [
+							'id' => $userData['id'],
+							'name' => $_POST['name'],
+							'address' => $_POST['address'],
+							'email' => $_POST['email'],
+							'photo' => $photo,
+						];
+
+						$where = ['id' => $userData['id']];
+
+						$updateEx = $this->UpdateData('user', $data, $where);
+
+						if ($updateEx) {
+							if (!is_null($photo)) {
+								move_uploaded_file($_FILES['photo']['tmp_name'], $path . $file_name);
+							}
+
+							$_SESSION['user_data']->id = $data['id'];
+							$_SESSION['user_data']->name = $data['name'];
+							$_SESSION['user_data']->email = $data['email'];
+							$_SESSION['user_data']->address = $data['address'];
+							$_SESSION['user_data']->photo = $data['photo'];
+						?>
+							<script>
+								openModal("Success", "successfully updated data", 0, 1.5, './yourprofile');
+							</script>
+						<?php
+						} else {
+						?>
+							<script>
+								openModal("Failed", "failed to insert data", 1, 1.5, './yourprofile');
+							</script>
+						<?php
+						}
+					}
+
+					include 'Views/consumer/profile.php';
+					include 'Views/consumer/footer.php';
+
+					break;
+
+					// link: --changepassword
+				case 'changepassword':
+					break;
+
 					// link: --products
 				case '/products':
 					$category = '';
@@ -237,17 +299,17 @@ class Controller extends Model
 						}
 					}
 
-										
-					if(isset($_GET['q'])){
+
+					if (isset($_GET['q'])) {
 						$selectEx = $this->SearchProducts($_GET['q']);
-					}else{
+					} else {
 						$selectEx = $this->SelectData('product_view', $where);
 					}
 					if ($selectEx['Code'] == false) {
 						echo "Error Occured Catgegory and Produccts not found";
 						// exit;
 					}
-					
+
 					// products-pagination
 					$nonpagedProducts = $selectEx['Data'];
 					$pageNum = 1;
@@ -365,7 +427,7 @@ class Controller extends Model
 					$where = ['product_id' => $product->id];
 					$selectEx = $this->SelectData('product_review_view', $where);
 					$pageCount = 1;
-					if($selectEx['Code']){
+					if ($selectEx['Code']) {
 						$unFilterReviews = $selectEx['Data'];
 
 						$pageNum = 1;
@@ -375,7 +437,7 @@ class Controller extends Model
 						if (isset($_GET['p'])) {
 							$pageNum = $_GET['p'];
 						}
-	
+
 						$reviews = $reviews[$pageNum - 1];
 					}
 
@@ -387,15 +449,15 @@ class Controller extends Model
 
 					$shopProducts = [];
 					$similarProducts = [];
-					if(!empty($product)){
+					if (!empty($product)) {
 						$columns = ['id', 'name', 'image', 'price'];
 						$where = ['shop_id' => $product->shop_id, 'deleteFlag' => 'o'];
 						$res = $this->SelectColumnData('product', $columns, $where, 7);
-						$shopProducts = ($res['Code']?$res['Data']:[]);
-						
+						$shopProducts = ($res['Code'] ? $res['Data'] : []);
+
 						$where = ['category' => $product->category, 'deleteFlag' => 'o'];
 						$res = $this->SelectColumnData('product', $columns, $where, 7);
-						$similarProducts = ($res['Code']?$res['Data']:[]);
+						$similarProducts = ($res['Code'] ? $res['Data'] : []);
 					}
 
 					include 'Views/modal.php';
@@ -643,7 +705,7 @@ class Controller extends Model
 						<script>
 							openModal("Invalid Url", "shop your are searching cant be found!", 1, 1.5, './');
 						</script>
-						<?php
+					<?php
 						exit;
 					}
 
@@ -652,8 +714,8 @@ class Controller extends Model
 					$reviews = [];
 					$where = ['id' => $_GET['id']];
 					$selectEx = $this->SelectData('shop', $where);
-					if(!$selectEx['Code']){
-						?>
+					if (!$selectEx['Code']) {
+					?>
 						<script>
 							openModal("Invalid Id", "shop your are searching cant be found!", 1, 1.5, './');
 						</script>
@@ -668,14 +730,14 @@ class Controller extends Model
 
 					$where = ['shop_id' => $shop->id, 'deleteFlag' => 'o'];
 					$selectEx = $this->SelectData('product', $where);
-					if($selectEx['Code']){
+					if ($selectEx['Code']) {
 						$shop_items = $selectEx['Data'];
 					}
 
 					$where = ['shop_id' => $shop->id];
 					$selectEx = $this->SelectData('shop_review_view', $where);
 					$pageCount = 0;
-					if($selectEx['Code']){
+					if ($selectEx['Code']) {
 						$unFilterReviews = $selectEx['Data'];
 					}
 

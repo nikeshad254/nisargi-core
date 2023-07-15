@@ -27,6 +27,8 @@
         echo '<link rel="stylesheet" href="Views/consumer/css/consumerReview.css">';
     }else if ($path == '/viewshop') {
         echo '<link rel="stylesheet" href="Views/consumer/css/consumerProducer.css">';
+    }else if ($path == '/yourprofile') {
+        echo '<link rel="stylesheet" href="Views/consumer/css/consumerProfile.css">';
     }
     ?>
 </head>
@@ -84,7 +86,7 @@
                         echo '<img class="downArr" src="Views/images/icons/cat-down.svg" alt="">';
                     ?>
                         <ul class="dropdown-ul">
-                            <li><a href="#">Profile</a></li>
+                            <li><a href="./yourprofile">Profile</a></li>
                             <li><a href="./myorders">My Orders</a></li>
                             <li><a href="logout">Logout</a></li>
                         </ul>

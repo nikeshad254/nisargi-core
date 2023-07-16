@@ -1,6 +1,19 @@
 .first-hero{
     margin-top: var(--nav-size);
 }
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+.header .buttons{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    border-bottom: 1px solid var(--gray-500);
+}
+
 .first-hero .heading{
     margin-bottom: 1rem;
 }
@@ -44,12 +57,13 @@
     align-items: center;
     gap: 1rem;
     width: 70rem;
-    background-color: var(--gray-100);
+    background-color: var(--irish-100);
+    border: 1px solid var(--gray-500);
     border-radius: 10px;
     padding: 1rem;
 }
 .profile-name{
-    width: 50rem;
+    width:20%;
 }
 
 .profile-img img{

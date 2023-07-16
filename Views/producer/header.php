@@ -24,6 +24,8 @@
             echo '<link rel="stylesheet" href="Views/producer/css/producerOrder.css">';
         }else if($path == '/shoporder'){
             echo '<link rel="stylesheet" href="Views/producer/css/producer-oneOrder.css">';
+        }else if($path == '/viewreviews'){
+            echo '<link rel="stylesheet" href="Views/producer/css/producer-reviews.css">';
         }
     ?>  
 </head>
@@ -44,7 +46,7 @@
                     <p>Orders</p>
                     <img src="Views/images/icons/queue-list.svg" alt="" class="icon">
                 </a>
-                <a href="#" class="Link nav-btn">
+                <a href="./viewreviews" class="Link nav-btn">
                     <p>Reviews</p>
                     <img src="Views/images/icons/star.svg" alt="" class="icon">
                 </a>

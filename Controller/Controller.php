@@ -1003,6 +1003,45 @@ class Controller extends Model
 						}
 					}
 					break;
+				
+					// link: --viewreviews
+				case '/viewreviews':
+					if (!isset($_SESSION['shop_data'])) {
+						$this->redirect('/', 0);
+					}
+					$reviews = [];
+					$tblname = '';
+					$where = ['shop_id' => $_SESSION['shop_data']->id];
+					$unFilterReviews = [];
+					if(!isset($_GET['type'])){
+						$tblname = 'product_review_view';
+					}elseif(isset($_GET['type']) && $_GET['type']=='product'){
+						$tblname = 'product_review_view';
+					}elseif(isset($_GET['type']) && $_GET['type']=='shop'){
+						$tblname = 'shop_review_view';
+					}
+
+					$selectEx = $this->SelectData($tblname, $where);
+					if($selectEx['Code']){
+						$unFilterReviews = $selectEx['Data'];
+					}
+
+					// --paging implementation
+					$pageNum = 1;
+					$itemCount = 10;
+					$reviews = $this->convertPaginationArr($itemCount, $unFilterReviews);
+					$pageCount = count($reviews);
+					if (isset($_GET['p'])) {
+						$pageNum = $_GET['p'];
+					}
+
+					$reviews = $reviews[$pageNum - 1];
+
+					include 'Views/producer/header.php';
+					include 'Views/producer/viewReviews.php';
+					include 'Views/producer/footer.php';
+					
+					break;
 
 					// link: --requests 
 				case '/requests':

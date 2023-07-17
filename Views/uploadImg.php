@@ -5,6 +5,18 @@
 // necessary varibles to integrate
 // $name = as file upload name
 // $initial_img = as initial display image
+// $required = for setting if photo is required or not
+// $value = to add value to files used while updating
+
+// echo $initial_img;
+
+if(!isset($required)){
+    $required = false;
+}
+
+if(!isset($value)){
+    $value = '';
+}
 
 if(!isset($name)){
     echo 'integration uploadImg failed';
@@ -76,8 +88,8 @@ if(!isset($initial_img)){
 
 <label class="label">
     <img class="inputImg" src="<?=$initial_img?>">
-    <input type="file" name="<?=$name?>" id="file" required />
-    <span>click to replace</span>
+    <input type="file" name="<?=$name?>" id="file" value="<?$value;?>" <?=($required)? 'required': ''?> />
+    <span>click to replace <?=$required?'*':''?></span>
 </label>
 
 <script>

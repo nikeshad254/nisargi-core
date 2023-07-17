@@ -11,9 +11,15 @@
             <textarea name="description" cols="30" rows="10" style="resize: none;" required><?= htmlentities($product->description) ?></textarea>
         </div>
 
-        <div class="lbl-inp">
-            <label for="image">Image</label>
-            <input type="file" name="image" value="<?php echo isset($product) ? 'uploads/products/' . htmlentities($product->image) : ''; ?>">
+
+        <div class="productImgContainer">
+            <?php
+            $name = "image";
+            $initial_img = 'uploads/products/';
+            $initial_img .= isset($product)?$product->image:'';
+            $value = isset($product)?$product->image:'';
+            include('Views/uploadImg.php');
+            ?>
         </div>
 
 
@@ -55,6 +61,4 @@
             <button class="btn post">Update Item</button>
         </div>
     </form>
-
-    <img src="uploads/products/<?php echo htmlentities($product->image); ?>" alt="" style="height: 100px; width:100px; position: absolute; right:29vw; top:20vh;" />
 </div>

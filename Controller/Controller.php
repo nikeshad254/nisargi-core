@@ -1149,16 +1149,19 @@ class Controller extends Model
 						$unFilterReviews = $selectEx['Data'];
 					}
 
-					// --paging implementation
-					$pageNum = 1;
-					$itemCount = 10;
-					$reviews = $this->convertPaginationArr($itemCount, $unFilterReviews);
-					$pageCount = count($reviews);
-					if (isset($_GET['p'])) {
-						$pageNum = $_GET['p'];
+					$pageCount = 1;
+					if(!empty($unFilterReviews)){
+						// --paging implementation
+						$pageNum = 1;
+						$itemCount = 10;
+						$reviews = $this->convertPaginationArr($itemCount, $unFilterReviews);
+						$pageCount = count($reviews);
+						if (isset($_GET['p'])) {
+							$pageNum = $_GET['p'];
+						}
+	
+						$reviews = $reviews[$pageNum - 1];
 					}
-
-					$reviews = $reviews[$pageNum - 1];
 
 					include 'Views/producer/header.php';
 					include 'Views/producer/viewReviews.php';

@@ -17,12 +17,12 @@
         </div>
 
         <div class="photo-container">
+            <?php
+                $name = "photo";
+                $initial_img = "uploads/".$userData['photo'];
+                include('Views/uploadImg.php');
+            ?>
 
-            <label class="label">
-                <img class="inputImg" src="uploads/<?= $userData['photo'] ?>">
-                <input type="file" name="photo" id="file" required />
-                <span>click to replace</span>
-            </label>
         </div>
 
 
@@ -34,15 +34,3 @@
         <button class="btn" type="submit">Update Profile</button>
     </form>
 </div>
-
-<script>
-    let fileBtn = document.querySelector('#file');
-    let inputImg = document.querySelector('.inputImg');
-    fileBtn.addEventListener('change', (e) => {
-        let file = e.target.files[0];
-        console.log(e.target.files);
-        console.log(URL.createObjectURL(file));
-        console.log(file.name);
-        inputImg.src = URL.createObjectURL(file);
-    })
-</script>

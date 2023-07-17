@@ -33,7 +33,7 @@
     </div>
     <div class="details-container">
         <h3 class="product"><?= $product->name; ?></h3>
-        <p class="seller">Seller: <a href="./consumer-producer.html" class="link"><?= $product->shop_name; ?></a></p>
+        <p class="seller">Seller: <a href="./viewshop?id=<?=$product->shop_id?>" class="link"><?= $product->shop_name; ?></a></p>
         <p class="description"><?= $product->description; ?></p>
         <div class="stars-and-award">
             <div class="stars">

@@ -43,7 +43,7 @@ $pagePath => where to go (./)
     }
 </style>
 
-
+<?php if($pageCount>1):?>
 <div class="paging-container">
     <?php
     $query = '?';
@@ -87,3 +87,4 @@ $pagePath => where to go (./)
     <img src='Views/images/icons/arrow.svg' class='right-arrow'>
     </a>
 </div>
+<?php endif;?>

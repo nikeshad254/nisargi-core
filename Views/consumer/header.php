@@ -11,8 +11,8 @@
     $path = $_SERVER['PATH_INFO'];
     if ($path == '/') {
         echo '<link rel="stylesheet" href="Views/consumer/css/consumerHome.css">';
-    } else if ($path == '/registerShop') {
-        echo '<link rel="stylesheet" href="Views/producer/css/producer-create.css">';
+    } else if ($path == '/registerShop' || $path == '/yourshop') {
+        echo '<link rel="stylesheet" href="Views/consumer/css/producer-register.css">';
     } else if ($path == '/products') {
         echo '<link rel="stylesheet" href="Views/consumer/css/consumerCategory.css">';
     } else if ($path == '/yourcart') {

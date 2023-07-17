@@ -28,7 +28,7 @@ class Controller extends Model
 
 		foreach ($data as $field => $value) {
 
-			if (empty($value)) {
+			if ($field !== 'image' && empty($value)) {
 				$errors[] = ucfirst($field) . ' should not be empty.';
 			}
 
@@ -97,6 +97,9 @@ class Controller extends Model
 
 	function convertPaginationArr($pageItemsCount, $totalArr)
 	{
+		if (is_null($totalArr)) {
+			return [];
+		}
 		$pages = ceil(count($totalArr) / $pageItemsCount);
 		$newArr = [];
 		$item = 0;
@@ -202,14 +205,13 @@ class Controller extends Model
 						?>
 							<script>
 								console.log("hey success");
-								openModal("Register Success", "Please login Now!", 0, 1.5, '');
+								openModal("Register Success", "Please login Now!", 0, 1.5, './login');
 							</script>
 						<?php
-							$this->redirect('/login', 1.5);
 						} else {
 						?>
 							<script>
-								openModal("Failed", "<?= $insertEx['Message'] ?>", 0, 1.5, '');
+								openModal("Failed", "<?= $insertEx['Message'] ?>", 1, 1.5, '');
 							</script>
 						<?php
 						}
@@ -308,8 +310,7 @@ class Controller extends Model
 								openModal("Failed", "new and confrim password must be same", 1, 1.5, '');
 							</script>
 							<?php
-						} 
-						else {
+						} else {
 							$updateEx = $this->ChangeUserPass($opass, $_SESSION['user_data']->id, $npass);
 							if ($updateEx['Code']) {
 							?>
@@ -317,12 +318,12 @@ class Controller extends Model
 									openModal("Success", "successfully changed password", 0, 1.5, './yourprofile');
 								</script>
 							<?php
-							}else{
-								?>
+							} else {
+							?>
 								<script>
-									openModal("Failed", "<?=$updateEx['Message']?>", 1, 1.5, '');
+									openModal("Failed", "<?= $updateEx['Message'] ?>", 1, 1.5, '');
 								</script>
-								<?php
+							<?php
 							}
 						}
 					}
@@ -785,21 +786,23 @@ class Controller extends Model
 
 					$where = ['shop_id' => $shop->id];
 					$selectEx = $this->SelectData('shop_review_view', $where);
-					$pageCount = 0;
+					$pageCount = 1;
+					$unFilterReviews = [];
 					if ($selectEx['Code']) {
 						$unFilterReviews = $selectEx['Data'];
 					}
 
-					// --paging implementation
-					$pageNum = 1;
-					$itemCount = 10;
-					$reviews = $this->convertPaginationArr($itemCount, $unFilterReviews);
-					$pageCount = count($reviews);
-					if (isset($_GET['p'])) {
-						$pageNum = $_GET['p'];
+					if (!empty($unFilterReviews)) {
+						// --paging implementation
+						$pageNum = 1;
+						$itemCount = 10;
+						$reviews = $this->convertPaginationArr($itemCount, $unFilterReviews);
+						$pageCount = is_null($reviews) ? 0 : count($reviews);
+						if (isset($_GET['p'])) {
+							$pageNum = $_GET['p'];
+						}
+						$reviews = $reviews[$pageNum - 1];
 					}
-
-					$reviews = $reviews[$pageNum - 1];
 					include 'Views/consumer/viewshop.php';
 					include 'Views/consumer/footer.php';
 					break;
@@ -818,11 +821,16 @@ class Controller extends Model
 					}
 
 					include 'Views/consumer/header.php';
-					include 'Views/producer/registerShop.php';
 					include 'Views/modal.php';
+					include 'Views/producer/registerShop.php';
 					include 'Views/producer/footer.php';
 
 					if ($_SERVER['REQUEST_METHOD'] == "POST") {
+						$path = 'uploads/shop/';
+						$extention = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+						$file_name = $_POST['name'] . '_' . date('YmdHis') . '.' . $extention;
+						$photo = (file_exists($_FILES['image']['tmp_name'])) ? $file_name : null;
+
 
 						$insert_data = [
 							'name' => $_POST['name'],
@@ -830,6 +838,7 @@ class Controller extends Model
 							'bio' => $_POST['bio'],
 							'address' => $_POST['address'],
 							'user_id' => $_SESSION['user_data']->id,
+							'image' => $photo
 						];
 
 						$error = [];
@@ -844,6 +853,10 @@ class Controller extends Model
 						}
 						$insertEx = $this->InsertData('shop', $insert_data);
 						if ($insertEx['Code']) {
+							if (!is_null($photo)) {
+								move_uploaded_file($_FILES['image']['tmp_name'], $path . $file_name);
+							}
+
 							$where = ['user_id' => $_SESSION['user_data']->id];
 							$dataEx = $this->SelectData('shop', $where);
 							if ($dataEx['Code']) {
@@ -862,6 +875,67 @@ class Controller extends Model
 						<?php
 						}
 					}
+					break;
+
+					//link: --yourshop
+				case '/yourshop':
+					if (!isset($_SESSION['user_data'])) {
+						$this->redirect("/login", 0);
+					} else {
+						if (!isset($_SESSION['shop_data'])) {
+							$this->redirect('/registerShop', 0);
+						}
+					}
+
+					$shop_data = $_SESSION['shop_data'];
+
+					if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+						$path = 'uploads/shop/';
+						$extention = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+						$file_name = $_POST['name'] . '_' . date('YmdHis') . '.' . $extention;
+						$photo = (file_exists($_FILES['image']['tmp_name'])) ? $file_name : $shop_data->image;
+
+						$data = [
+							'name' => $_POST['name'],
+							'phone' => $_POST['phone'],
+							'bio' => $_POST['bio'],
+							'address' => $_POST['address'],
+							'image' => $photo
+						];
+
+						$where = ['id' => $shop_data->id];
+
+						$updateEx = $this->UpdateData('shop', $data, $where);
+
+						if ($updateEx) {
+							if (!is_null($photo)) {
+								move_uploaded_file($_FILES['image']['tmp_name'], $path . $file_name);
+							}
+
+							$_SESSION['shop_data']->image = $data['image'];
+							$_SESSION['shop_data']->name = $data['name'];
+							$_SESSION['shop_data']->phone = $data['phone'];
+							$_SESSION['shop_data']->bio = $data['bio'];
+							$_SESSION['shop_data']->address = $data['address'];
+						?>
+							<script>
+								openModal("Success", "successfully updated data", 0, 1.5, './yourprofile');
+							</script>
+						<?php
+						} else {
+						?>
+							<script>
+								openModal("Failed", "failed to insert data", 1, 1.5, './yourprofile');
+							</script>
+						<?php
+						}
+					}
+					include 'Views/consumer/header.php';
+					include 'Views/modal.php';
+					include 'Views/producer/registerShop.php';
+					include 'Views/producer/footer.php';
+
 					break;
 
 					// link: --farmerZone 

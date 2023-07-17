@@ -101,12 +101,12 @@
                 </a>
                 <div class="content">
                     <h4><?= $product->name; ?></h4>
-                    <p><?php
+                    <a href="./viewshop?id=<?=$product->shop_id;?>" class="link"><?php
                         echo ($product->shop_name);
                         if (isset($_SESSION['shop_data'])  && $product->shop_id  === $_SESSION['shop_data']->id) {
                             echo " <b style='color: var(--pink-400);'>(you)</b>";
                         }
-                        ?></p>
+                        ?></a>
                     <p class="price">Rs. <?= $product->price; ?></p>
 
                     <div class="stars" id="stars">

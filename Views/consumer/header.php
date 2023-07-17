@@ -29,6 +29,8 @@
         echo '<link rel="stylesheet" href="Views/consumer/css/consumerProducer.css">';
     }else if ($path == '/yourprofile') {
         echo '<link rel="stylesheet" href="Views/consumer/css/consumerProfile.css">';
+    }else if ($path == '/changepass') {
+        echo '<link rel="stylesheet" href="Views/consumer/css/consumerChangePass.css">';
     }
     ?>
 </head>

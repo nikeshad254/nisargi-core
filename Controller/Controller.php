@@ -145,7 +145,9 @@ class Controller extends Model
 
 						$loginEx = $this->LoginData($email, $pass);
 						if ($loginEx['Code']) {
+
 							$_SESSION['user_data'] = $loginEx['Data'];
+
 							$where = ['user_id' => $_SESSION['user_data']->id];
 							$selectEx = $this->SelectData('shop', $where);
 							if ($selectEx['Code']) {
@@ -281,8 +283,55 @@ class Controller extends Model
 
 					break;
 
-					// link: --changepassword
-				case 'changepassword':
+					// link: --changepass
+				case '/changepass':
+					if (!isset($_SESSION['user_data'])) {
+						$this->redirect("/", 0);
+					}
+
+
+					include 'Views/consumer/header.php';
+					include 'Views/modal.php';
+
+					$opass = "";
+					$npass = "";
+					$cnpass = "";
+
+					if ($_SERVER['REQUEST_METHOD'] == "POST") {
+						$opass = $_POST['opass'];
+						$npass = $_POST['npass'];
+						$cnpass = $_POST['cnpass'];
+
+						if ($npass != $cnpass) {
+						?>
+							<script>
+								openModal("Failed", "new and confrim password must be same", 1, 1.5, '');
+							</script>
+							<?php
+						} 
+						else {
+							$updateEx = $this->ChangeUserPass($opass, $_SESSION['user_data']->id, $npass);
+							if ($updateEx['Code']) {
+							?>
+								<script>
+									openModal("Success", "successfully changed password", 0, 1.5, './yourprofile');
+								</script>
+							<?php
+							}else{
+								?>
+								<script>
+									openModal("Failed", "<?=$updateEx['Message']?>", 1, 1.5, '');
+								</script>
+								<?php
+							}
+						}
+					}
+
+					include 'Views/consumer/changePassword.php';
+					include 'Views/consumer/footer.php';
+
+					print_r($_SESSION);
+
 					break;
 
 					// link: --products
@@ -375,7 +424,7 @@ class Controller extends Model
 
 					if ($_SERVER['REQUEST_METHOD'] == "POST") {
 						if (!isset($_SESSION['user_data'])) {
-						?>
+							?>
 							<script>
 								openModal("Failed", "Please Login First", 1, 1.5, '');
 							</script>
@@ -1003,7 +1052,7 @@ class Controller extends Model
 						}
 					}
 					break;
-				
+
 					// link: --viewreviews
 				case '/viewreviews':
 					if (!isset($_SESSION['shop_data'])) {
@@ -1013,16 +1062,16 @@ class Controller extends Model
 					$tblname = '';
 					$where = ['shop_id' => $_SESSION['shop_data']->id];
 					$unFilterReviews = [];
-					if(!isset($_GET['type'])){
+					if (!isset($_GET['type'])) {
 						$tblname = 'product_review_view';
-					}elseif(isset($_GET['type']) && $_GET['type']=='product'){
+					} elseif (isset($_GET['type']) && $_GET['type'] == 'product') {
 						$tblname = 'product_review_view';
-					}elseif(isset($_GET['type']) && $_GET['type']=='shop'){
+					} elseif (isset($_GET['type']) && $_GET['type'] == 'shop') {
 						$tblname = 'shop_review_view';
 					}
 
 					$selectEx = $this->SelectData($tblname, $where);
-					if($selectEx['Code']){
+					if ($selectEx['Code']) {
 						$unFilterReviews = $selectEx['Data'];
 					}
 
@@ -1040,7 +1089,7 @@ class Controller extends Model
 					include 'Views/producer/header.php';
 					include 'Views/producer/viewReviews.php';
 					include 'Views/producer/footer.php';
-					
+
 					break;
 
 					// link: --requests 

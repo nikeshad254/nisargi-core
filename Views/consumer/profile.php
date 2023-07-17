@@ -23,7 +23,7 @@
 
         <div class="inp-label">
             <span>Change Password ?</span>
-            <a href="#" class="link changePass">click here</a>
+            <a href="./changepass" class="link changePass">click here</a>
         </div>
 
         <button class="btn" type="submit">Update Profile</button>

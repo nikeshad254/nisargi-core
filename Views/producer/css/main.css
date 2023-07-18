@@ -108,7 +108,7 @@ body{
 .navigation .middle-nav,
 .navigation .right-nav{
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
     height: 100%;
 }
 .nisargi{
@@ -120,7 +120,7 @@ body{
 }
 
 .nav-btn{
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -144,6 +144,53 @@ body{
     border: 1px solid var(--gray-900);
 }
 
+/* dropdown hover utilities and more */
+.dropdown{
+    position: relative;
+    width: fit-content;
+    min-width: 7rem;
+    cursor: pointer;
+    /* display: none; */
+}
+.dropdown-ul{
+    position: absolute;
+    left: 0;
+    top: calc(var(--nav-size) - 10px);
+    width: 100%;
+    display: none;
+    transition: 0.3s ease;
+    opacity: 0;
+}
+.dropdown-ul li{
+    list-style: none;
+    margin-bottom: 1px;
+    text-align: center;
+    padding: 3px 0px;
+    border: 2px solid rgba(128, 0, 79, 0.382);
+    background-color: #fd8fff;
+    border-radius: 2px;
+    font-size: 1.0rem;
+}
+.dropdown-ul li:hover{
+    background-color: #e17fe4;
+
+}
+.dropdown-ul li a{
+    text-decoration: none;
+}
+.dropdown:hover .dropdown-ul{
+    display: block;
+    transition: 0.3s ease;
+    opacity: 1;
+}
+.dropdown .downArr{
+    height: 20px;
+    height: 20px;
+}
+.dropdown:hover .downArr{
+    transition: 0.3s ease;
+    transform: rotateZ(180deg);
+}
 
 /* navigation ends here */
 

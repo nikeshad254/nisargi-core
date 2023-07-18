@@ -45,9 +45,6 @@
     border-radius: 10px;
     overflow: hidden;
 }
-.general-orders .order-table thead th{
-    background-color: var(--gray-100);
-}
 
 .hardBorder td{
     border-bottom: 5px solid red;
@@ -57,6 +54,10 @@
 .general-orders .order-table th{
     border: 1px solid var(--gray-600);
     padding: 0.3rem 0;
+    background-color: var(--gray-200);
+}
+.general-orders .order-table thead th{
+    background-color: var(--pink-100);
 }
 
 /* second hero || general orders ends here */

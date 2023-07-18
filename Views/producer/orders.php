@@ -54,7 +54,7 @@
                     <tr>
 
                         <td>
-                            <a href="./shoporder?id=<?= $order->order_id; ?>" class="Link">#<?= $order->order_id; ?></a>
+                            <a href="./shoporder?id=<?= $order->order_id; ?>">#<?= $order->order_id; ?></a>
                         </td>
                         <td><?= $order->date; ?></td>
                         <td>

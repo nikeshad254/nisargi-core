@@ -948,6 +948,49 @@ class Controller extends Model
 						}
 					}
 
+					$overAllData = [];	// top card data
+					$avgRating = 0;	// avg rating for card
+					$tableData = []; //table data of orders
+
+					$sql = "SELECT SUM(quantity * price) AS total_sum, 
+							COUNT(DISTINCT order_id) AS total_orders,
+							COUNT(DISTINCT user_id) AS total_unique_users
+							FROM
+								orderproduct_view
+							WHERE
+							shop_id = ".$_SESSION['shop_data']->id;
+					
+					$CustomEx = $this->customQuery($sql);
+					if($CustomEx){
+						$overAllData = $CustomEx;
+					}
+
+					$sql = "SELECT AVG(rating) AS average_rating
+						FROM product_review_view
+						WHERE shop_id = ".$_SESSION['shop_data']->id;
+					
+					$CustomEx = $this->customQuery($sql);
+					if($CustomEx){
+						$avgRating = $CustomEx;
+						$avgRating = round($avgRating->average_rating * 2) / 2;
+					}
+
+					$where = ['shop_id' => $_SESSION['shop_data']->id];
+					$selectEx = $this->SelectData('orderproduct_view', $where);
+					if($selectEx['Code']){
+						$tableData = $selectEx['Data'];
+
+						$tableData = $this->filterOrderProductView($tableData);
+					}
+
+					// echo "<pre>";
+					// print_r($overAllData);
+					// echo "<br>";
+					// print_r($avgRating);
+					// echo "<br>";
+					// print_r($tableData);
+					// exit;
+
 					include 'Views/producer/header.php';
 					include 'Views/producer/dashboard.php';
 					include 'Views/producer/footer.php';

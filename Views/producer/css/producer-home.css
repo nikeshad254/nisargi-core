@@ -45,6 +45,9 @@
     border-radius: 10px;
     overflow: hidden;
 }
+.general-orders .order-table thead th{
+    background-color: var(--gray-100);
+}
 
 .general-orders .order-table td,
 .general-orders .order-table th{

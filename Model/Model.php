@@ -340,6 +340,10 @@ class Model
 	function customQuery($sql)
 	{
 		$result = $this->connection->query($sql);
-		return $result->fetch_object();
+		if($result){
+			return $result->fetch_object();
+		}else{
+			return false;
+		}
 	}
 }

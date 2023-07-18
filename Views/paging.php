@@ -80,7 +80,7 @@ $pagePath => where to go (./)
         $pg = ($_GET['p'] == $pageCount) ? 1 : $_GET['p'] + 1;
         echo "<a href='$pagePath$query&p=$pg' class='link'>";
     } else {
-        $pg = ($pageCount <= 2) ? 1 : 2;
+        $pg = ($pageCount < 2) ? 1 : 2;
         echo "<a href='$pagePath$query&p=$pg' class='link'>";
     }
     ?>

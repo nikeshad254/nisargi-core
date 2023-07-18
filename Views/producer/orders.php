@@ -82,3 +82,8 @@
     </table>
 
 </div>
+
+<?php
+$pagePath = "./shoporders";
+include "Views/paging.php";
+?>

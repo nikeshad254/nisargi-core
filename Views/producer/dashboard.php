@@ -102,3 +102,8 @@
         </tbody>
     </table>
 </div>
+
+<?php
+$pagePath = "./farmerZone";
+include "Views/paging.php";
+?>

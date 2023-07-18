@@ -9,14 +9,6 @@
 
     $type = ($tblname == 'product_review_view' ? 'product' : ($tblname == 'shop_review_view' ? 'shop' : ''));
 
-    $avg_rating = 0;
-
-    foreach ($reviews as $review) {
-        $avg_rating += $review->rating;
-    }
-
-    $avg_rating = $avg_rating / count($reviews);
-
     $avg_rating = round($avg_rating * 2) / 2;
 
     ?>

@@ -96,25 +96,24 @@ class Controller extends Model
 	}
 
 	function convertPaginationArr($pageItemsCount, $totalArr)
-	{
-		if (is_null($totalArr)) {
-			return [];
-		}
-		$pages = ceil(count($totalArr) / $pageItemsCount);
-		$newArr = [];
-		$item = 0;
-		for ($i = 0; $i < $pages; $i++) {
-			$arr = [];
-			for ($j = 0; $j < $pageItemsCount; $j++) {
-				if ($item < count($totalArr)) {
-					array_push($arr, $totalArr[$item]);
-				}
-				$item++;
-			}
-			$newArr[$i] = $arr;
-		}
-		return $newArr;
-	}
+{
+    if (is_null($totalArr)) {
+        return [];
+    }
+
+    $totalItems = count($totalArr);
+    $pages = ceil($totalItems / $pageItemsCount);
+    $newArr = [];
+
+    for ($i = 0; $i < $pages; $i++) {
+        $start = $i * $pageItemsCount;
+        $arr = array_slice($totalArr, $start, $pageItemsCount);
+        $newArr[$i] = $arr;
+    }
+
+    return $newArr;
+}
+
 
 	function __construct()
 	{
@@ -951,6 +950,7 @@ class Controller extends Model
 					$overAllData = [];	// top card data
 					$avgRating = 0;	// avg rating for card
 					$tableData = []; //table data of orders
+					$unpagedtableData = [];
 
 					$sql = "SELECT SUM(quantity * price) AS total_sum, 
 							COUNT(DISTINCT order_id) AS total_orders,
@@ -974,17 +974,34 @@ class Controller extends Model
 						$avgRating = $CustomEx;
 						$avgRating = round($avgRating->average_rating * 2) / 2;
 					}
-
+					
 					$where = ['shop_id' => $_SESSION['shop_data']->id];
 					$selectEx = $this->SelectData('orderproduct_view', $where);
 					if($selectEx['Code']){
 						$tableData = $selectEx['Data'];
 
-						$tableData = $this->filterOrderProductView($tableData);
+						$unpagedtableData = $this->filterOrderProductView($tableData);
+					}
+					
+
+
+					$pageCount = 1;
+					if(!empty($unpagedtableData)){
+						// --paging implementation
+						$pageNum = 1;
+						$itemCount = 10;
+						$tableData = $this->convertPaginationArr($itemCount, $unpagedtableData);
+						$pageCount = count($tableData);
+						if (isset($_GET['p'])) {
+							$pageNum = $_GET['p'];
+						}
+	
+						$tableData = $tableData[$pageNum - 1];
 					}
 
 					// echo "<pre>";
-					// print_r($overAllData);
+					// print_r($unpagedtableData);
+					// print_r($tableData);
 					// echo "<br>";
 					// print_r($avgRating);
 					// echo "<br>";
@@ -1193,7 +1210,13 @@ class Controller extends Model
 					}
 
 					$pageCount = 1;
+					$avg_rating = 0;
 					if(!empty($unFilterReviews)){
+						foreach ($unFilterReviews as $review) {
+							$avg_rating += $review->rating;
+						}
+					
+						$avg_rating = $avg_rating / count($unFilterReviews);
 						// --paging implementation
 						$pageNum = 1;
 						$itemCount = 10;
@@ -1221,11 +1244,26 @@ class Controller extends Model
 					$where = ['shop_id' => $_SESSION['shop_data']->id, 'status' => 'in review'];
 					$selectEx = $this->SelectData('orderproduct_view', $where);
 
+					$unpagedorders = [];
 					if ($selectEx['Code']) {
 						$orderUnfilter = $selectEx['Data'];
 						if (count($orderUnfilter) > 0) {
-							$orders = $this->filterOrderProductView($orderUnfilter);
+							$unpagedorders = $this->filterOrderProductView($orderUnfilter);
 						}
+					}
+
+					$pageCount = 1;
+					if(!empty($unpagedorders)){
+						// --paging implementation
+						$pageNum = 1;
+						$itemCount = 10;
+						$orders = $this->convertPaginationArr($itemCount, $unpagedorders);
+						$pageCount = count($orders);
+						if (isset($_GET['p'])) {
+							$pageNum = $_GET['p'];
+						}
+	
+						$orders = $orders[$pageNum - 1];
 					}
 					include 'Views/producer/header.php';
 					include 'Views/producer/request.php';
@@ -1320,12 +1358,26 @@ class Controller extends Model
 						}
 					}
 					$selectEx = $this->SelectData('orderproduct_view', $where);
-
+					$unpagedorders = [];
 					if ($selectEx['Code']) {
 						$orderUnfilter = $selectEx['Data'];
 						if (count($orderUnfilter) > 0) {
-							$orders = $this->filterOrderProductView($orderUnfilter);
+							$unpagedorders = $this->filterOrderProductView($orderUnfilter);
 						}
+					}
+
+					$pageCount = 1;
+					if(!empty($unpagedorders)){
+						// --paging implementation
+						$pageNum = 1;
+						$itemCount = 10;
+						$orders = $this->convertPaginationArr($itemCount, $unpagedorders);
+						$pageCount = count($orders);
+						if (isset($_GET['p'])) {
+							$pageNum = $_GET['p'];
+						}
+	
+						$orders = $orders[$pageNum - 1];
 					}
 
 					include 'Views/producer/header.php';

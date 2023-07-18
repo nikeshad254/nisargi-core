@@ -72,22 +72,22 @@
                 $rowSpan = count($order->products);
                 $total = 0;
 
-                foreach($order->products as $product){
+                foreach ($order->products as $product) {
                     $total += $product['price'] * $product['quantity'];
                 }
                 // echo $rowSpan;
             ?>
                 <tr>
-                    <td rowspan="<?= $rowSpan ?>"><?= $order->order_id; ?></td>
-                    <td rowspan="<?= $rowSpan ?>"><?= $order->date; ?></td>
-                    <td rowspan="<?= $rowSpan ?>"><?= $order->delivery_name; ?></td>
+                    <td rowspan="<?= $rowSpan ?>" class="tblOrder"><?= $order->order_id; ?></td>
+                    <td rowspan="<?= $rowSpan ?>" class="tblDate"><?= $order->date; ?></td>
+                    <td rowspan="<?= $rowSpan ?>" class="tblBuyer"><?= $order->delivery_name; ?></td>
                     <!-- product -->
                     <td><?= $order->products[0]['product_name'] ?></td>
                     <td><?= $order->products[0]['price'] ?></td>
                     <td><?= $order->products[0]['quantity'] ?></td>
                     <!-- product -->
-                    <td rowspan="<?= $rowSpan ?>"><?=$total?></td>
-                    <td rowspan="<?= $rowSpan ?>"><?= $order->status; ?></td>
+                    <td rowspan="<?= $rowSpan ?>" class="tblAmount"><?= $total ?></td>
+                    <td rowspan="<?= $rowSpan ?>" class="tblStatus"><?= $order->status; ?></td>
                 </tr>
 
                 <!-- product count -1  -->
@@ -98,7 +98,6 @@
                         <td><?= $order->products[$i]['quantity'] ?></td>
                     </tr>
                 <?php endfor; ?>
-
             <?php endforeach; ?>
         </tbody>
     </table>

@@ -49,6 +49,10 @@
     background-color: var(--gray-100);
 }
 
+.hardBorder td{
+    border-bottom: 5px solid red;
+}
+
 .general-orders .order-table td,
 .general-orders .order-table th{
     border: 1px solid var(--gray-600);

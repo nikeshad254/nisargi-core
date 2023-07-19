@@ -348,28 +348,29 @@ class Controller extends Model
 						}
 					}
 
-
+					$nonpagedProducts =  [];
 					if (isset($_GET['q'])) {
 						$selectEx = $this->SearchProducts($_GET['q']);
 					} else {
 						$selectEx = $this->SelectData('product_view', $where);
 					}
-					if ($selectEx['Code'] == false) {
-						echo "Error Occured Catgegory and Produccts not found";
+					if ($selectEx['Code']) {
+						$nonpagedProducts = $selectEx['Data'];
 						// exit;
 					}
 
 					// products-pagination
-					$nonpagedProducts = $selectEx['Data'];
-					$pageNum = 1;
-					$itemCount = 10;
-					$pagedProducts = $this->convertPaginationArr($itemCount, $nonpagedProducts);
-					$pageCount = count($pagedProducts);
-					if (isset($_GET['p'])) {
-						$pageNum = $_GET['p'];
+					if(!empty($nonpagedProducts)){
+						$pageNum = 1;
+						$itemCount = 10;
+						$pagedProducts = $this->convertPaginationArr($itemCount, $nonpagedProducts);
+						$pageCount = count($pagedProducts);
+						if (isset($_GET['p'])) {
+							$pageNum = $_GET['p'];
+						}
+	
+						$products = $pagedProducts[$pageNum - 1];
 					}
-
-					$products = $pagedProducts[$pageNum - 1];
 					// echo "<pre>";
 					// print_r($products);
 					// exit;

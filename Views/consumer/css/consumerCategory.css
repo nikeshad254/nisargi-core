@@ -5,6 +5,7 @@
     flex-direction: row;
     align-items: center;
     border-bottom: 1px solid var(--gray-500);
+    text-transform: capitalize;
 }
 .name-label{
     display: flex;

@@ -5,79 +5,68 @@
         echo "<p>No Products Found</p>";
         exit;
     }
+
+    $categorys = [
+        "fruits" => [
+            "apple" => "Views/images/apple-demo.png",
+            "banana" => "Views/images/banana-demo.png",
+            "carrot" => "Views/images/carrot-demo.png",
+            "cucumber" => "Views/images/cucumber-demo.png",
+            "mango" => "Views/images/mango-demo.png",
+            "peach" => "Views/images/peach-demo.png",
+            "pineapple" => "Views/images/pineapple-demo.png",
+            "orange" => "Views/images/orange-demo.png",
+            "dragonFruit" => "Views/images/dragonFruit-demo.png",
+        ],
+        "vegetables" => [
+            "carrot" => "Views/images/carrot-demo.png",
+            "neuro" => "Views/images/neuro-demo.png",
+            "bringal" => "Views/images/bringal-demo.png",
+            "spanich" => "Views/images/spanich-demo.png",
+            "ghiraula" => "Views/images/ghiraula-demo.png",
+        ],
+        "dairy" => [
+            "milk" => "Views/images/cow milk-demo.png",
+            "cheese" => "Views/images/cheese-demo.png",
+        ],
+        "meat" => [
+            "beef" => "Views/images/beef-demo.png",
+            "chicken" => "Views/images/chicken-demo.png",
+            "lamb" => "Views/images/lamb-demo.png",
+        ],
+        "pickel" => [
+            "khursani" => "Views/images/chilly-demo.png",
+            "mula" => "Views/images/mula-demo.png",
+        ],
+        "fertilizer" => [
+            "inorganic" => "Views/images/inorganic mal-demo.png",
+            "organic" => "Views/images/organic mal-demo.png",
+        ],
+    ];
+
+    $cat = 'fruits';
+    if($category !== ''){
+        $cat = isset($categorys[$category])? $category : 'fruits';
+    }
     ?>
 
     <div class="name-label">
-        <h3>Fruits</h3>
+        <h3><?= $category;?></h3>
         <div class="label">
-            <a href="#">All</a><span>></span><a href="#"><?= $category ?></a>
+            <a href="./products">All</a><span>></span><a href="./products?category=<?=$category;?>"><?= $category ?></a>
         </div>
         <small>( <?= count($nonpagedProducts); ?> ) results found</small>
     </div>
     <div class="all-cats">
         <!-- contain max 9 -->
-        <a href="#" class="one-cat">
+        <?php foreach($categorys[$cat] as $name => $link):?>
+        <a href="./products?q=<?=$name;?>" class="one-cat">
             <div class="img">
-                <img src="Views/images/apple-demo.png" alt="">
+                <img src="<?=$link;?>" alt="">
             </div>
-            <p>Apples</p>
+            <p><?=$name;?></p>
         </a>
-
-        <a href="#" class="one-cat">
-            <div class="img">
-                <img src="Views/images/banana-demo.png" alt="">
-            </div>
-            <p>Bananas</p>
-        </a>
-
-        <a href="#" class="one-cat">
-            <div class="img">
-                <img src="Views/images/carrot-demo.png" alt="">
-            </div>
-            <p>Carrots</p>
-        </a>
-
-        <a href="#" class="one-cat">
-            <div class="img">
-                <img src="Views/images/cucumber-demo.png" alt="">
-            </div>
-            <p>Cucumbers</p>
-        </a>
-
-        <a href="#" class="one-cat">
-            <div class="img">
-                <img src="Views/images/mango-demo.png" alt="">
-            </div>
-            <p>Mangos</p>
-        </a>
-
-        <a href="#" class="one-cat">
-            <div class="img">
-                <img src="Views/images/peach-demo.png" alt="">
-            </div>
-            <p>Peachs</p>
-        </a>
-
-        <a href="#" class="one-cat">
-            <div class="img">
-                <img src="Views/images/pineapple-demo.png" alt="">
-            </div>
-            <p>Pineapples</p>
-        </a>
-
-        <a href="#" class="one-cat">
-            <div class="img">
-                <img src="Views/images/orange-demo.png" alt="">
-            </div>
-            <p>Oranges</p>
-        </a>
-
-        <a href="#" class="one-cat">
-            <div class="img">
-                <img src="Views/images/dragonFruit-demo.png" alt="">
-            </div>
-            <p>Dragon Fruit</p>
-        </a>
+        <?php endforeach;?>
     </div>
 </div>
 

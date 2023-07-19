@@ -78,7 +78,7 @@
                 // echo $rowSpan;
             ?>
                 <tr>
-                    <td rowspan="<?= $rowSpan ?>" class="tblOrder"><a href="./shoporder?id=<?=$order->order_id;?>"><?= $order->order_id; ?></a></td>
+                    <td rowspan="<?= $rowSpan ?>" class="tblOrder"><a href="./shoporder?id=<?= $order->order_id; ?>"><?= $order->order_id; ?></a></td>
                     <td rowspan="<?= $rowSpan ?>" class="tblDate"><?= $order->date; ?></td>
                     <td rowspan="<?= $rowSpan ?>" class="tblBuyer"><?= $order->delivery_name; ?></td>
                     <!-- product -->
@@ -101,6 +101,12 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+
+    <?php
+    if (empty($tableData)) {
+        echo "<p style='text-align: center'>There are no orders.<p>";
+    }
+    ?>
 </div>
 
 <?php

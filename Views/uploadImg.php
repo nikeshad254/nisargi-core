@@ -88,7 +88,7 @@ if(!isset($initial_img)){
 
 <label class="label">
     <img class="inputImg" src="<?=$initial_img?>">
-    <input type="file" name="<?=$name?>" id="file" value="<?$value;?>" <?=($required)? 'required': ''?> />
+    <input type="file" name="<?=$name?>" id="file" <?php if($value !== ''){ echo 'value="'.$value.'"';}?> <?=($required)? 'required': ''?> />
     <span>click to replace <?=$required?'*':''?></span>
 </label>
 

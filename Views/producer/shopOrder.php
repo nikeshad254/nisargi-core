@@ -21,14 +21,14 @@
         <div class="orders">
             <?php
             foreach ($order->products as $product) :
-                $total += $product['price'] * $product['stock'];
+                $total += $product['price'] * $product['quantity'];
             ?>
                 <div class="oneOrder">
                     <img src="uploads/products/<?= $product['product_image'] ?>" alt="">
                     <p class="name"><?= $product['product_name']; ?></p>
                     <div class="prodQty">
                         <h4>Rs. <?= $product['price']; ?></h4>
-                        <p><?= $product['stock']; ?> <?= $product['unit']; ?></p>
+                        <p><?= $product['quantity']; ?> <?= $product['unit']; ?></p>
                     </div>
                 </div>
             <?php endforeach; ?>

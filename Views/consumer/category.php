@@ -39,8 +39,8 @@
             "mula" => "Views/images/mula-demo.png",
         ],
         "fertilizer" => [
-            "inorganic" => "Views/images/inorganic mal-demo.png",
-            "organic" => "Views/images/organic mal-demo.png",
+            "urea" => "Views/images/inorganic mal.png",
+            "chicken" => "Views/images/organic mal.png",
         ],
     ];
 

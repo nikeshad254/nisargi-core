@@ -96,23 +96,23 @@ class Controller extends Model
 	}
 
 	function convertPaginationArr($pageItemsCount, $totalArr)
-{
-    if (is_null($totalArr)) {
-        return [];
-    }
+	{
+		if (is_null($totalArr)) {
+			return [];
+		}
 
-    $totalItems = count($totalArr);
-    $pages = ceil($totalItems / $pageItemsCount);
-    $newArr = [];
+		$totalItems = count($totalArr);
+		$pages = ceil($totalItems / $pageItemsCount);
+		$newArr = [];
 
-    for ($i = 0; $i < $pages; $i++) {
-        $start = $i * $pageItemsCount;
-        $arr = array_slice($totalArr, $start, $pageItemsCount);
-        $newArr[$i] = $arr;
-    }
+		for ($i = 0; $i < $pages; $i++) {
+			$start = $i * $pageItemsCount;
+			$arr = array_slice($totalArr, $start, $pageItemsCount);
+			$newArr[$i] = $arr;
+		}
 
-    return $newArr;
-}
+		return $newArr;
+	}
 
 
 	function __construct()
@@ -360,7 +360,7 @@ class Controller extends Model
 					}
 
 					// products-pagination
-					if(!empty($nonpagedProducts)){
+					if (!empty($nonpagedProducts)) {
 						$pageNum = 1;
 						$itemCount = 10;
 						$pagedProducts = $this->convertPaginationArr($itemCount, $nonpagedProducts);
@@ -368,7 +368,7 @@ class Controller extends Model
 						if (isset($_GET['p'])) {
 							$pageNum = $_GET['p'];
 						}
-	
+
 						$products = $pagedProducts[$pageNum - 1];
 					}
 					// echo "<pre>";
@@ -774,6 +774,8 @@ class Controller extends Model
 					}
 
 					$shop = $selectEx['Data'][0];
+					// print_r($shop);
+					// exit;
 
 					$sql = 'SELECT sum(quantity) as sales from orderproduct_view where shop_id = 1';
 					$salesCount = $this->customQuery($sql);
@@ -829,17 +831,27 @@ class Controller extends Model
 						$path = 'uploads/shop/';
 						$extention = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
 						$file_name = $_POST['name'] . '_' . date('YmdHis') . '.' . $extention;
-						$photo = (file_exists($_FILES['image']['tmp_name'])) ? $file_name : null;
+						$photo = (file_exists($_FILES['image']['tmp_name'])) ? $file_name : NULL;
 
-
-						$insert_data = [
-							'name' => $_POST['name'],
-							'phone' => $_POST['phone'],
-							'bio' => $_POST['bio'],
-							'address' => $_POST['address'],
-							'user_id' => $_SESSION['user_data']->id,
-							'image' => $photo
-						];
+						$insert_data = [];
+						if (!is_null($photo)) {
+							$insert_data = [
+								'name' => $_POST['name'],
+								'phone' => $_POST['phone'],
+								'bio' => $_POST['bio'],
+								'address' => $_POST['address'],
+								'user_id' => $_SESSION['user_data']->id,
+								'image' => $photo
+							];
+						} else {
+							$insert_data = [
+								'name' => $_POST['name'],
+								'phone' => $_POST['phone'],
+								'bio' => $_POST['bio'],
+								'address' => $_POST['address'],
+								'user_id' => $_SESSION['user_data']->id
+							];
+						}
 
 						$error = [];
 						$error = $this->validateForm($insert_data);
@@ -889,6 +901,9 @@ class Controller extends Model
 
 					$shop_data = $_SESSION['shop_data'];
 
+					include 'Views/consumer/header.php';
+					include 'Views/modal.php';
+
 					if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 						$path = 'uploads/shop/';
@@ -908,6 +923,8 @@ class Controller extends Model
 
 						$updateEx = $this->UpdateData('shop', $data, $where);
 
+
+
 						if ($updateEx) {
 							if (!is_null($photo)) {
 								move_uploaded_file($_FILES['image']['tmp_name'], $path . $file_name);
@@ -920,19 +937,18 @@ class Controller extends Model
 							$_SESSION['shop_data']->address = $data['address'];
 						?>
 							<script>
-								openModal("Success", "successfully updated data", 0, 1.5, './yourprofile');
+								openModal("Success", "successfully updated data", 0, 1.5, './yourshop');
 							</script>
 						<?php
 						} else {
 						?>
 							<script>
-								openModal("Failed", "failed to insert data", 1, 1.5, './yourprofile');
+								openModal("Failed", "failed to insert data", 1, 1.5, './yourshop');
 							</script>
 						<?php
 						}
 					}
-					include 'Views/consumer/header.php';
-					include 'Views/modal.php';
+
 					include 'Views/producer/registerShop.php';
 					include 'Views/producer/footer.php';
 
@@ -953,41 +969,42 @@ class Controller extends Model
 					$tableData = []; //table data of orders
 					$unpagedtableData = [];
 
-					$sql = "SELECT SUM(quantity * price) AS total_sum, 
-							COUNT(DISTINCT order_id) AS total_orders,
-							COUNT(DISTINCT user_id) AS total_unique_users
-							FROM
-								orderproduct_view
-							WHERE
-							shop_id = ".$_SESSION['shop_data']->id;
-					
+					$sql = "SELECT
+						CASE WHEN status = 'complete' THEN SUM(quantity * price) ELSE 0 END AS total_sum,
+						COUNT(DISTINCT order_id) AS total_orders,
+						COUNT(DISTINCT user_id) AS total_unique_users
+					FROM
+						orderproduct_view
+					WHERE
+					shop_id = " . $_SESSION['shop_data']->id;
+
 					$CustomEx = $this->customQuery($sql);
-					if($CustomEx){
+					if ($CustomEx) {
 						$overAllData = $CustomEx;
 					}
 
 					$sql = "SELECT AVG(rating) AS average_rating
 						FROM product_review_view
-						WHERE shop_id = ".$_SESSION['shop_data']->id;
-					
+						WHERE shop_id = " . $_SESSION['shop_data']->id;
+
 					$CustomEx = $this->customQuery($sql);
-					if($CustomEx){
+					if ($CustomEx) {
 						$avgRating = $CustomEx;
 						$avgRating = round($avgRating->average_rating * 2) / 2;
 					}
-					
+
 					$where = ['shop_id' => $_SESSION['shop_data']->id];
 					$selectEx = $this->SelectData('orderproduct_view', $where);
-					if($selectEx['Code']){
+					if ($selectEx['Code']) {
 						$tableData = $selectEx['Data'];
 
 						$unpagedtableData = $this->filterOrderProductView($tableData);
 					}
-					
+
 
 
 					$pageCount = 1;
-					if(!empty($unpagedtableData)){
+					if (!empty($unpagedtableData)) {
 						// --paging implementation
 						$pageNum = 1;
 						$itemCount = 10;
@@ -996,7 +1013,7 @@ class Controller extends Model
 						if (isset($_GET['p'])) {
 							$pageNum = $_GET['p'];
 						}
-	
+
 						$tableData = $tableData[$pageNum - 1];
 					}
 
@@ -1074,14 +1091,14 @@ class Controller extends Model
 							}
 						?>
 							<script>
-								openModal("Sucess", "data has been sucessfully inserted", 0, 1.5, './farmerProduct');
+								openModal("Sucess", "Product is on sale", 0, 1.5, './farmerProduct');
 							</script>
 						<?php
 
 						} else {
 						?>
 							<script>
-								openModal("Failed", "data has been sucessfully failed", 1, 1.5, '');
+								openModal("Failed", "Product is not listed", 1, 1.5, '');
 							</script>
 						<?php
 						}
@@ -1212,11 +1229,11 @@ class Controller extends Model
 
 					$pageCount = 1;
 					$avg_rating = 0;
-					if(!empty($unFilterReviews)){
+					if (!empty($unFilterReviews)) {
 						foreach ($unFilterReviews as $review) {
 							$avg_rating += $review->rating;
 						}
-					
+
 						$avg_rating = $avg_rating / count($unFilterReviews);
 						// --paging implementation
 						$pageNum = 1;
@@ -1226,7 +1243,7 @@ class Controller extends Model
 						if (isset($_GET['p'])) {
 							$pageNum = $_GET['p'];
 						}
-	
+
 						$reviews = $reviews[$pageNum - 1];
 					}
 
@@ -1254,7 +1271,7 @@ class Controller extends Model
 					}
 
 					$pageCount = 1;
-					if(!empty($unpagedorders)){
+					if (!empty($unpagedorders)) {
 						// --paging implementation
 						$pageNum = 1;
 						$itemCount = 10;
@@ -1263,7 +1280,7 @@ class Controller extends Model
 						if (isset($_GET['p'])) {
 							$pageNum = $_GET['p'];
 						}
-	
+
 						$orders = $orders[$pageNum - 1];
 					}
 					include 'Views/producer/header.php';
@@ -1368,7 +1385,7 @@ class Controller extends Model
 					}
 
 					$pageCount = 1;
-					if(!empty($unpagedorders)){
+					if (!empty($unpagedorders)) {
 						// --paging implementation
 						$pageNum = 1;
 						$itemCount = 10;
@@ -1377,7 +1394,7 @@ class Controller extends Model
 						if (isset($_GET['p'])) {
 							$pageNum = $_GET['p'];
 						}
-	
+
 						$orders = $orders[$pageNum - 1];
 					}
 
@@ -1423,7 +1440,7 @@ class Controller extends Model
 					$where = ['id' => $_GET['id']];
 					$data = ['status' => 'in delivery'];
 					$updateEx = $this->UpdateData('orders', $data, $where);
-					if ($updateEx['Code']) {
+					if ($updateEx) {
 						?>
 						<script type="text/javascript">
 							openModal("Sucess", "Item set for delivery", 0, 2, './shoporders');

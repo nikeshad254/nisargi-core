@@ -183,8 +183,8 @@ class Controller extends Model
 					if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 						$insert_data = [
-							'name' => $_POST['name'],
-							'address' => $_POST['address'],
+							'name' => mysqli_real_escape_string($this->connection, $_POST['name']),
+							'address' => mysqli_real_escape_string($this->connection, $_POST['address']),
 							'email' => $_POST['email'],
 							'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
 						];
@@ -245,8 +245,8 @@ class Controller extends Model
 
 						$data = [
 							'id' => $userData['id'],
-							'name' => $_POST['name'],
-							'address' => $_POST['address'],
+							'name' => mysqli_real_escape_string($this->connection, $_POST['name']),
+							'address' => mysqli_real_escape_string($this->connection, $_POST['address']),
 							'email' => $_POST['email'],
 							'photo' => $photo,
 						];
@@ -299,9 +299,9 @@ class Controller extends Model
 					$cnpass = "";
 
 					if ($_SERVER['REQUEST_METHOD'] == "POST") {
-						$opass = $_POST['opass'];
-						$npass = $_POST['npass'];
-						$cnpass = $_POST['cnpass'];
+						$opass = mysqli_real_escape_string($this->connection, $_POST['opass']);
+						$npass = mysqli_real_escape_string($this->connection, $_POST['npass']);
+						$cnpass = mysqli_real_escape_string($this->connection, $_POST['cnpass']);
 
 						if ($npass != $cnpass) {
 						?>
@@ -432,11 +432,11 @@ class Controller extends Model
 							<?php
 						} else {
 
-							$order_data['delivery']['name'] = $_POST['full-name'];
-							$order_data['delivery']['city'] = $_POST['city'];
-							$order_data['delivery']['street'] = $_POST['street'];
-							$order_data['delivery']['mobile'] = $_POST['mobile'];
-							$order_data['delivery']['message'] = $_POST['message'];
+							$order_data['delivery']['name'] = mysqli_real_escape_string($this->connection, $_POST['full-name']);
+							$order_data['delivery']['city'] = mysqli_real_escape_string($this->connection, $_POST['city']);
+							$order_data['delivery']['street'] = mysqli_real_escape_string($this->connection, $_POST['street']);
+							$order_data['delivery']['mobile'] = mysqli_real_escape_string($this->connection, $_POST['mobile']);
+							$order_data['delivery']['message'] = mysqli_real_escape_string($this->connection, $_POST['message']);
 
 							$insertEx = $this->InsertOrderData($order_data);
 							print_r($insertEx);
@@ -693,10 +693,10 @@ class Controller extends Model
 					if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 						$data = [
 							'star_count' => $_POST['star'],
-							'message' => $_POST['reviewTxt'],
+							'message' => mysqli_real_escape_string($this->connection, $_POST['reviewTxt']),
 							'customer_id' => $_SESSION['user_data']->id,
-							'item_id' => $_GET['id'],
-							'type' => $_GET['item']
+							'item_id' => mysqli_real_escape_string($this->connection, $_GET['id']),
+							'type' => mysqli_real_escape_string($this->connection, $_GET['item'])
 						];
 
 						if (empty($review)) {
@@ -719,8 +719,8 @@ class Controller extends Model
 						} else {
 							$where = [
 								'customer_id' => $_SESSION['user_data']->id,
-								'item_id' => $_GET['id'],
-								'type' => $_GET['item']
+								'item_id' => mysqli_real_escape_string($this->connection, $_GET['id']),
+								'type' => mysqli_real_escape_string($this->connection, $_GET['item'])
 							];
 							$updateEx = $this->UpdateData('review', $data, $where);
 							if ($updateEx) {
@@ -762,7 +762,7 @@ class Controller extends Model
 					$shop = [];
 					$shop_items = [];
 					$reviews = [];
-					$where = ['id' => $_GET['id']];
+					$where = ['id' => mysqli_real_escape_string($this->connection, $_GET['id'])];
 					$selectEx = $this->SelectData('shop', $where);
 					if (!$selectEx['Code']) {
 					?>
@@ -836,20 +836,20 @@ class Controller extends Model
 						$insert_data = [];
 						if (!is_null($photo)) {
 							$insert_data = [
-								'name' => $_POST['name'],
-								'phone' => $_POST['phone'],
-								'bio' => $_POST['bio'],
-								'address' => $_POST['address'],
+								'name' => mysqli_real_escape_string($this->connection, $_POST['name']),
+								'phone' => mysqli_real_escape_string($this->connection, $_POST['phone']),
+								'bio' => mysqli_real_escape_string($this->connection, $_POST['bio']),
+								'address' => mysqli_real_escape_string($this->connection, $_POST['address']),
 								'user_id' => $_SESSION['user_data']->id,
 								'image' => $photo
 							];
 						} else {
 							$insert_data = [
-								'name' => $_POST['name'],
-								'phone' => $_POST['phone'],
-								'bio' => $_POST['bio'],
-								'address' => $_POST['address'],
-								'user_id' => $_SESSION['user_data']->id
+								'name' => mysqli_real_escape_string($this->connection, $_POST['name']),
+								'phone' => mysqli_real_escape_string($this->connection, $_POST['phone']),
+								'bio' => mysqli_real_escape_string($this->connection, $_POST['bio']),
+								'address' => mysqli_real_escape_string($this->connection, $_POST['address']),
+								'user_id' => mysqli_real_escape_string($this->connection, $_SESSION['user_data']->id)
 							];
 						}
 
@@ -912,10 +912,10 @@ class Controller extends Model
 						$photo = (file_exists($_FILES['image']['tmp_name'])) ? $file_name : $shop_data->image;
 
 						$data = [
-							'name' => $_POST['name'],
-							'phone' => $_POST['phone'],
-							'bio' => $_POST['bio'],
-							'address' => $_POST['address'],
+							'name' => mysqli_real_escape_string($this->connection, $_POST['name']),
+							'phone' => mysqli_real_escape_string($this->connection, $_POST['phone']),
+							'bio' => mysqli_real_escape_string($this->connection, $_POST['bio']),
+							'address' => mysqli_real_escape_string($this->connection, $_POST['address']),
 							'image' => $photo
 						];
 
@@ -1064,13 +1064,13 @@ class Controller extends Model
 						$photo = (file_exists($_FILES['image']['tmp_name'])) ? $file_name : null;
 
 						$insert_data = [
-							'name' => $_POST['name'],
+							'name' => mysqli_real_escape_string($this->connection, $_POST['name']),
 							'image' => $photo,
-							'description' => $_POST['description'],
-							'category' => $_POST['category'],
-							'price' => $_POST['price'],
-							'stock' => $_POST['stock'],
-							'unit' => $_POST['unit'],
+							'description' => mysqli_real_escape_string($this->connection, $_POST['description']),
+							'category' => mysqli_real_escape_string($this->connection, $_POST['category']),
+							'price' => mysqli_real_escape_string($this->connection, $_POST['price']),
+							'stock' => mysqli_real_escape_string($this->connection, $_POST['stock']),
+							'unit' => mysqli_real_escape_string($this->connection, $_POST['unit']),
 							'shop_id' => $_SESSION['shop_data']->id,
 						];
 						$error = [];
@@ -1123,7 +1123,7 @@ class Controller extends Model
 					];
 
 					if ($_SERVER['REQUEST_METHOD'] == "GET") {
-						$where = ['id' => $_GET['id']];
+						$where = ['id' => mysqli_real_escape_string($this->connection, $_GET['id'])];
 						$products = $this->SelectData('product', $where);
 						if (!$products['Code']) {
 							echo "no product found";
@@ -1137,7 +1137,7 @@ class Controller extends Model
 
 					if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-						$where = ['id' => $_GET['id']];
+						$where = ['id' => mysqli_real_escape_string($this->connection, $_GET['id'])];
 						$products = $this->SelectData('product', $where);
 						$product = $products['Data'][0];
 
@@ -1148,13 +1148,13 @@ class Controller extends Model
 
 
 						$update_data = [
-							'name' => $_POST['name'],
+							'name' => mysqli_real_escape_string($this->connection, $_POST['name']),
 							'image' => $photo,
-							'description' => $_POST['description'],
-							'category' => $_POST['category'],
-							'price' => $_POST['price'],
-							'stock' => $_POST['stock'],
-							'unit' => $_POST['unit'],
+							'description' => mysqli_real_escape_string($this->connection, $_POST['description']),
+							'category' => mysqli_real_escape_string($this->connection, $_POST['category']),
+							'price' => mysqli_real_escape_string($this->connection, $_POST['price']),
+							'stock' => mysqli_real_escape_string($this->connection, $_POST['stock']),
+							'unit' => mysqli_real_escape_string($this->connection, $_POST['unit']),
 							'shop_id' => $_SESSION['shop_data']->id,
 						];
 
@@ -1437,7 +1437,7 @@ class Controller extends Model
 					}
 					include 'Views/producer/header.php';
 					include 'Views/modal.php';
-					$where = ['id' => $_GET['id']];
+					$where = ['id' => mysqli_real_escape_string($this->connection, $_GET['id'])];
 					$data = ['status' => 'in delivery'];
 					$updateEx = $this->UpdateData('orders', $data, $where);
 					if ($updateEx) {

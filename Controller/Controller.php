@@ -1473,6 +1473,7 @@ class Controller extends Model
 
 					// link: --404
 				default:
+					include 'Views/404.php';
 					break;
 			}
 		}

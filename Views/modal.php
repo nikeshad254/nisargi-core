@@ -76,7 +76,7 @@
         document.getElementById("myModal").style.display = "none";
     }
 
-    function openModal(title, msg, status, time, link) {
+    function openModal(title, msg, status, time, link = "") {
         let myModal = document.getElementById("myModal");
         myModal.style.display = "block";
         myModal.querySelector('.title').innerHTML = title;
@@ -89,9 +89,8 @@
         if (time > 0) {
             setTimeout(() => {
                 closeModal();
-                if (link !== '') {
+                // if (link ===  undefined || link === null){ link = "" }
                     window.location.href = link;
-                }
             }, time * 1000);
         }
 

@@ -36,6 +36,14 @@ class Controller extends Model
 				$errors[] = 'Invalid email format.';
 			}
 
+			if ($field === 'phone') {
+				if (!preg_match('/^[0-9]{10}+$/', $value)) {
+					echo $value;
+					exit;
+					$errors[] = "InValid Phone Number";
+				}
+			}
+
 			if ($field === 'number' || $field === 'stock' || $field === 'price') {
 				if (!is_numeric($value))
 					$errors[] = ucfirst($field) . ' must be number';
@@ -210,7 +218,7 @@ class Controller extends Model
 						} else {
 						?>
 							<script>
-								openModal("Failed", "<?= $insertEx['Message'] ?>", 1, 1.5, '');
+								openModal("Failed", "Check you email and try again", 1, 1.5);
 							</script>
 						<?php
 						}
@@ -882,7 +890,7 @@ class Controller extends Model
 						} else {
 						?>
 							<script>
-								openModal("Failed", "<?= $insertEx['Message'] ?>", 0, 1.5, '');
+								openModal("Failed", "<?= $insertEx['Message'] ?>", 1, 1.5, '');
 							</script>
 						<?php
 						}

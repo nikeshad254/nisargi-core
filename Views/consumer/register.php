@@ -27,22 +27,22 @@
                 <div class="inputs">
                     <div class="lbl-inp">
                         <label for="name">Name</label>
-                        <input type="text" name="name">
+                        <input type="text" name="name" required>
                     </div>
 
                     <div class="lbl-inp">
                         <label for="address">Address</label>
-                        <input type="text" name="address">
+                        <input type="text" name="address" required>
                     </div>
 
                     <div class="lbl-inp">
                         <label for="email">Email</label>
-                        <input type="email" name="email">
+                        <input type="email" name="email" required>
                     </div>
     
                     <div class="lbl-inp">
                         <label for="password">Password</label>
-                        <input type="password" name="password">
+                        <input type="password" name="password" required>
                     </div>
                 </div>
 

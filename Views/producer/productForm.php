@@ -1,5 +1,5 @@
 <div class="first-hero container">
-    <h3 class="heading">Shop Creation</h3>
+    <h3 class="heading">Product Creation</h3>
     <form method="post" enctype="multipart/form-data" class="create-product">
         <div class="lbl-inp">
             <label for="name">Product Name</label>

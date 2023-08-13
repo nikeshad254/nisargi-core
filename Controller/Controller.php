@@ -338,7 +338,7 @@ class Controller extends Model
 					include 'Views/consumer/changePassword.php';
 					include 'Views/consumer/footer.php';
 
-					print_r($_SESSION);
+					// print_r($_SESSION);
 
 					break;
 

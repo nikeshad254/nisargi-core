@@ -60,11 +60,38 @@ body {
   /* overflow-x: hidden; */
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--irish-500);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--irish-600);
+}
+
 /* utlility starts here */
 
 .link {
   text-decoration: none;
   color: inherit;
+}
+
+.link.disable {
+  opacity: 0.9;
+  cursor: not-allowed;
 }
 
 .container {
@@ -423,6 +450,10 @@ img#three-bars {
 .top-footer .block {
   display: flex;
   flex-direction: column;
+}
+
+.top-footer .block a:hover {
+  text-decoration: underline;
 }
 
 .stars-collection {

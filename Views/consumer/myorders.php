@@ -64,7 +64,12 @@
 
     <div class="orders-list">
 
-        <?php foreach ($allOrders as $orders) : ?>
+        <?php 
+            if(count($allOrders) < 1){
+                echo "<p>There are no Orders...</p>";
+            }
+        foreach ($allOrders as $orders) : 
+            ?>
             <div class="singleOrder">
                 <div class="productContainer">
                     <div class="purchase-txt">

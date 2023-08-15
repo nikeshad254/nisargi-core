@@ -51,25 +51,25 @@
 
     <div class="services-lists">
 
-        <div class="service-box">
+        <a href="https://drive.google.com/file/d/1TxE9vj2PG-wqbpGj8NB2Jb5RqtZ3AcHx/view" target="_blank" class="link service-box">
             <h3>Frequently Asked Questions</h3>
             <p>Have any question? here you can find answer.</p>
             <div class="img-box">
                 <img src="Views/images/hands-n-mobile.jpg" alt="">
             </div>
-        </div>
+        </a>
 
-        <div class="service-box">
+        <a href="https://drive.google.com/file/d/1TxE9vj2PG-wqbpGj8NB2Jb5RqtZ3AcHx/view" target="_blank" class="link service-box">
             <h3>About Nisargi <br> Products</h3>
-            <p>Have any question? here you can find answer.</p>
+            <p>Wanna learn about nisargi? View from here.</p>
             <div class="img-box">
                 <img src="Views/images/veg-bag.jpg" alt="">
             </div>
-        </div>
+        </a>
 
         <div class="service-box">
             <h3>Delivery and payment options</h3>
-            <p>Have any question? here you can find answer.</p>
+            <p>Currently we only offer payment on delivery.</p>
             <div class="img-box">
                 <img src="Views/images/money-hand.jpg" alt="">
             </div>

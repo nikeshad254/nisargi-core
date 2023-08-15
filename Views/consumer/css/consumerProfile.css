@@ -1,45 +1,48 @@
-.first-container{
-    margin-top: var(--nav-size);
-    padding: 1rem 2rem;
-    min-height: 60vh;
+.first-container {
+  margin-top: var(--nav-size);
+  padding: 1rem 2rem;
+  min-height: 60vh;
 }
 
-.first-container .heading{
-    text-align: center;
-    margin-bottom: 1rem;
+.first-container .heading {
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
-.profile-update-form{
-    background-color: var(--irish-100);
-    border: 2px solid var(--gray-300);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-    gap: 2rem;
-    width: 35%;
-    position: relative;
-    margin: 0 auto;
+.profile-update-form {
+  background-color: var(--irish-100);
+  border: 2px solid var(--gray-300);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 2rem;
+  width: 35%;
+  position: relative;
+  margin: 0 auto;
 }
-.profile-update-form .inp-label{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.profile-update-form .inp-label {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
-.profile-update-form .inp-label label{
-    text-transform: capitalize;
+.profile-update-form .inp-label label {
+  text-transform: capitalize;
 }
-.profile-update-form .inp-label input{
-    padding: 0 0.3rem;
+.profile-update-form .inp-label input {
+  padding: 0 0.3rem;
 }
-.profile-update-form .btn{
- font-size: 1.0rem;
- width: 100%;
+.profile-update-form .btn {
+  font-size: 1rem;
+  width: 100%;
 }
-.changePass{
-    text-decoration: underline;
+.changePass {
+  text-decoration: underline;
 }
 
-.photo-container{
-    position: absolute;
-    right: -11rem;
+.photo-container {
+  position: absolute;
+  right: -11rem;
+}
+.top-footer {
+  margin-top: 3rem;
 }

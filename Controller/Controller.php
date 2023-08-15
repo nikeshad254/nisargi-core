@@ -558,7 +558,9 @@ class Controller extends Model
 					}
 
 					include 'Views/consumer/myorders.php';
-					include 'Views/consumer/footer.php';
+					if(count($allOrders) > 0){
+						include 'Views/consumer/footer.php';
+					}
 					break;
 
 					// link: --billview 

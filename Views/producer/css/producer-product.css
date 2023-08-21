@@ -1,79 +1,80 @@
-.first-hero{
-    margin-top: var(--nav-size);
+.first-hero {
+  margin-top: var(--nav-size);
 }
-.first-hero .headers{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
+.first-hero .headers {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
 }
-.addNewProduct{
-    display: flex;
-    gap: 0.5rem;
-    padding: 0.5rem;
-    border-radius: 10px;
-    background-color: var(--gray-200);
-    cursor: pointer;
-    transition: 0.3s ease;
+.addNewProduct {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 10px;
+  background-color: var(--gray-200);
+  cursor: pointer;
+  transition: 0.3s ease;
 }
-.addNewProduct:hover{
-    background-color: var(--gray-300);
-    outline: 1px solid var(--gray-900);
+.addNewProduct:hover {
+  background-color: var(--gray-300);
+  outline: 1px solid var(--gray-900);
 }
-.one-product{
-    width: 12rem;
-    padding: 0.5rem;
-    background-color: #ffeaf5;
-    border: 2px solid var(--gray-300);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    
+.one-product {
+  width: 12rem;
+  padding: 0.5rem;
+  background-color: #ffeaf5;
+  border: 1px solid var(--gray-400);
+  box-shadow: rgba(0, 0, 0, 0.12) 5px 5px 4px, rgba(0, 0, 0, 0.24) 3px 2px 3px;
+
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-.products-container{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1rem;
+.products-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
 }
-.one-product .product-img{
-    height: 10rem;
-    width: 100%;
-    object-fit: cover;
+.one-product .product-img {
+  height: 10rem;
+  width: 100%;
+  object-fit: cover;
 }
-.one-product .desc{
-    text-align: center;
-    font-size: 1.1rem;
+.one-product .desc {
+  text-align: center;
+  font-size: 1.1rem;
 }
-.one-product .desc .name{
-    font-size: 1.2rem;
-    font-weight: 700;
-    /* width: 10rem; */
-    text-align: center;
+.one-product .desc .name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  /* width: 10rem; */
+  text-align: center;
 }
-.one-product .desc .cost{
-    font-weight: 600;
+.one-product .desc .cost {
+  font-weight: 600;
 }
-.one-product .buttons{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 0.3rem;
+.one-product .buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.3rem;
 }
-.one-product .buttons .btn{
-    background-color: var(--irish-400);
-    padding: 0.5rem;
-    color: var(--gray-900);
-    border: 1px solid var(--gray-900);
-    border-radius: 10px;
-    transition: 0.3s ease;
-    text-align: center;
-    min-width: 4rem;
+.one-product .buttons .btn {
+  background-color: var(--irish-400);
+  padding: 0.5rem;
+  color: var(--gray-900);
+  border: 1px solid var(--gray-900);
+  border-radius: 10px;
+  transition: 0.3s ease;
+  text-align: center;
+  min-width: 4rem;
 }
-.one-product .buttons .edit:hover{
-    background-color: var(--irish-600);
-    color: var(--gray-100);
+.one-product .buttons .edit:hover {
+  background-color: var(--irish-600);
+  color: var(--gray-100);
 }
-.one-product .buttons .remove:hover{
-    background-color: var(--pink-700);
-    color: var(--gray-100);
+.one-product .buttons .remove:hover {
+  background-color: var(--pink-700);
+  color: var(--gray-100);
 }

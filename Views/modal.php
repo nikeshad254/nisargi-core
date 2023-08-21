@@ -18,7 +18,9 @@
         background-color: #fefefe;
         margin: 15% auto;
         padding: 20px;
-        border: 1px solid #888;
+        border: 2px solid #000;
+        border-bottom: 4px solid;
+        border-right: 3px solid;
         width: 40%;
         min-height: 50%;
         display: flex;
@@ -90,7 +92,7 @@
             setTimeout(() => {
                 closeModal();
                 // if (link ===  undefined || link === null){ link = "" }
-                    window.location.href = link;
+                window.location.href = link;
             }, time * 1000);
         }
 

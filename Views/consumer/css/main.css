@@ -48,7 +48,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
-  color: var(--text-dark);
+  color: inherit;
   /* background-color: #00eaff25;
     border: 1px solid red; */
 }

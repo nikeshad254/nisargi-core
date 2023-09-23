@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <img src="Views/images/bg-pattern-3.png" class="bgImg" alt="">
+    <img src="Views/images/agriBg.jpg" class="bgImg" alt="">
     <section class="first-hero container">
         <div class="formContainer">
             <div class="descs">
@@ -22,7 +22,7 @@
             </div>
 
             <form class="loginForm" method="post" enctype="multipart/form-data">
-                <h3>Log In to Nisargi</h3>
+                <h3>Register to Nisargi</h3>
 
                 <div class="inputs">
                     <div class="lbl-inp">
@@ -39,7 +39,7 @@
                         <label for="email">Email</label>
                         <input type="email" name="email" required>
                     </div>
-    
+
                     <div class="lbl-inp">
                         <label for="password">Password</label>
                         <input type="password" name="password" required>
@@ -53,7 +53,7 @@
 
     </section>
 
-    <?php require 'Views/modal.php'?>
+    <?php require 'Views/modal.php' ?>
 </body>
 
 </html>

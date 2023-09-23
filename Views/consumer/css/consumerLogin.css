@@ -5,6 +5,7 @@
   object-fit: cover;
   object-position: right;
   z-index: -1;
+  filter: brightness(80%);
   /* transform: rotateY(180deg); */
 }
 

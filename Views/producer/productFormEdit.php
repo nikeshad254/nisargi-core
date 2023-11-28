@@ -16,8 +16,8 @@
             <?php
             $name = "image";
             $initial_img = 'uploads/products/';
-            $initial_img .= isset($product)?$product->image:'';
-            $value = isset($product)?$product->image:'';
+            $initial_img .= isset($product) ? $product->image : '';
+            $value = isset($product) ? $product->image : '';
             include('Views/uploadImg.php');
             ?>
         </div>
@@ -47,11 +47,11 @@
             <div class="inps">
                 <input type="text" class="stock" value="<?= htmlentities($product->stock) ?>" name="stock">
                 <select name="unit">
-                    <option value="kg" value="<?= htmlentities($product->name) == 'kg' ? 'selected' : '' ?>">kg</option>
-                    <option value="g" value="<?= htmlentities($product->name) == 'g' ? 'selected' : '' ?>">g</option>
-                    <option value="pcs" value="<?= htmlentities($product->name) == 'pcs' ? 'selected' : '' ?>">pcs</option>
-                    <option value="ltr" value="<?= htmlentities($product->name) == 'ltr' ? 'selected' : '' ?>">ltr</option>
-                    <option value="ml" value="<?= htmlentities($product->name) == 'ml' ? 'selected' : '' ?>">ml</option>
+                    <option value="kg" <?= htmlentities($product->unit) == 'kg' ? 'selected' : '' ?>>kg</option>
+                    <option value="g" <?= htmlentities($product->unit) == 'g' ? 'selected' : '' ?>>g</option>
+                    <option value="pcs" <?= htmlentities($product->unit) == 'pcs' ? 'selected' : '' ?>>pcs</option>
+                    <option value="ltr" <?= htmlentities($product->unit) == 'ltr' ? 'selected' : '' ?>>ltr</option>
+                    <option value="ml" <?= htmlentities($product->unit) == 'ml' ? 'selected' : '' ?>>ml</option>
                 </select>
             </div>
         </div>

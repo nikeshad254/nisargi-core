@@ -156,18 +156,6 @@ class Controller extends Model
 						$email = mysqli_real_escape_string($this->connection, $_POST['email']);
 						$pass = mysqli_real_escape_string($this->connection, $_POST['password']);
 
-						$error = [];
-						$error = $this->validateForm($insert_data);
-
-						if ($error) {
-?>
-							<script>
-								openModal("Login Failed", "<?= $error[0] ?>", 1, 1.5);
-							</script>
-						<?php
-							exit;
-						}
-
 						$loginEx = $this->LoginData($email, $pass);
 						if ($loginEx['Code']) {
 
@@ -179,7 +167,7 @@ class Controller extends Model
 								$_SESSION['shop_data'] = $selectEx['Data'][0];
 							}
 
-						?>
+?>
 							<script type="text/javascript">
 								openModal("Login Successful", "<?= $loginEx['Message'] ?>", 0, 1.5, '/nisargi');
 							</script>
@@ -205,6 +193,22 @@ class Controller extends Model
 
 					if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
+						$error = [];
+
+						if (isset($_POST['password'])) {
+							if (strlen($_POST['password']) < 4) $error[] = "Password must be atleast 4 characters.";
+							if (!preg_match("/^(?=.*[A-Za-z])(?=.*\d).+$/", $_POST['password'])) $error[] = "Password must contain atleast one letter and one number.";
+						}
+
+						if ($error) {
+						?>
+							<script>
+								openModal("Signup Failed", "<?= $error[0] ?>", 1, 1.5);
+							</script>
+						<?php
+							exit;
+						}
+
 						$insert_data = [
 							'name' => mysqli_real_escape_string($this->connection, $_POST['name']),
 							'address' => mysqli_real_escape_string($this->connection, $_POST['address']),
@@ -212,13 +216,12 @@ class Controller extends Model
 							'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
 						];
 
-						$error = [];
 						$error = $this->validateForm($insert_data);
 
 						if ($error) {
 						?>
 							<script>
-								openModal("Failed Insertion", "<?= $error[0] ?>", 1, 1.5);
+								openModal("Signup Failed", "<?= $error[0] ?>", 1, 1.5);
 							</script>
 						<?php
 							exit;
@@ -227,7 +230,7 @@ class Controller extends Model
 						if ($insertEx['Code']) {
 						?>
 							<script>
-								console.log("hey success");
+								// console.log("hey success");
 								openModal("Register Success", "Please login Now!", 0, 1.5, './login');
 							</script>
 						<?php

@@ -111,3 +111,9 @@
   font-weight: 600;
   font-size: 1rem;
 }
+.loginForm .inputs .lbl-inp input:focus {
+  outline: none;
+  /* border: 3px solid var(--irish-100); */
+  background-color: var(--irish-100);
+  color: var(--gray-900);
+}

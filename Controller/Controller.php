@@ -26,20 +26,23 @@ class Controller extends Model
 	{
 		$errors = [];
 
+		var_dump($data);
 		foreach ($data as $field => $value) {
 
 			if ($field !== 'image' && empty($value)) {
 				$errors[] = ucfirst($field) . ' should not be empty.';
 			}
 
-			if ($field === 'email' && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
+			if ($field === 'email' && !preg_match("/^\w{3,}@\w{2,}.\w{2,}$/i", $value)) {
 				$errors[] = 'Invalid email format.';
+			}
+
+			if ($field === 'password' && strlen($value) < 8) {
+				$errors[] = 'Password must be atleast 8 characters.';
 			}
 
 			if ($field === 'phone') {
 				if (!preg_match('/^[0-9]{10}+$/', $value)) {
-					echo $value;
-					exit;
 					$errors[] = "InValid Phone Number";
 				}
 			}
@@ -153,6 +156,18 @@ class Controller extends Model
 						$email = mysqli_real_escape_string($this->connection, $_POST['email']);
 						$pass = mysqli_real_escape_string($this->connection, $_POST['password']);
 
+						$error = [];
+						$error = $this->validateForm($insert_data);
+
+						if ($error) {
+?>
+							<script>
+								openModal("Login Failed", "<?= $error[0] ?>", 1, 1.5);
+							</script>
+						<?php
+							exit;
+						}
+
 						$loginEx = $this->LoginData($email, $pass);
 						if ($loginEx['Code']) {
 
@@ -164,7 +179,7 @@ class Controller extends Model
 								$_SESSION['shop_data'] = $selectEx['Data'][0];
 							}
 
-?>
+						?>
 							<script type="text/javascript">
 								openModal("Login Successful", "<?= $loginEx['Message'] ?>", 0, 1.5, '/nisargi');
 							</script>
@@ -199,6 +214,7 @@ class Controller extends Model
 
 						$error = [];
 						$error = $this->validateForm($insert_data);
+
 						if ($error) {
 						?>
 							<script>
@@ -447,7 +463,7 @@ class Controller extends Model
 							$order_data['delivery']['message'] = mysqli_real_escape_string($this->connection, $_POST['message']);
 
 							$insertEx = $this->InsertOrderData($order_data);
-							print_r($insertEx);
+							// print_r($insertEx);
 
 							if ($insertEx['Code']) {
 							?>
@@ -558,7 +574,7 @@ class Controller extends Model
 					}
 
 					include 'Views/consumer/myorders.php';
-					if(count($allOrders) > 0){
+					if (count($allOrders) > 0) {
 						include 'Views/consumer/footer.php';
 					}
 					break;

@@ -26,7 +26,6 @@ class Controller extends Model
 	{
 		$errors = [];
 
-		var_dump($data);
 		foreach ($data as $field => $value) {
 
 			if ($field !== 'image' && empty($value)) {
@@ -887,7 +886,7 @@ class Controller extends Model
 						if ($error) {
 						?>
 							<script>
-								openModal("Failed Insertion", "<?= $error[0] ?>", 1, 1.5, '');
+								openModal("Failed Shop Creation", "<?= $error[0] ?>", 1, 1.5, '');
 							</script>
 						<?php
 							exit;

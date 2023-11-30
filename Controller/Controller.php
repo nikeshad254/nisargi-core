@@ -805,8 +805,11 @@ class Controller extends Model
 					// print_r($shop);
 					// exit;
 
-					$sql = 'SELECT sum(quantity) as sales from orderproduct_view where shop_id = 1';
+
+					$sql = "SELECT sum(quantity) as sales from orderproduct_view where shop_id = '" . $_GET['id'] . "'";
 					$salesCount = $this->customQuery($sql);
+					// var_dump($salesCount);
+					// exit;
 
 					$where = ['shop_id' => $shop->id, 'deleteFlag' => 'o'];
 					$selectEx = $this->SelectData('product', $where);

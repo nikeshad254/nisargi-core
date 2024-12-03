@@ -6,7 +6,7 @@
     <div class="blocks">
         <div class="sales block">
             <div class="desc">
-                <p class="amt">Rs.<?= $overAllData->total_sum; ?></p>
+                <p class="amt">Rs.<?= $overAllData ? $overAllData->total_sum : 0;  ?></p>
                 <p class="name">total sales</p>
             </div>
             <img src="Views/images/icons/cart.svg" alt="" class="image">
@@ -14,7 +14,7 @@
 
         <div class="block">
             <div class="desc">
-                <p class="amt"><?= $overAllData->total_orders; ?></p>
+                <p class="amt"><?= $overAllData ? $overAllData->total_orders : 0; ?></p>
                 <p class="name">total orders</p>
             </div>
             <img src="Views/images/icons/queue-list.svg" alt="" class="image">
@@ -22,7 +22,7 @@
 
         <div class="block">
             <div class="desc">
-                <p class="amt"><?= $overAllData->total_unique_users; ?></p>
+                <p class="amt"><?= $overAllData ? $overAllData->total_unique_users : 0; ?></p>
                 <p class="name">Customers</p>
             </div>
             <img src="Views/images/icons/user-circle.svg" alt="" class="image">

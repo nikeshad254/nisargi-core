@@ -1000,16 +1000,17 @@ class Controller extends Model
 					$tableData = []; //table data of orders
 					$unpagedtableData = [];
 
-					$sql = "SELECT
-						CASE WHEN status = 'complete' THEN SUM(quantity * price) ELSE 0 END AS total_sum,
-						COUNT(DISTINCT order_id) AS total_orders,
-						COUNT(DISTINCT user_id) AS total_unique_users
-					FROM
-						orderproduct_view
-					WHERE
-					shop_id = " . $_SESSION['shop_data']->id;
+					$sql = "SELECT 
+							SUM(CASE WHEN status = 'complete' THEN quantity * price ELSE 0 END) AS total_sum,
+							COUNT(DISTINCT order_id) AS total_orders,
+							COUNT(DISTINCT user_id) AS total_unique_users
+							FROM
+								orderproduct_view
+							WHERE
+							shop_id = " . $_SESSION['shop_data']->id;
 
 					$CustomEx = $this->customQuery($sql);
+
 					if ($CustomEx) {
 						$overAllData = $CustomEx;
 					}

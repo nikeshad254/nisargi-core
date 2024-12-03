@@ -3,7 +3,7 @@
 class Model
 {
 
-	protected $connection = '';
+	protected $connection;
 	protected $servername = 'localhost';
 	protected $username = 'root';
 	protected $password = '';
@@ -11,6 +11,8 @@ class Model
 
 	function __construct()
 	{
+		// echo (password_hash("pass1234", PASSWORD_DEFAULT));
+		// exit;
 
 		mysqli_report(MYSQLI_REPORT_STRICT);
 		try {
@@ -44,29 +46,29 @@ class Model
 		return $response;
 	}
 
-	function ChangeUserPass($opass, $id, $npass){
+	function ChangeUserPass($opass, $id, $npass)
+	{
 		$sql = "SELECT password from user WHERE id = $id";
 		$selEx = $this->connection->query($sql);
 		$data = $selEx->fetch_object();
 
-		if ( password_verify($opass, $data->password)) {
+		if (password_verify($opass, $data->password)) {
 
 			$hashed =  password_hash($npass, PASSWORD_DEFAULT);
 			$sql = "UPDATE user SET password = '$hashed' WHERE id = '$id'";
 
 			$updateEx = $this->connection->query($sql);
 
-			if($updateEx){
+			if ($updateEx) {
 				$response['Data'] = null;
 				$response['Code'] = true;
 				$response['Message'] = 'Sucessfully changed password';
-			}else{
+			} else {
 				$response['Data'] = null;
 				$response['Code'] = false;
 				$response['Message'] = 'Server Error: try again later';
 			}
-			
-		}else{
+		} else {
 			$response['Data'] = null;
 			$response['Code'] = false;
 			$response['Message'] = 'Password is incorrect.';
@@ -157,7 +159,8 @@ class Model
 		// exit;
 
 		$sqlEx = $this->connection->query($selSql);
-		if ($sqlEx->num_rows > 0) {
+
+		if ($sqlEx && $sqlEx->num_rows != 0) {
 			while ($FetchData = $sqlEx->fetch_object()) {
 				$allData[] = $FetchData;
 			}
@@ -340,9 +343,9 @@ class Model
 	function customQuery($sql)
 	{
 		$result = $this->connection->query($sql);
-		if($result){
+		if ($result) {
 			return $result->fetch_object();
-		}else{
+		} else {
 			return false;
 		}
 	}
